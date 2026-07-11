@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Footer } from "../common/Footer";
 import { Header } from "../common/Header";
+import { pretendard } from "../fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -14,7 +15,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ko" className="h-full antialiased">
+    <html lang="ko" className={`h-full antialiased ${pretendard.variable}`}>
       <body className="min-h-full flex flex-col">
         <Header />
         {children}
