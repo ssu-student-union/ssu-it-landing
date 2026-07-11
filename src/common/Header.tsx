@@ -4,7 +4,7 @@ import logo from "../assets/logo.svg";
 
 export const Header = () => {
   return (
-    <header className="flex h-25 w-full items-center justify-between px-20">
+    <header className="flex h-25 w-full items-center justify-between px-20 bg-white">
       <Link href="/" className="flex items-center gap-2">
         <Image src={logo} alt="IT지원위원회" className="h-auto w-10" priority />
         <span className="font-bold text-[#1b1c1c] text-[1.75rem] tracking-[-0.02em]">
