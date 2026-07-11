@@ -1,11 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import copyright from "../assets/images/copyright.svg";
-import instagram from "../assets/images/instagram.svg";
-import kakao from "../assets/images/kakao.svg";
-import linkedIn from "../assets/images/linkedIn.svg";
-import logo from "../assets/images/logo.svg";
-import mail from "../assets/images/mail.svg";
+import copyright from "../assets/icons/copyright.svg";
+import instagram from "../assets/icons/instagram.svg";
+import kakao from "../assets/icons/kakao.svg";
+import linkedIn from "../assets/icons/linkedIn.svg";
+import mail from "../assets/icons/mail.svg";
+import logo from "../assets/logo.svg";
 
 export const Footer = () => {
   return (
