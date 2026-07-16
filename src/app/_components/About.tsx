@@ -1,3 +1,5 @@
+import Image from "next/image";
+import aboutPhoto from "../../assets/images/about-photo.jpg";
 import { StatCounter } from "./StatCounter";
 
 const INTRO_PARAGRAPH = `IT지원위원회는 학내 서비스의 안정적인 운영과 학생 자치 문화의 활성화를 목표로, 학생들이 실제로 사용하는 디지털 서비스와 플랫폼을 직접 기획하고 개발하며 운영하는 조직입니다.
@@ -18,8 +20,15 @@ export const About = () => {
       <div className="flex flex-col items-center gap-33">
         <h2 className="text-4xl font-bold text-[#121212]">IT지원위원회란?</h2>
         <div className="flex w-full gap-25 items-center">
-          {/* 소개 사진 (Figma: Rectangle 64) - src/assets/images/about-photo.jpg 추가 후 next/image로 교체 */}
-          <div className="h-[37.375rem] w-[26rem] rounded-xl bg-[#d9d9d9]" />
+          <div className="relative h-[37.375rem] w-[26rem] overflow-hidden rounded-xl">
+            <Image
+              src={aboutPhoto}
+              alt="IT지원위원회 소개 사진"
+              fill
+              sizes="416px"
+              className="object-cover"
+            />
+          </div>
 
           <p className="max-w-[36.625rem] whitespace-pre-line font-semibold text-[1.625rem] text-[#282323] leading-[2.5rem]">
             {INTRO_PARAGRAPH}
