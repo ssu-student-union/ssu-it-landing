@@ -6,6 +6,21 @@
     sans-serif;
 }
 
+@theme {
+  --animate-float: float 4s ease-in-out infinite;
+  --animate-float-slow: float 5s ease-in-out infinite;
+}
+
 body {
   background-color: #fafafa;
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
