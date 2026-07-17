@@ -24,7 +24,7 @@ export const Hero = () => {
           alt=""
           fill
           sizes="457px"
-          className="z-0 animate-float-slow object-contain object-right-bottom [animation-delay:-2.5s]"
+          className="z-0 animate-float-slow object-contain object-right-bottom"
         />
         <Image
           src={heroGraphicRight1}
@@ -42,7 +42,7 @@ export const Hero = () => {
           alt=""
           fill
           sizes="280px"
-          className="z-0 animate-float object-contain object-left-top [animation-delay:-2s]"
+          className="z-0 animate-float object-contain object-left-top"
         />
         <Image
           src={heroGraphicLeft1}
@@ -55,10 +55,14 @@ export const Hero = () => {
 
       <div className="absolute bottom-10 left-6 z-10 flex flex-col gap-5 sm:bottom-16 sm:left-12 sm:gap-6 lg:bottom-32.5 lg:left-26 lg:gap-8">
         <h1 className="text-white leading-[1.4] sm:leading-[1.6] lg:leading-[1.9]">
-          <div className="font-medium text-xl sm:text-3xl lg:text-3xl min-[1440px]:text-5xl">
-            더 나은 숭실대학교의 발전을 추구하는
+          <div className="flex items-center gap-3 font-medium text-xl sm:text-3xl lg:text-3xl min-[1440px]:text-5xl">
+            <span>더 나은 숭실대학교의 발전을 추구하는</span>
+            {/* 장식용 언더라인 스와시 (Figma: Vector15, width 186px / height 0 / stroke 1px #FFEBEB) */}
+            <span
+              aria-hidden
+              className="h-px w-10 shrink-0 bg-[#ffebeb] sm:w-16 lg:w-16 min-[1440px]:w-[11.625rem]"
+            />
           </div>
-          {/* 장식용 언더라인 스와시 (Figma: Vector15) - src/assets/images/hero-accent-line.svg 추가 후 next/image로 교체 */}
           <div className="font-bold text-3xl sm:text-5xl lg:text-5xl min-[1440px]:text-6xl">
             숭실대학교 IT 지원위원회
           </div>
