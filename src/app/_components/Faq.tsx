@@ -1,3 +1,5 @@
+import Image from "next/image";
+import chevronBlackIcon from "../../assets/icons/chevron_black.svg";
 import { Accordion, AccordionItem } from "../../common/Accordion";
 
 // TODO: FAQ 답변은 정확한 내용으로 교체 필요
@@ -47,8 +49,13 @@ export const Faq = () => {
                 <p className="font-semibold text-[#121212] text-2xl">
                   {item.question}
                 </p>
-                {/* 아코디언 토글 화살표 (Figma: iconamoon:arrow-up-2-light) - src/assets/icons/chevron.svg 추가 후 next/image로 교체 */}
-                <div className="size-10.5 shrink-0 rotate-180 transition-transform duration-300 ease-in-out group-aria-expanded:rotate-0" />
+                <Image
+                  src={chevronBlackIcon}
+                  alt=""
+                  width={40}
+                  height={40}
+                  className="shrink-0 transition-transform duration-300 ease-in-out group-aria-expanded:rotate-180"
+                />
               </>
             }
           >

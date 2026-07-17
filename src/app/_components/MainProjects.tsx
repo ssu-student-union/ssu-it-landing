@@ -1,3 +1,6 @@
+import Image from "next/image";
+import arrowCircleIcon from "../../assets/icons/arrow_circle.svg";
+
 const PROJECTS = [
   {
     title: "SSUPORT",
@@ -26,7 +29,7 @@ export const MainProjects = () => {
   return (
     <div className="relative px-4 py-32">
       <div className="absolute top-0 right-8">
-        {/* 배경 워터마크 텍스트 (장식용) */}
+        {/* 배경 워터마크 텍스트 */}
         <p
           aria-hidden
           className="pointer-events-none select-none text-[9.375rem] font-bold leading-none text-white/[0.14]"
@@ -34,11 +37,16 @@ export const MainProjects = () => {
           Main
         </p>
         <div className="absolute inset-0 flex -translate-x-8 items-end justify-start gap-1 pb-4">
-          <h2 className="whitespace-nowrap text-5xl leading-none font-bold text-white">
+          <h2 className="whitespace-nowrap text-5xl leading-none font-bold text-white h-16 flex items-center">
             메인 프로젝트
           </h2>
-          {/* 화살표 아이콘 (Figma: ei:arrow-left, 180도 회전) - src/assets/icons/arrow-left.svg 추가 후 next/image로 교체 */}
-          <div className="size-16 rotate-180" />
+          <Image
+            src={arrowCircleIcon}
+            alt=""
+            width={64}
+            height={64}
+            className="cursor-pointer"
+          />
         </div>
       </div>
 

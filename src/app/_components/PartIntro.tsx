@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 import backendIcon from "../../assets/icons/backend.svg";
-import chevronIcon from "../../assets/icons/chevron.svg";
+import chevronWhiteIcon from "../../assets/icons/chevron_white.svg";
 import designIcon from "../../assets/icons/design.svg";
 import frontendIcon from "../../assets/icons/frontend.svg";
 import hrIcon from "../../assets/icons/hr.svg";
@@ -80,7 +80,7 @@ export const PartIntro = () => {
             className="disabled:opacity-30"
           >
             <Image
-              src={chevronIcon}
+              src={chevronWhiteIcon}
               alt=""
               width={9}
               height={30}
@@ -95,7 +95,7 @@ export const PartIntro = () => {
             className="disabled:opacity-30"
           >
             <Image
-              src={chevronIcon}
+              src={chevronWhiteIcon}
               alt=""
               width={9}
               height={30}
