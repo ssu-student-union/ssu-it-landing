@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import backendIcon from "../../assets/icons/backend.svg";
 import chevronWhiteIcon from "../../assets/icons/chevron_white.svg";
 import designIcon from "../../assets/icons/design.svg";
@@ -14,7 +14,15 @@ const PART_CARD_GRADIENT =
 
 const PART_CARD_BACK_GRADIENT = `linear-gradient(rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), ${PART_CARD_GRADIENT}`;
 
-const VISIBLE_COUNT = 4;
+const MAX_VISIBLE_COUNT = 4;
+
+const getVisibleCount = () => {
+  if (typeof window === "undefined") return MAX_VISIBLE_COUNT;
+  if (window.matchMedia("(min-width: 1024px)").matches)
+    return MAX_VISIBLE_COUNT;
+  if (window.matchMedia("(min-width: 640px)").matches) return 2;
+  return 1;
+};
 
 const PARTS = [
   {
@@ -51,21 +59,35 @@ const PARTS = [
 
 export const PartIntro = () => {
   const [start, setStart] = useState(0);
-  const maxStart = PARTS.length - VISIBLE_COUNT;
+  const [visibleCount, setVisibleCount] = useState(MAX_VISIBLE_COUNT);
+  const maxStart = Math.max(0, PARTS.length - visibleCount);
+
+  useEffect(() => {
+    const handleResize = () => setVisibleCount(getVisibleCount());
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
+    setStart((prev) =>
+      Math.min(prev, Math.max(0, PARTS.length - visibleCount)),
+    );
+  }, [visibleCount]);
 
   const goPrev = () => setStart((prev) => Math.max(0, prev - 1));
   const goNext = () => setStart((prev) => Math.min(maxStart, prev + 1));
 
   return (
-    <div className="relative px-4 py-32">
-      <div className="absolute top-0 left-8">
+    <div className="relative px-4 py-16 sm:py-24 lg:py-32">
+      <div className="absolute top-6 left-4 sm:top-10 sm:left-8 lg:top-14">
         <p
           aria-hidden
-          className="pointer-events-none select-none text-[9.375rem] font-bold leading-none text-[#dddddd]/[0.14]"
+          className="pointer-events-none select-none text-6xl font-bold leading-none text-[#dddddd]/[0.14] sm:text-8xl lg:text-8xl min-[1440px]:text-[9.375rem]"
         >
           Part
         </p>
-        <h2 className="absolute inset-0 flex items-end justify-center whitespace-nowrap pb-4 text-5xl leading-none font-bold text-white">
+        <h2 className="absolute inset-0 flex translate-y-0.5 items-end justify-center whitespace-nowrap pb-2 text-2xl leading-none font-bold text-white sm:translate-y-1 sm:pb-4 sm:text-4xl lg:translate-y-2 lg:text-4xl min-[1440px]:text-5xl">
           파트 소개
         </h2>
       </div>
@@ -105,41 +127,47 @@ export const PartIntro = () => {
         </div>
       </div>
 
-      <div className="relative mx-auto mt-16 max-w-5xl overflow-hidden">
+      <div className="relative mx-auto mt-10 max-w-5xl overflow-hidden sm:mt-12 lg:mt-16">
         <div
           className="flex transition-transform duration-500 ease-in-out"
           style={{
-            width: `${(PARTS.length / VISIBLE_COUNT) * 100}%`,
+            width: `${(PARTS.length / visibleCount) * 100}%`,
             transform: `translateX(-${start * (100 / PARTS.length)}%)`,
           }}
         >
           {PARTS.map((part) => (
             <div
               key={part.label}
-              className="group h-68 shrink-0 px-4 perspective-[1000px]"
+              className="group h-56 shrink-0 px-2 perspective-[1000px] sm:h-64 sm:px-3 lg:h-68 lg:px-4"
               style={{ width: `${100 / PARTS.length}%` }}
             >
               <div className="relative h-full w-full transition-transform duration-700 ease-in-out transform-3d group-hover:rotate-y-180">
                 <div
-                  className="absolute inset-0 flex flex-col justify-between rounded-lg py-5 px-6 shadow-[6px_6px_4px_2px_#303030] backface-hidden"
+                  className="absolute inset-0 flex flex-col justify-between rounded-lg py-4 px-4 shadow-[6px_6px_4px_2px_#303030] backface-hidden sm:py-5 sm:px-5 lg:px-6"
                   style={{ backgroundImage: PART_CARD_GRADIENT }}
                 >
-                  <p className="text-4xl font-semibold text-[#2f2f2f]">
+                  <p className="text-2xl font-semibold text-[#2f2f2f] sm:text-3xl lg:text-3xl min-[1440px]:text-4xl">
                     {part.label}
                   </p>
                   <div className="flex w-full justify-end">
-                    <Image src={part.icon} alt="" width={54} height={54} />
+                    <Image
+                      src={part.icon}
+                      alt=""
+                      width={54}
+                      height={54}
+                      className="h-9 w-9 sm:h-11 sm:w-11 lg:h-13.5 lg:w-13.5 min-[1440px]:h-13.5 min-[1440px]:w-13.5"
+                    />
                   </div>
                 </div>
 
                 <div
-                  className="absolute inset-0 flex rotate-y-180 flex-col gap-3 rounded-lg py-5 px-6 shadow-[6px_6px_4px_2px_#303030] backface-hidden"
+                  className="absolute inset-0 flex rotate-y-180 flex-col gap-3 rounded-lg py-4 px-4 shadow-[6px_6px_4px_2px_#303030] backface-hidden sm:py-5 sm:px-5 lg:px-6"
                   style={{ backgroundImage: PART_CARD_BACK_GRADIENT }}
                 >
-                  <p className="text-4xl font-semibold text-white">
+                  <p className="text-2xl font-semibold text-white sm:text-3xl lg:text-3xl min-[1440px]:text-4xl">
                     {part.label}
                   </p>
-                  <p className="whitespace-pre-line text-base leading-relaxed font-medium text-white">
+                  <p className="whitespace-pre-line text-sm leading-relaxed font-medium text-white sm:text-base">
                     {part.description}
                   </p>
                 </div>

@@ -9,7 +9,7 @@ import logo from "../assets/logo.svg";
 
 export const Footer = () => {
   return (
-    <footer className="flex h-87 w-full flex-col justify-between bg-[#f2f3f4] px-36 py-16">
+    <footer className="flex w-full flex-col justify-between gap-8 bg-[#f2f3f4] px-4 py-10 sm:px-8 sm:py-12 lg:h-87 lg:gap-0 lg:px-36 lg:py-16">
       <div className="flex flex-col gap-5">
         <div className="flex flex-col gap-1.5">
           <div className="flex items-center gap-1">

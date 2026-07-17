@@ -31,22 +31,22 @@ const FAQ_ITEMS = [
 
 export const Faq = () => {
   return (
-    <section className="flex flex-col items-center gap-10 bg-[#fafafa] px-4 py-32">
-      <h2 className="w-full max-w-4xl font-bold text-[#262323] text-[2rem]">
+    <section className="flex flex-col items-center gap-6 bg-[#fafafa] px-4 py-16 sm:gap-8 sm:py-24 lg:gap-10 lg:py-32">
+      <h2 className="w-full max-w-4xl font-bold text-[#262323] text-xl sm:text-2xl lg:text-2xl min-[1440px]:text-[2rem]">
         FAQ/ 답변
       </h2>
 
-      <Accordion className="flex w-full max-w-4xl flex-col gap-4">
+      <Accordion className="flex w-full max-w-4xl flex-col gap-3 sm:gap-4">
         {FAQ_ITEMS.map((item) => (
           <AccordionItem
             key={item.question}
             id={item.question}
-            className="w-full overflow-hidden rounded-[1.875rem] bg-[#f6f6f6]"
-            triggerClassName="flex h-[5.5625rem] w-full items-center justify-between px-8"
-            panelClassName="px-8 pb-8 text-lg text-[#4a4a4a] leading-relaxed"
+            className="w-full overflow-hidden rounded-2xl bg-[#f6f6f6] sm:rounded-[1.875rem]"
+            triggerClassName="flex min-h-16 w-full items-center justify-between gap-4 px-5 py-4 sm:min-h-20 sm:px-8 lg:h-[5.5625rem] lg:py-0"
+            panelClassName="px-5 pb-5 text-sm text-[#4a4a4a] leading-relaxed sm:px-8 sm:pb-8 sm:text-base lg:text-base min-[1440px]:text-lg"
             trigger={
               <>
-                <p className="font-semibold text-[#121212] text-2xl">
+                <p className="text-left font-semibold text-[#121212] text-base sm:text-xl lg:text-xl min-[1440px]:text-2xl">
                   {item.question}
                 </p>
                 <Image
@@ -54,7 +54,7 @@ export const Faq = () => {
                   alt=""
                   width={40}
                   height={40}
-                  className="shrink-0 transition-transform duration-300 ease-in-out group-aria-expanded:rotate-180"
+                  className="h-6 w-6 shrink-0 transition-transform duration-300 ease-in-out group-aria-expanded:rotate-180 sm:h-8 sm:w-8 lg:h-8 lg:w-8 min-[1440px]:h-10 min-[1440px]:w-10"
                 />
               </>
             }

@@ -9,7 +9,7 @@ import { DARK_SECTION_GRADIENT } from "./gradients";
 export const Hero = () => {
   return (
     <section
-      className="relative h-212.5 overflow-hidden"
+      className="relative h-[26rem] overflow-hidden sm:h-[32rem] lg:h-212.5"
       style={{ backgroundImage: DARK_SECTION_GRADIENT }}
     >
       {/* 장식용 반짝임 아이콘 (Figma: Vector, 3개) - src/assets/images/hero-sparkle.svg 추가 후 next/image로 교체 */}
@@ -53,13 +53,13 @@ export const Hero = () => {
         />
       </div>
 
-      <div className="absolute bottom-32.5 left-26 z-10 flex flex-col gap-8">
-        <h1 className="text-white leading-[1.9]">
-          <div className=" font-medium text-4xl">
+      <div className="absolute bottom-10 left-6 z-10 flex flex-col gap-5 sm:bottom-16 sm:left-12 sm:gap-6 lg:bottom-32.5 lg:left-26 lg:gap-8">
+        <h1 className="text-white leading-[1.4] sm:leading-[1.6] lg:leading-[1.9]">
+          <div className="font-medium text-xl sm:text-3xl lg:text-3xl min-[1440px]:text-5xl">
             더 나은 숭실대학교의 발전을 추구하는
           </div>
           {/* 장식용 언더라인 스와시 (Figma: Vector15) - src/assets/images/hero-accent-line.svg 추가 후 next/image로 교체 */}
-          <div className="font-bold text-[3.125rem]">
+          <div className="font-bold text-3xl sm:text-5xl lg:text-5xl min-[1440px]:text-6xl">
             숭실대학교 IT 지원위원회
           </div>
         </h1>
@@ -67,9 +67,9 @@ export const Hero = () => {
         {/* 리크루팅 페이지 연결 예정 (실제 경로 미정) */}
         <Link
           href="#"
-          className="flex h-22.5 w-53 items-center justify-center rounded-xl border-[3px] border-[#9dcfeb]"
+          className="flex h-14 w-36 items-center justify-center rounded-xl border-[3px] border-[#9dcfeb] sm:h-18 sm:w-44 lg:h-18 lg:w-44 min-[1440px]:h-24 min-[1440px]:w-56"
         >
-          <span className="bg-gradient-to-r from-[#9dcfeb] to-[#6a8a9c] bg-clip-text font-bold text-2xl text-transparent">
+          <span className="bg-gradient-to-r from-[#9dcfeb] to-[#6a8a9c] bg-clip-text font-bold text-lg text-transparent sm:text-2xl lg:text-2xl min-[1440px]:text-3xl">
             지금 지원하기
           </span>
         </Link>

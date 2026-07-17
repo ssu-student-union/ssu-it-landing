@@ -16,45 +16,47 @@ const STATS = [
 
 export const About = () => {
   return (
-    <section className="flex flex-col items-center gap-83 pt-50">
-      <div className="flex flex-col items-center gap-33">
-        <h2 className="text-4xl font-bold text-[#121212]">IT지원위원회란?</h2>
-        <div className="flex w-full gap-25 items-center">
-          <div className="relative h-[37.375rem] w-[26rem] overflow-hidden rounded-xl">
+    <section className="flex flex-col items-center gap-20 px-4 pt-20 sm:gap-28 sm:px-8 sm:pt-32 lg:gap-83 lg:px-0 lg:pt-50">
+      <div className="flex flex-col items-center gap-10 sm:gap-16 lg:gap-33">
+        <h2 className="text-2xl font-bold text-[#121212] sm:text-3xl lg:text-3xl min-[1440px]:text-4xl">
+          IT지원위원회란?
+        </h2>
+        <div className="flex w-full flex-col items-center gap-10 sm:gap-16 lg:flex-row lg:gap-25">
+          <div className="relative h-64 w-full max-w-80 shrink-0 overflow-hidden rounded-xl sm:h-96 sm:max-w-96 lg:h-[37.375rem] lg:w-[26rem] lg:max-w-none">
             <Image
               src={aboutPhoto}
               alt="IT지원위원회 소개 사진"
               fill
-              sizes="416px"
+              sizes="(min-width: 1024px) 416px, (min-width: 640px) 384px, 320px"
               className="object-cover"
             />
           </div>
 
-          <p className="max-w-[36.625rem] whitespace-pre-line font-semibold text-[1.625rem] text-[#282323] leading-[2.5rem]">
+          <p className="max-w-[36.625rem] whitespace-pre-line font-semibold text-base text-[#282323] leading-[1.75rem] sm:text-xl sm:leading-[2rem] lg:text-xl lg:leading-[2rem] min-[1440px]:text-[1.625rem] min-[1440px]:leading-[2.5rem]">
             {INTRO_PARAGRAPH}
           </p>
         </div>
       </div>
 
       <div
-        className="flex w-full flex-col items-center gap-25 rounded-t-xl px-37 pt-20 pb-36"
+        className="flex w-full flex-col items-center gap-10 rounded-t-xl px-6 pt-12 pb-16 sm:gap-16 sm:px-12 sm:pt-16 sm:pb-24 lg:gap-25 lg:px-37 lg:pt-20 lg:pb-36"
         style={{
           background:
             "linear-gradient(180deg, rgba(169, 195, 224, 0.20) 0%, rgba(53, 80, 92, 0.20) 100%)",
         }}
       >
-        <h3 className="text-center font-medium text-[2rem] text-black tracking-[1.08rem]">
+        <h3 className="text-center font-medium text-lg text-black tracking-[0.3rem] sm:text-2xl sm:tracking-[0.6rem] lg:text-2xl lg:tracking-[0.6rem] min-[1440px]:text-[2rem] min-[1440px]:tracking-[1.08rem]">
           2026 IT 지원위원회
         </h3>
 
-        <div className="grid w-full grid-cols-1 gap-16 sm:grid-cols-3">
+        <div className="grid w-full grid-cols-1 gap-10 sm:grid-cols-3 sm:gap-8 lg:gap-16">
           {STATS.map((stat) => (
             <div
               key={stat.label}
-              className="flex flex-col items-center gap-16 whitespace-nowrap"
+              className="flex flex-col items-center gap-8 whitespace-nowrap sm:gap-10 lg:gap-16"
             >
               <div className="flex w-full flex-col items-center gap-2">
-                <p className="font-medium text-[2rem] text-[#312a2a]">
+                <p className="font-medium text-xl text-[#312a2a] sm:text-2xl lg:text-2xl min-[1440px]:text-4xl">
                   {stat.label}
                 </p>
                 <div className="h-px w-full max-w-71.5 bg-[#858C90] border-r" />
