@@ -1,27 +1,31 @@
 import Image from "next/image";
 import arrowCircleIcon from "../../assets/icons/arrow_circle.svg";
+import campusClubImage from "../../assets/images/campus-club.png";
+import passuImage from "../../assets/images/passu.png";
+import ssuportImage from "../../assets/images/ssuport.png";
+import studentCouncilImage from "../../assets/images/student-council.png";
 
 const PROJECTS = [
   {
     title: "SSUPORT",
     description: "총학생회 특별장학금 신청/관리 시스템 서비스",
-    imageAssetHint: "src/assets/images/project-ssuport.png",
+    image: ssuportImage,
   },
   {
     title: "동아리연합회 홈페이지",
     description: "중앙동아리들의 정보 전달 및 행정처리를 위한 서비스",
-    imageAssetHint: "src/assets/images/project-club-union.png",
+    image: campusClubImage,
   },
   {
     title: "총학생회 홈페이지",
     description: "학생과 자치기구를 잇는 소통의 장",
-    imageAssetHint: "src/assets/images/project-student-council.png",
+    image: studentCouncilImage,
   },
   {
     title: "PASSU",
     description:
       "수기 수령증 작성과 재학생 인증을 간소화한 디지털 수령증 서비스",
-    imageAssetHint: "src/assets/images/project-passu.png",
+    image: passuImage,
   },
 ];
 
@@ -55,8 +59,15 @@ export const MainProjects = () => {
             key={project.title}
             className="flex flex-col gap-4 sm:gap-7 lg:gap-10"
           >
-            {/* 썸네일 자리 - imageAssetHint 이미지 추가 후 next/image로 교체 */}
-            <div className="h-48 w-full max-w-[26.75rem] rounded-lg bg-white/10 sm:h-52 lg:h-[15.75rem]" />
+            <div className="relative h-48 w-full max-w-[26.75rem] overflow-hidden rounded-lg sm:h-52 lg:h-[15.75rem]">
+              <Image
+                src={project.image}
+                alt={project.title}
+                fill
+                sizes="(min-width: 640px) 428px, 100vw"
+                className="object-cover"
+              />
+            </div>
 
             <div>
               <h3 className="text-left font-bold text-[#e2d7d7] text-2xl sm:text-3xl lg:text-3xl min-[1440px]:text-[2.5rem]">
