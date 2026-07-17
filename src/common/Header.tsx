@@ -4,7 +4,7 @@ import logo from "../assets/logo.svg";
 
 export const Header = () => {
   return (
-    <header className="flex h-16 w-full items-center justify-between px-4 bg-white sm:h-20 sm:px-8 lg:h-25 lg:px-20">
+    <header className="flex h-16 w-full items-center justify-between px-4 bg-white sm:h-20 sm:px-8 lg:h-22 lg:px-14 min-[1440px]:h-25 min-[1440px]:px-20">
       <Link href="/" className="flex items-center gap-2">
         <Image
           src={logo}
