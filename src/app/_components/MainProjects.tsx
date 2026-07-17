@@ -29,7 +29,6 @@ export const MainProjects = () => {
   return (
     <div className="relative px-4 py-16 sm:py-24 lg:py-32">
       <div className="absolute top-0 right-4 sm:right-8">
-        {/* 배경 워터마크 텍스트 */}
         <p
           aria-hidden
           className="pointer-events-none select-none text-6xl font-bold leading-none text-white/[0.14] sm:text-8xl lg:text-8xl min-[1440px]:text-[9.375rem]"
@@ -56,7 +55,7 @@ export const MainProjects = () => {
             key={project.title}
             className="flex flex-col gap-4 sm:gap-7 lg:gap-10"
           >
-            {/* {project.title} 썸네일 - {project.imageAssetHint} 추가 후 next/image로 교체 */}
+            {/* 썸네일 자리 - imageAssetHint 이미지 추가 후 next/image로 교체 */}
             <div className="h-48 w-full max-w-[26.75rem] rounded-lg bg-white/10 sm:h-52 lg:h-[15.75rem]" />
 
             <div>

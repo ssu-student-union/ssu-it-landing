@@ -2,7 +2,6 @@ import Image from "next/image";
 import chevronBlackIcon from "../../assets/icons/chevron_black.svg";
 import { Accordion, AccordionItem } from "../../common/Accordion";
 
-// TODO: FAQ 답변은 정확한 내용으로 교체 필요
 const FAQ_ITEMS = [
   {
     question: "Q1. 활동기간은 얼마나 되나요?",
