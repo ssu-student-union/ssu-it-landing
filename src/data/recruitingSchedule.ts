@@ -3,7 +3,8 @@ export const APPLICATION_PERIOD = {
   end: "2026-02-05",
 } as const;
 
-export const ANNOUNCEMENT_DATE = "2026-07-31";
+// 면접(INTERVIEW_DATES) 종료 직후 — 확정되면 실제 발표일로 교체 (플레이스홀더).
+export const ANNOUNCEMENT_DATE = "2026-02-13";
 
 export const INTERVIEW_DATES = [
   "2026-02-02",

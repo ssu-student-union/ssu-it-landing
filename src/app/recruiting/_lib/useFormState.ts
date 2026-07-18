@@ -1,8 +1,22 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { z } from "zod";
 import { scrollToElementCentered } from "./scrollToElement";
+
+/** `storageKey`가 주어졌을 때 sessionStorage에서 이전에 저장된 값을 동기적으로 읽어온다(SSR/파싱 실패 시 `initialValues`로 폴백). */
+function readStoredValues<T>(
+  storageKey: string | undefined,
+  initialValues: T,
+): T {
+  if (!storageKey || typeof window === "undefined") return initialValues;
+  try {
+    const raw = window.sessionStorage.getItem(storageKey);
+    return raw ? { ...initialValues, ...JSON.parse(raw) } : initialValues;
+  } catch {
+    return initialValues;
+  }
+}
 
 /**
  * 리크루팅 폼 3단계가 공유하는 상태/검증 훅.
@@ -17,13 +31,25 @@ import { scrollToElementCentered } from "./scrollToElement";
  * (`scrollToElementCentered`). 이 키는 zod `fieldErrors`의 첫 번째 키,
  * 즉 스키마에 필드를 선언한 순서와 같다 — 그래서 각 페이지의 문항 순서와
  * 스키마 필드 선언 순서를 맞춰둬야 "가장 위에 있는 에러"로 정확히 스크롤된다.
+ *
+ * `storageKey`를 넘기면 `values`를 sessionStorage에 미러링한다 — 각 스텝이
+ * 별개의 라우트/페이지 컴포넌트라 "이전" 버튼으로 이동하면 컴포넌트가
+ * 완전히 리마운트되어 로컬 `useState`만으로는 입력값이 사라지기 때문이다.
  */
 export function useFormState<T extends Record<string, unknown>>(
   schemaFactory: (values: T) => z.ZodType<T, unknown>,
   initialValues: T,
+  storageKey?: string,
 ) {
-  const [values, setValues] = useState<T>(initialValues);
+  const [values, setValues] = useState<T>(() =>
+    readStoredValues(storageKey, initialValues),
+  );
   const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    if (!storageKey) return;
+    window.sessionStorage.setItem(storageKey, JSON.stringify(values));
+  }, [values, storageKey]);
 
   const setField = <K extends keyof T>(
     key: K,

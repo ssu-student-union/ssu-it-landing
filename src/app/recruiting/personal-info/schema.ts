@@ -77,7 +77,10 @@ export const stepOneSchema = z
       return;
     }
 
-    if (validRanges.some((r) => new Date(r.start) >= new Date(r.end))) {
+    if (
+      data.noAvailableTime &&
+      validRanges.some((r) => new Date(r.start) >= new Date(r.end))
+    ) {
       ctx.addIssue({
         path: ["otherTime"],
         code: z.ZodIssueCode.custom,

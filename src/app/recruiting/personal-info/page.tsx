@@ -29,14 +29,9 @@ import {
   QuestionSection,
 } from "../_components/question";
 import { StepIndicator } from "../_components/StepIndicator";
+import { RECRUITING_STEPS, RECRUITING_STORAGE_KEYS } from "../_lib/constants";
 import { useFormState } from "../_lib/useFormState";
 import { type StepOneFormData, stepOneSchema } from "./schema";
-
-const steps = [
-  "개인정보 동의 및 작성",
-  "지원 파트 및 지원동기",
-  "포트폴리오 제출",
-];
 
 const weekdayInterviewDates = INTERVIEW_DATES.filter((d) => !isWeekendDate(d));
 const weekendInterviewDates = INTERVIEW_DATES.filter(isWeekendDate);
@@ -79,7 +74,11 @@ export default function RecruitingStepOnePage() {
     submitted,
     fieldError,
     validate,
-  } = useFormState(() => stepOneSchema, initialValues);
+  } = useFormState(
+    () => stepOneSchema,
+    initialValues,
+    RECRUITING_STORAGE_KEYS.stepOne,
+  );
 
   const handleNext = () => {
     if (validate().success) {
@@ -106,11 +105,12 @@ export default function RecruitingStepOnePage() {
       ...prev,
       noAvailableTime: checked,
       interviewAvailability: checked ? {} : prev.interviewAvailability,
+      otherTime: checked ? prev.otherTime : [],
     }));
 
   return (
     <main className="mx-auto flex w-full max-w-6xl flex-col gap-10 px-8 py-16 sm:px-12 lg:px-32 xl:px-40">
-      <StepIndicator steps={steps} currentStep={1} />
+      <StepIndicator steps={RECRUITING_STEPS} currentStep={1} />
 
       <h1 className="font-semibold text-2xl text-black md:text-[1.875rem]">
         1. 개인정보 동의 및 작성

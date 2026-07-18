@@ -13,15 +13,10 @@ import {
   QuestionSection,
 } from "../_components/question";
 import { StepIndicator } from "../_components/StepIndicator";
+import { RECRUITING_STEPS, RECRUITING_STORAGE_KEYS } from "../_lib/constants";
 import { buildEmptyAnswers } from "../_lib/questionConfig";
 import { useFormState } from "../_lib/useFormState";
 import { buildStepTwoSchema, type StepTwoFormData } from "./schema";
-
-const steps = [
-  "개인정보 동의 및 작성",
-  "지원 파트 및 지원동기",
-  "포트폴리오 제출",
-];
 
 const initialValues: StepTwoFormData = {
   department: "",
@@ -40,6 +35,7 @@ export default function RecruitingStepTwoPage() {
   } = useFormState(
     (v) => buildStepTwoSchema(v.department as DepartmentId | ""),
     initialValues,
+    RECRUITING_STORAGE_KEYS.stepTwo,
   );
 
   const selectedDepartment = departments.find(
@@ -56,7 +52,7 @@ export default function RecruitingStepTwoPage() {
 
   return (
     <main className="mx-auto flex w-full max-w-6xl flex-col gap-10 px-8 py-16 sm:px-12 lg:px-32 xl:px-40">
-      <StepIndicator steps={steps} currentStep={2} />
+      <StepIndicator steps={RECRUITING_STEPS} currentStep={2} />
 
       <h1 className="font-semibold text-2xl text-black md:text-[1.875rem]">
         2. 지원 파트 및 지원동기 작성

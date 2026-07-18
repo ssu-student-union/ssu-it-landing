@@ -9,14 +9,9 @@ import {
   QuestionSection,
 } from "../_components/question";
 import { StepIndicator } from "../_components/StepIndicator";
+import { RECRUITING_STEPS, RECRUITING_STORAGE_KEYS } from "../_lib/constants";
 import { useFormState } from "../_lib/useFormState";
 import { type StepThreeFormData, stepThreeSchema } from "./schema";
-
-const steps = [
-  "개인정보 동의 및 작성",
-  "지원 파트 및 지원동기",
-  "포트폴리오 제출",
-];
 
 const initialValues: StepThreeFormData = {
   portfolioLink: "",
@@ -26,7 +21,11 @@ const initialValues: StepThreeFormData = {
 export default function RecruitingStepThreePage() {
   const router = useRouter();
   const { values, setField, errors, submitted, fieldError, validate } =
-    useFormState(() => stepThreeSchema, initialValues);
+    useFormState(
+      () => stepThreeSchema,
+      initialValues,
+      RECRUITING_STORAGE_KEYS.stepThree,
+    );
   const [file, setFile] = useState<File | null>(null);
 
   const handlePrev = () => router.push("/recruiting/motivation");
@@ -47,7 +46,7 @@ export default function RecruitingStepThreePage() {
 
   return (
     <main className="mx-auto flex w-full max-w-6xl flex-col gap-10 px-8 py-16 sm:px-12 lg:px-32 xl:px-40">
-      <StepIndicator steps={steps} currentStep={3} />
+      <StepIndicator steps={RECRUITING_STEPS} currentStep={3} />
 
       <h1 className="font-semibold text-2xl text-black md:text-[1.875rem]">
         3. 포트폴리오 제출 및 완료
