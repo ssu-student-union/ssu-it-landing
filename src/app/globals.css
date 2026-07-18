@@ -4,6 +4,7 @@
   --font-sans:
     var(--font-pretendard), -apple-system, BlinkMacSystemFont, system-ui,
     sans-serif;
+  --ease-expo-out: cubic-bezier(0.19, 1, 0.22, 1);
 }
 
 body {

@@ -26,8 +26,8 @@ export const Header = () => {
           진행 프로젝트
         </Link>
         <Link
-          href="#"
-          className="flex items-center justify-center whitespace-nowrap rounded-4xl bg-gradient-to-b from-[#4a4a4a] to-black px-8 py-3 font-semibold text-[#e5e5e5] text-2xl"
+          href="/recruiting/personal-info"
+          className="flex items-center justify-center whitespace-nowrap rounded-4xl bg-linear-to-b from-[#4a4a4a] to-black px-8 py-3 font-semibold text-[#e5e5e5] text-2xl"
         >
           리크루팅
         </Link>
