@@ -57,7 +57,7 @@ export const TimeRangeList = ({
             min={min}
             max={max}
             submitted={submitted}
-            className="min-w-[220px] flex-1"
+            className="min-w-55 flex-1"
           />
           <DateTimePicker
             label="종료"
@@ -67,7 +67,7 @@ export const TimeRangeList = ({
             max={max}
             error={rangeError(range)}
             submitted={submitted}
-            className="min-w-[220px] flex-1"
+            className="min-w-55 flex-1"
           />
           {ranges.length > 1 && (
             <button
