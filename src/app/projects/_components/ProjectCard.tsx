@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import type { Project } from "../../../data/projects";
 
 type ProjectCardProps = {
@@ -7,7 +8,10 @@ type ProjectCardProps = {
 
 export const ProjectCard = ({ project }: ProjectCardProps) => {
   return (
-    <div className="flex cursor-pointer flex-col items-center gap-6 rounded-2xl bg-[#434343]/50 p-6 transition-transform duration-300 ease-in-out hover:scale-105 sm:gap-10 sm:p-8 lg:p-10">
+    <Link
+      href={`/projects/${project.slug}`}
+      className="flex cursor-pointer flex-col items-center gap-6 rounded-2xl bg-[#434343]/50 p-6 transition-transform duration-300 ease-in-out hover:scale-105 sm:gap-10 sm:p-8 lg:p-10"
+    >
       <div className="relative h-40 w-full overflow-hidden rounded-lg sm:h-52 lg:h-[15.75rem]">
         <Image
           src={project.image}
@@ -26,6 +30,6 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
           {project.description}
         </p>
       </div>
-    </div>
+    </Link>
   );
 };
