@@ -1,3 +1,5 @@
+import Image from "next/image";
+import teamIcon from "../../../../assets/icons/team.svg";
 import type { TeamRole } from "../../../../data/projects";
 
 type ProjectTeamProps = {
@@ -7,9 +9,18 @@ type ProjectTeamProps = {
 export const ProjectTeam = ({ team }: ProjectTeamProps) => {
   return (
     <div className="flex h-full flex-col gap-4 rounded-[1.25rem] border border-[#cdc4c4] p-6 sm:gap-5 sm:p-8 lg:p-10">
-      <h2 className="font-bold text-xl text-white sm:text-2xl lg:text-2xl min-[1440px]:text-[1.75rem]">
-        팀 소개
-      </h2>
+      <div className="flex items-center gap-2 sm:gap-3">
+        <Image
+          src={teamIcon}
+          alt=""
+          width={70}
+          height={70}
+          className="h-10 w-auto"
+        />
+        <h2 className="font-bold text-xl text-white sm:text-2xl lg:text-2xl min-[1440px]:text-[1.75rem]">
+          팀 소개
+        </h2>
+      </div>
       <div className="flex flex-col gap-3 sm:gap-4">
         {team.map((member) => {
           const hasMultipleNames = member.name.includes(",");
