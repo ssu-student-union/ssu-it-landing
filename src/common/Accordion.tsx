@@ -83,7 +83,7 @@ export const AccordionItem = ({
         type="button"
         aria-expanded={isOpen}
         onClick={() => context.toggle(itemId)}
-        className={`group w-full text-left ${triggerClassName ?? ""}`}
+        className={`group w-full cursor-pointer text-left ${triggerClassName ?? ""}`}
       >
         {trigger}
       </button>

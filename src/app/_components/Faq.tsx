@@ -42,7 +42,7 @@ export const Faq = () => {
             id={item.question}
             className="w-full overflow-hidden rounded-2xl bg-[#f6f6f6] sm:rounded-[1.875rem]"
             triggerClassName="flex min-h-16 w-full items-center justify-between gap-4 px-5 py-4 sm:min-h-20 sm:px-8 lg:h-[5.5625rem] lg:py-0"
-            panelClassName="px-5 pb-5 text-sm text-[#4a4a4a] leading-relaxed sm:px-8 sm:pb-8 sm:text-base lg:text-base min-[1440px]:text-lg"
+            panelClassName="px-5 pb-5 text-base text-[#4a4a4a] leading-relaxed sm:px-8 sm:pb-8 sm:text-lg lg:text-lg min-[1440px]:text-xl"
             trigger={
               <>
                 <p className="text-left font-semibold text-[#121212] text-base sm:text-xl lg:text-xl min-[1440px]:text-2xl">
