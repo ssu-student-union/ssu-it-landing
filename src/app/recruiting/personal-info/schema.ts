@@ -1,10 +1,11 @@
-import dayjs from "dayjs";
 import { z } from "zod";
 import {
   INTERVIEW_DATES,
+  LOCAL_DATETIME_FORMAT,
   WEEKDAY_SLOT_START_TIMES,
   WEEKEND_SLOT_START_TIMES,
 } from "../../../data/recruitingSchedule";
+import { dayjs } from "../../../lib";
 import { TIME_RANGE_ORDER_MESSAGE } from "../_lib/schema";
 
 const dateEnum = z.enum(INTERVIEW_DATES);
@@ -13,9 +14,7 @@ const slotEnum = z.enum([
   ...WEEKEND_SLOT_START_TIMES,
 ]);
 
-// z.record(dateEnum, ...)는 zod v4에서 모든 enum 키가 존재해야 하는
-// exhaustive record로 취급돼서, "고른 날짜만 기록"하는 sparse map엔
-// partialRecord를 써야 한다.
+// z.record는 zod v4에서 모든 enum 키를 요구하는 exhaustive record라, 고른 날짜만 기록하는 sparse map엔 partialRecord를 써야 한다.
 const interviewAvailability = z
   .partialRecord(dateEnum, z.array(slotEnum))
   .default({});
@@ -23,7 +22,7 @@ const interviewAvailability = z
 const localDateTimeString = z
   .string()
   .refine(
-    (v) => v === "" || /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/.test(v),
+    (v) => v === "" || dayjs(v, LOCAL_DATETIME_FORMAT, true).isValid(),
     "날짜/시간 형식이 올바르지 않아요.",
   );
 
@@ -36,7 +35,7 @@ export const stepOneSchema = z
   .object({
     agree: z
       .boolean()
-      .refine((v) => v === true, "개인정보 수집 및 이용에 동의해주세요."),
+      .refine((v) => v, "개인정보 수집 및 이용에 동의해주세요."),
     name: z.string().trim().min(1, "이름을 입력해주세요."),
     studentId: z
       .string()
@@ -81,9 +80,7 @@ export const stepOneSchema = z
 
     if (
       data.noAvailableTime &&
-      validRanges.some(
-        (r) => dayjs(r.start).valueOf() >= dayjs(r.end).valueOf(),
-      )
+      validRanges.some((r) => dayjs(r.start).isSameOrAfter(dayjs(r.end)))
     ) {
       ctx.addIssue({
         path: ["otherTime"],
@@ -94,3 +91,16 @@ export const stepOneSchema = z
   });
 
 export type StepOneFormData = z.infer<typeof stepOneSchema>;
+
+export const stepOneInitialValues: StepOneFormData = {
+  agree: false,
+  name: "",
+  studentId: "",
+  phone: "",
+  college: "",
+  department: "",
+  grade: "",
+  interviewAvailability: {},
+  noAvailableTime: false,
+  otherTime: [],
+};

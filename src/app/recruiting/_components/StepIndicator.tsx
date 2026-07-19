@@ -4,11 +4,7 @@ type StepIndicatorProps = {
   className?: string;
 };
 
-/**
- * 상단 Step1/2/3 진행 표시. `currentStep`보다 작은 번호는 체크 완료로
- * 표시된다 — 완료 화면(`complete/page.tsx`)처럼 전 단계를 다 채워진
- * 상태로 보여주고 싶으면 `steps.length + 1`처럼 배열 길이보다 큰 값을 준다.
- */
+/** 상단 진행 표시. `currentStep`보다 작은 번호는 체크 완료로 표시되므로, 전 단계를 다 채운 상태로 보이려면 `steps.length + 1`을 준다. */
 export const StepIndicator = ({
   steps,
   currentStep,

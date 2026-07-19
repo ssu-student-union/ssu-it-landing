@@ -32,3 +32,8 @@ export const stepThreeSchema = z
   });
 
 export type StepThreeFormData = z.infer<typeof stepThreeSchema>;
+
+export const stepThreeInitialValues: StepThreeFormData = {
+  portfolioLink: "",
+  portfolioFile: null,
+};

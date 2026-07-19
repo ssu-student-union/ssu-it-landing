@@ -1,10 +1,10 @@
-export { maxLengthExceededMessage, TIME_RANGE_ORDER_MESSAGE } from "./messages";
 export {
-  buildAnswerSchema,
   buildEmptyAnswers,
+  type FieldConfig,
+  type FormValues,
   type QuestionAnswer,
-  type QuestionConfig,
-} from "./questionConfig";
+} from "./fieldConfig";
+export { maxLengthExceededMessage, TIME_RANGE_ORDER_MESSAGE } from "./messages";
 export {
   type RecruitingSubmissionPayload,
   type SubmissionValidationResult,

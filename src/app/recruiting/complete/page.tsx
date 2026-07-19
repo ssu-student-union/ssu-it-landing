@@ -25,12 +25,12 @@ export default function RecruitingCompletePage() {
       className="items-center gap-16 text-center"
     >
       <div className="relative flex items-center justify-center">
-        <div className="absolute size-[280px] rounded-full bg-brand-tint blur-3xl sm:size-[394px]" />
+        <div className="absolute size-70 rounded-full bg-brand-tint blur-3xl sm:size-98.5" />
         <Image
           src={astronautImage}
           alt=""
           priority
-          className="relative size-[280px] sm:size-[394px]"
+          className="relative size-70 sm:size-98.5"
         />
       </div>
 

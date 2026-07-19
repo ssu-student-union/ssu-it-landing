@@ -7,11 +7,7 @@ type FieldErrorProps = {
   message?: string;
 };
 
-/**
- * 애니메이션되는 에러 문구. `AnimatePresence`가 퇴장 애니메이션 동안 마지막
- * `message`를 자동으로 붙잡아두므로, `message`가 `undefined`가 된 순간에도
- * 별도 state 없이 exit 애니메이션이 끊기지 않는다.
- */
+/** 애니메이션되는 에러 문구. `AnimatePresence`가 퇴장 중 마지막 `message`를 붙잡아두므로 `undefined`가 돼도 exit 애니메이션이 끊기지 않는다. */
 export const FieldError = ({ message }: FieldErrorProps) => (
   <AnimatePresence initial={false}>
     {message && (

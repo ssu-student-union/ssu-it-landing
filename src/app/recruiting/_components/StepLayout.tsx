@@ -7,12 +7,7 @@ type StepLayoutProps = {
   currentStep: number;
   /** h1 제목. 완료 화면처럼 제목이 없는 페이지는 생략한다. */
   title?: string;
-  /**
-   * 세로 간격 등 페이지별 레이아웃 클래스. 기본 `gap-10`을 통째로 대체하므로
-   * 다른 gap을 쓰려면 (예: 완료 화면의 `gap-16`) gap까지 포함해 넘긴다 —
-   * 기본 클래스에 gap을 고정하면 Tailwind에서 어느 쪽이 이길지 스타일시트
-   * 순서에 좌우되기 때문.
-   */
+  /** 페이지별 레이아웃 클래스. 기본 `gap-10`을 통째로 대체하므로 다른 gap이 필요하면 gap까지 포함해 넘긴다. */
   className?: string;
   children: ReactNode;
 };

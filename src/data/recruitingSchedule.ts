@@ -1,9 +1,7 @@
-import dayjs from "dayjs";
-import "dayjs/locale/ko";
-import isBetween from "dayjs/plugin/isBetween";
+import { dayjs } from "../lib";
 
-dayjs.locale("ko");
-dayjs.extend(isBetween);
+/** `<input type="datetime-local">` 값 포맷. 대체 일정 검증(strict parse)에서 재사용한다. */
+export const LOCAL_DATETIME_FORMAT = "YYYY-MM-DDTHH:mm";
 
 export const APPLICATION_PERIOD = {
   start: "2026-02-01",

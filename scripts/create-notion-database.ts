@@ -14,7 +14,7 @@
  * 실행 결과로 출력되는 database_id를 .env.local의 NOTION_DATABASE_ID에 붙여넣으면 끝.
  *
  * select/multi-select 옵션은 하드코딩하지 않고 앱이 실제로 쓰는 소스
- * (src/data/recruitingStepOne.tsx, recruitingStepTwo.tsx, recruitingSchedule.ts)에서
+ * (src/data/recruitingGrades.ts, recruitingDepartments.ts, recruitingSchedule.ts)에서
  * 그대로 끌어온다 — 앱 UI와 Notion 프로퍼티 옵션이 어긋나지 않게 하기 위함이다.
  *
  * 주의: 이 스크립트는 프로퍼티 스키마만 생성한다. "기본 뷰"에서 어떤 컬럼을
@@ -26,12 +26,12 @@ import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import type { CreateDatabaseParameters } from "@notionhq/client";
 import { Client } from "@notionhq/client";
+import { departments } from "../src/data/recruitingDepartments";
+import { gradeLevels, gradeSemesters } from "../src/data/recruitingGrades";
 import {
   formatShortDate,
   INTERVIEW_DATES,
 } from "../src/data/recruitingSchedule";
-import { gradeLevels, gradeSemesters } from "../src/data/recruitingStepOne";
-import { departments } from "../src/data/recruitingStepTwo";
 import { NOTION_PROPERTIES } from "../src/server/notion/propertyNames";
 
 /** node --env-file 없이도 동작하도록 .env.local을 최소한으로 직접 파싱한다(별도 dotenv 의존성 추가 없이). */
@@ -86,13 +86,7 @@ const gradeOptions = gradeLevels.flatMap((level) =>
 const departmentOptions = departments.map((department) => department.id);
 
 const taskOptions = Array.from(
-  new Set(
-    departments.flatMap((department) =>
-      department.questions.flatMap((question) =>
-        question.type === "checkbox-group" ? question.options : [],
-      ),
-    ),
-  ),
+  new Set(departments.flatMap((department) => department.taskOptions)),
 );
 
 const properties: Record<string, PropertyConfig> = {

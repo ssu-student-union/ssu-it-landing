@@ -3,35 +3,24 @@
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Button, FileUpload, Textfield } from "../_components/fields";
-import {
-  FieldError,
-  QuestionList,
-  QuestionSection,
-} from "../_components/question";
+import { Button } from "../_components/fields";
+import { FormRenderer } from "../_components/form";
 import { StepLayout } from "../_components/StepLayout";
 import { RECRUITING_STORAGE_KEYS } from "../_lib/constants";
 import { useFormState } from "../_lib/hooks";
-import { type StepThreeFormData, stepThreeSchema } from "./schema";
-
-const initialValues: StepThreeFormData = {
-  portfolioLink: "",
-  portfolioFile: null,
-};
+import { stepThreeFields } from "./fields";
+import { stepThreeInitialValues, stepThreeSchema } from "./schema";
 
 async function submitApplication(formData: FormData): Promise<void> {
   let response: Response;
   try {
-    // FormData를 body로 전달하면 boundary가 포함된 multipart/form-data
-    // Content-Type을 브라우저가 자동으로 설정한다. 직접 헤더를 지정하면
-    // boundary가 누락되어 서버에서 파싱이 실패하므로 지정하지 않는다.
+    // Content-Type을 직접 지정하면 multipart boundary가 빠져 서버 파싱이 실패하므로 지정하지 않는다.
     response = await fetch("/api/recruiting/submit", {
       method: "POST",
       body: formData,
       signal: AbortSignal.timeout(10_000),
     });
   } catch {
-    // 응답 자체가 없는 경우(네트워크 단절·타임아웃)만 여기로 온다.
     throw new Error("네트워크 연결을 확인해주세요.");
   }
   if (!response.ok) throw new Error("제출에 실패했어요.");
@@ -39,18 +28,23 @@ async function submitApplication(formData: FormData): Promise<void> {
 
 export default function RecruitingStepThreePage() {
   const router = useRouter();
-  const { values, setField, errors, submitted, fieldError, validate } =
-    useFormState(
-      () => stepThreeSchema,
-      initialValues,
-      RECRUITING_STORAGE_KEYS.stepThree,
-    );
+  const {
+    values,
+    setField,
+    setValues,
+    errors,
+    submitted,
+    fieldError,
+    validate,
+  } = useFormState(
+    () => stepThreeSchema,
+    stepThreeInitialValues,
+    RECRUITING_STORAGE_KEYS.stepThree,
+  );
   const [file, setFile] = useState<File | null>(null);
 
-  // 실제 File 객체는 리마운트("이전"으로 갔다 돌아오기)를 넘어 복원될 수
-  // 없는데, sessionStorage에서 복원된 메타(`values.portfolioFile`)만 남으면
-  // 파일 없이도 검증을 통과해 실제 파일 없는 제출이 가능해진다. 마운트
-  // 시점에 메타를 무효화해 파일 상태와 항상 일치시킨다.
+  // File 객체는 리마운트를 넘어 복원되지 않는데, sessionStorage의 메타만 남으면
+  // 파일 없이도 검증을 통과한다 — 마운트 시 메타를 무효화해 상태를 맞춘다.
   // biome-ignore lint/correctness/useExhaustiveDependencies: 마운트 시 1회만 실행해야 한다
   useEffect(() => {
     setField("portfolioFile", null);
@@ -63,7 +57,7 @@ export default function RecruitingStepThreePage() {
 
   const handlePrev = () => router.push("/recruiting/motivation");
 
-  const handleFileChange = (next: File | null) => {
+  const handleFileChange = (_key: string, next: File | null) => {
     setFile(next);
     setField(
       "portfolioFile",
@@ -93,43 +87,21 @@ export default function RecruitingStepThreePage() {
   };
 
   const handleComplete = () => {
-    if (validate().success) {
-      submitMutation.mutate(buildFormData());
-    }
+    if (validate().success) submitMutation.mutate(buildFormData());
   };
 
   return (
     <StepLayout currentStep={3} title="3. 포트폴리오 제출 및 완료">
-      <QuestionList>
-        <QuestionSection
-          id="field-portfolioLink"
-          title="포트폴리오 (링크)"
-          description="ex) Github, Notion, LinkedIn 등 링크 또는 파일을 공유해주세요."
-        >
-          <Textfield
-            value={values.portfolioLink}
-            onChange={(v) => setField("portfolioLink", v)}
-            placeholder="https://..."
-            error={errors.portfolioLink?.[0]}
-            submitted={submitted}
-          />
-        </QuestionSection>
-
-        <QuestionSection
-          id="field-portfolioFile"
-          title="포트폴리오 (파일)"
-          description="지원되는 파일 1개를 업로드하세요. 최대 크기는 10 MB입니다."
-        >
-          <FileUpload
-            file={file}
-            onChange={handleFileChange}
-            error={Boolean(fieldError("portfolioFile"))}
-          />
-          <div className="mt-2">
-            <FieldError message={fieldError("portfolioFile")} />
-          </div>
-        </QuestionSection>
-      </QuestionList>
+      <FormRenderer
+        fields={stepThreeFields}
+        values={values}
+        errors={errors}
+        submitted={submitted}
+        fieldError={fieldError}
+        setValues={setValues}
+        files={{ portfolioFile: file }}
+        onFileChange={handleFileChange}
+      />
 
       {submitMutation.isError && (
         <div className="rounded-xl bg-red-50 p-5 text-red-600 text-sm leading-relaxed sm:text-base">

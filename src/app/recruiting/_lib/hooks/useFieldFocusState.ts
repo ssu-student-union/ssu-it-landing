@@ -11,12 +11,7 @@ type UseFieldFocusStateOptions = {
   bypassGate?: boolean;
 };
 
-/**
- * 밑줄형 입력 필드(`Textfield`·`DateTimePicker`)가 공유하는 focus/blur
- * 추적과 상태별 스타일 계산. 에러 문구·테두리는 blur 또는 폼 제출 중 먼저
- * 오는 시점부터 보여주고(`isTouched`), `bypassGate`가 켜진 동안에는 포커스
- * 중이어도 즉시 에러로 표시한다.
- */
+/** `Textfield`·`DateTimePicker`가 공유하는 focus/blur 상태 훅. 에러는 blur 또는 제출 시점부터 보이되, `bypassGate`가 켜지면 포커스 중에도 즉시 표시한다. */
 export function useFieldFocusState({
   submitted = false,
   error,

@@ -1,7 +1,7 @@
 import {
   type DepartmentId,
   departments,
-} from "../../../../data/recruitingStepTwo";
+} from "../../../../data/recruitingDepartments";
 import {
   buildStepTwoSchema,
   type StepTwoFormData,
@@ -51,11 +51,7 @@ function extractDepartment(stepTwo: unknown): DepartmentId | "" {
   return "";
 }
 
-/**
- * 클라이언트가 보낸 3단계 폼 데이터를 서버에서 다시 검증한다(클라이언트 검증은
- * 신뢰하지 않음). `stepOneSchema`는 `.superRefine()`이 붙어 `.shape` 병합이
- * 안 되므로, 세 스키마를 각각 `safeParse`한 뒤 결과를 합치는 방식을 쓴다.
- */
+/** 클라이언트 검증은 신뢰하지 않고 서버에서 3단계 데이터를 다시 검증한다. `stepOneSchema`는 `.superRefine()`으로 `.shape` 병합이 안 돼 세 스키마를 각각 `safeParse`한다. */
 export function validateSubmission(
   payload: RecruitingSubmissionPayload,
 ): SubmissionValidationResult {

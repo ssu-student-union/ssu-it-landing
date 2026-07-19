@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import plusIcon from "../../../../assets/icons/plus.svg";
+import { dayjs } from "../../../../lib";
 import { TIME_RANGE_ORDER_MESSAGE } from "../../_lib/schema";
 import { fieldBorderClass } from "../../_lib/ui";
 import { FieldError } from "../question/FieldError";
@@ -18,11 +19,7 @@ type TimeRangeListProps = {
   submitted?: boolean;
 };
 
-/**
- * (시작~종료) 시간 범위를 여러 개 입력받는 반복 필드. `value`가 빈 배열이면
- * 빈 입력 행 하나를 시각적으로만 보여주고, 그 행에 값을 입력하는 순간 실제
- * 배열 항목으로 승격된다(빈 배열 ↔ 빈 행 1개를 동일하게 취급).
- */
+/** (시작~종료) 시간 범위 반복 필드. `value`가 빈 배열이면 빈 입력 행 하나를 시각적으로만 보여준다(빈 배열 ↔ 빈 행 1개를 동일하게 취급). */
 export const TimeRangeList = ({
   value,
   onChange,
@@ -42,7 +39,10 @@ export const TimeRangeList = ({
     onChange(ranges.filter((_, i) => i !== index));
 
   const rangeError = (range: TimeRange) =>
-    submitted && range.start && range.end && range.start >= range.end
+    submitted &&
+    range.start &&
+    range.end &&
+    dayjs(range.start).isSameOrAfter(dayjs(range.end))
       ? TIME_RANGE_ORDER_MESSAGE
       : undefined;
 
