@@ -25,7 +25,7 @@ export const Header = () => {
           위원회 소개
         </Link>
         <Link
-          href="#"
+          href="/projects"
           className="hidden font-semibold text-[#1b1c1c] text-lg whitespace-nowrap sm:block lg:text-xl min-[1440px]:text-2xl"
         >
           진행 프로젝트

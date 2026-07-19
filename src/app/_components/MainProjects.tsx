@@ -1,33 +1,7 @@
 import Image from "next/image";
+import Link from "next/link";
 import arrowCircleIcon from "../../assets/icons/arrow_circle.svg";
-import campusClubImage from "../../assets/images/campus-club.png";
-import passuImage from "../../assets/images/passu.png";
-import ssuportImage from "../../assets/images/ssuport.png";
-import studentCouncilImage from "../../assets/images/student-council.png";
-
-const PROJECTS = [
-  {
-    title: "SSUPORT",
-    description: "총학생회 특별장학금 신청/관리 시스템 서비스",
-    image: ssuportImage,
-  },
-  {
-    title: "동아리연합회 홈페이지",
-    description: "중앙동아리들의 정보 전달 및 행정처리를 위한 서비스",
-    image: campusClubImage,
-  },
-  {
-    title: "총학생회 홈페이지",
-    description: "학생과 자치기구를 잇는 소통의 장",
-    image: studentCouncilImage,
-  },
-  {
-    title: "PASSU",
-    description:
-      "수기 수령증 작성과 재학생 인증을 간소화한 디지털 수령증 서비스",
-    image: passuImage,
-  },
-];
+import { PROJECTS } from "../../data/projects";
 
 export const MainProjects = () => {
   return (
@@ -43,13 +17,15 @@ export const MainProjects = () => {
           <h2 className="flex h-10 items-center whitespace-nowrap text-2xl leading-none font-bold text-white sm:h-12 sm:text-4xl lg:h-12 lg:text-4xl min-[1440px]:h-16 min-[1440px]:text-5xl">
             메인 프로젝트
           </h2>
-          <Image
-            src={arrowCircleIcon}
-            alt=""
-            width={64}
-            height={64}
-            className="h-8 w-8 cursor-pointer sm:h-10 sm:w-10 lg:h-10 lg:w-10 min-[1440px]:h-16 min-[1440px]:w-16"
-          />
+          <Link href="/projects" aria-label="진행 프로젝트 더보기">
+            <Image
+              src={arrowCircleIcon}
+              alt=""
+              width={64}
+              height={64}
+              className="h-8 w-8 cursor-pointer sm:h-10 sm:w-10 lg:h-10 lg:w-10 min-[1440px]:h-16 min-[1440px]:w-16"
+            />
+          </Link>
         </div>
       </div>
 
