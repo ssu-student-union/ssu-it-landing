@@ -38,15 +38,15 @@ function isDepartmentId(value: string): value is DepartmentId {
   return departments.some((department) => department.id === value);
 }
 
-function extractDepartment(stepTwo: unknown): DepartmentId | "" {
+function extractDepartment(stepOne: unknown): DepartmentId | "" {
   if (
-    typeof stepTwo === "object" &&
-    stepTwo !== null &&
-    "department" in stepTwo &&
-    typeof stepTwo.department === "string" &&
-    isDepartmentId(stepTwo.department)
+    typeof stepOne === "object" &&
+    stepOne !== null &&
+    "department" in stepOne &&
+    typeof stepOne.department === "string" &&
+    isDepartmentId(stepOne.department)
   ) {
-    return stepTwo.department;
+    return stepOne.department;
   }
   return "";
 }
@@ -57,7 +57,7 @@ export function validateSubmission(
 ): SubmissionValidationResult {
   const stepOneResult = stepOneSchema.safeParse(payload.stepOne);
   const stepTwoResult = buildStepTwoSchema(
-    extractDepartment(payload.stepTwo),
+    extractDepartment(payload.stepOne),
   ).safeParse(payload.stepTwo);
   const stepThreeResult = stepThreeSchema.safeParse(payload.stepThree);
 

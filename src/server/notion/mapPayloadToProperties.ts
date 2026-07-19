@@ -69,13 +69,13 @@ const toStringValue = (value: string | string[] | undefined): string =>
 const toStringArray = (value: string | string[] | undefined): string[] =>
   Array.isArray(value) ? value : [];
 
-type InterviewAvailability = StepOneFormData["interviewAvailability"];
+type InterviewAvailability = StepTwoFormData["interviewAvailability"];
 type InterviewSlots = NonNullable<
   InterviewAvailability[keyof InterviewAvailability]
 >;
 
 function summarizeInterviewAvailability(
-  availability: StepOneFormData["interviewAvailability"],
+  availability: StepTwoFormData["interviewAvailability"],
 ): { dateLabels: string[]; detail: string } {
   const withSlots = Object.entries(availability).filter(
     (entry): entry is [string, InterviewSlots] =>
@@ -93,7 +93,7 @@ function summarizeInterviewAvailability(
   };
 }
 
-function summarizeOtherTime(ranges: StepOneFormData["otherTime"]): string {
+function summarizeOtherTime(ranges: StepTwoFormData["otherTime"]): string {
   return ranges
     .filter((range) => range.start && range.end)
     .map(
@@ -110,11 +110,11 @@ function summarizeOtherTime(ranges: StepOneFormData["otherTime"]): string {
  * 이 필드 하나만 보고도 구분할 수 있게 한다.
  */
 function summarizeInterviewSchedule(
-  stepOne: StepOneFormData,
+  stepTwo: StepTwoFormData,
   detail: string,
 ): string {
-  if (stepOne.noAvailableTime) {
-    return `[대체 일정] ${summarizeOtherTime(stepOne.otherTime)}`;
+  if (stepTwo.noAvailableTime) {
+    return `[대체 일정] ${summarizeOtherTime(stepTwo.otherTime)}`;
   }
   return detail;
 }
@@ -130,7 +130,7 @@ export function mapPayloadToProperties(
 ): NotionProperties {
   const { stepOne, stepTwo, stepThree } = submission;
   const { dateLabels, detail } = summarizeInterviewAvailability(
-    stepOne.interviewAvailability,
+    stepTwo.interviewAvailability,
   );
 
   return {
@@ -138,17 +138,17 @@ export function mapPayloadToProperties(
     [NOTION_PROPERTIES.studentId]: richTextValue(stepOne.studentId),
     [NOTION_PROPERTIES.phone]: phoneValue(stepOne.phone),
     [NOTION_PROPERTIES.college]: richTextValue(stepOne.college),
-    [NOTION_PROPERTIES.major]: richTextValue(stepOne.department),
+    [NOTION_PROPERTIES.major]: richTextValue(stepOne.major),
     [NOTION_PROPERTIES.gradeSemester]: selectValue(stepOne.grade),
     [NOTION_PROPERTIES.consent]: checkboxValue(stepOne.agree),
     [NOTION_PROPERTIES.interviewDates]: multiSelectValue(dateLabels),
     [NOTION_PROPERTIES.interviewSchedule]: richTextValue(
-      summarizeInterviewSchedule(stepOne, detail),
+      summarizeInterviewSchedule(stepTwo, detail),
     ),
     [NOTION_PROPERTIES.needsAlternateTime]: checkboxValue(
-      stepOne.noAvailableTime,
+      stepTwo.noAvailableTime,
     ),
-    [NOTION_PROPERTIES.recruitingDepartment]: selectValue(stepTwo.department),
+    [NOTION_PROPERTIES.recruitingDepartment]: selectValue(stepOne.department),
     [NOTION_PROPERTIES.tasks]: multiSelectValue(toStringArray(stepTwo.tasks)),
     [NOTION_PROPERTIES.motivation]: richTextValue(
       toStringValue(stepTwo.motivation),

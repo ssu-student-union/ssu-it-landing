@@ -1,7 +1,7 @@
 /** `StepIndicator`에 넘기는 3단계 라벨. 4개 페이지(personal-info/motivation/portfolio/complete)가 공유한다. */
 export const RECRUITING_STEPS = [
   "개인정보 동의 및 작성",
-  "지원 파트 및 지원동기",
+  "면접 시간 선택 및 지원동기",
   "포트폴리오 제출",
 ];
 

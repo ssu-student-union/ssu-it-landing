@@ -1,10 +1,19 @@
-import type { ReactNode } from "react";
 import {
   type Department,
   type DepartmentId,
   departments,
 } from "../../../data/recruitingDepartments";
-import { buildEmptyAnswers, type FieldConfig } from "../_lib/schema";
+import {
+  formatInterviewDate,
+  formatSlotLabel,
+  INTERVIEW_DATES,
+  INTERVIEW_PERIOD_MAX,
+  INTERVIEW_PERIOD_MIN,
+  isWeekendDate,
+  WEEKDAY_SLOT_START_TIMES,
+  WEEKEND_SLOT_START_TIMES,
+} from "../../../data/recruitingSchedule";
+import type { FieldConfig, FormValues } from "../_lib/schema";
 
 const highlight = (text: string) => (
   <b className="font-extrabold text-brand">{text}</b>
@@ -31,44 +40,6 @@ const fitCallout = (
     <p>밀도 있는 {highlight("성장")}을 원하는 분</p>
   </>
 );
-
-/** 부서별 자격 요건. 선택 시 애니메이션 박스로 보여준다. */
-const departmentRequirements: Record<DepartmentId, ReactNode> = {
-  PM: <p>[필수] 일정 및 이슈 관리 가능자 (플레이스홀더)</p>,
-  Design: (
-    <>
-      <p>
-        <b className="font-bold">[필수]</b>{" "}
-        <b className="font-semibold">Figma 사용 가능자</b>
-      </p>
-      <p>
-        - Auto Layout 활용 가능자
-        <br />- min, max-width 이용 반응형 페이지 제작 가능자
-        <br />- 서비스 디자인 유경험자
-      </p>
-      <p>
-        <b className="font-bold">[필수]</b> 디자인 시스템 구축 가능자
-      </p>
-      <p className="mt-4 font-semibold">마케팅 디자인</p>
-      <p>
-        <b className="font-bold">[필수]</b> Figma 사용 가능자
-      </p>
-      <p>
-        <b className="font-bold">[우대]</b> SNS 마케팅, 카드 뉴스, 내부 굿즈
-        제작 가능자
-      </p>
-      <p>
-        <b className="font-bold">[우대]</b> AI 툴 사용 가능자
-      </p>
-      <p>
-        <b className="font-bold">[우대]</b> 3D 툴 사용 가능자
-      </p>
-    </>
-  ),
-  Frontend: <p>[필수] React 사용 가능자 (플레이스홀더)</p>,
-  Backend: <p>[필수] Node.js 또는 유사 스택 사용 가능자 (플레이스홀더)</p>,
-  HR: <p>[필수] 인사/조직 운영 관심자 (플레이스홀더)</p>,
-};
 
 /** "역량 서술" textarea placeholder. */
 const departmentSkillPlaceholder: Record<DepartmentId, string> = {
@@ -118,26 +89,91 @@ function buildDepartmentQuestions(department: Department): FieldConfig[] {
   ];
 }
 
-const questionsFor = (id: unknown): FieldConfig[] => {
+export const questionsFor = (id: unknown): FieldConfig[] => {
   const department = departments.find((d) => d.id === id);
   return department ? buildDepartmentQuestions(department) : [];
 };
 
+type Availability = Partial<Record<string, string[]>>;
+
+const weekdayInterviewDates = INTERVIEW_DATES.filter((d) => !isWeekendDate(d));
+const weekendInterviewDates = INTERVIEW_DATES.filter(isWeekendDate);
+
+const availabilityOf = (values: FormValues): Availability =>
+  (values.interviewAvailability as Availability | undefined) ?? {};
+
+// 시간대 선택과 "가능한 시간이 없음"은 상호배타적이라 각 필드의 onToggle이
+// 서로의 값을 함께 갱신한다.
+const toggleSlot = (
+  selection: Availability,
+  day: string,
+  slot: string,
+  checked: boolean,
+): Availability => {
+  const current = selection[day] ?? [];
+  const next = checked
+    ? [...current, slot]
+    : current.filter((item) => item !== slot);
+  return { ...selection, [day]: next };
+};
+
 export const stepTwoFields: FieldConfig[] = [
   {
-    type: "radio-group",
-    key: "department",
-    name: "department",
-    title: "지원부서를 선택해주세요.",
-    options: departments.map((d) => ({ id: d.id, label: d.label })),
-    onSelect: (id) => ({
-      department: id,
-      ...buildEmptyAnswers(questionsFor(id)),
+    type: "checkbox-matrix",
+    key: "interviewAvailability",
+    title: "면접 가능한 시간을 선택해주세요.",
+    groups: [
+      {
+        cornerLabel: "평일",
+        columns: WEEKDAY_SLOT_START_TIMES.map(formatSlotLabel),
+        rows: weekdayInterviewDates.map((day) => ({
+          id: day,
+          label: formatInterviewDate(day),
+        })),
+        slots: [...WEEKDAY_SLOT_START_TIMES],
+      },
+      {
+        cornerLabel: "주말",
+        className: "mt-8",
+        columns: WEEKEND_SLOT_START_TIMES.map(formatSlotLabel),
+        rows: weekendInterviewDates.map((day) => ({
+          id: day,
+          label: formatInterviewDate(day),
+        })),
+        slots: [...WEEKEND_SLOT_START_TIMES],
+      },
+    ],
+    disabledWhen: (values) => Boolean(values.noAvailableTime),
+    getChecked: (values, rowId, slot) =>
+      availabilityOf(values)[rowId]?.includes(slot) ?? false,
+    onToggle: (values, rowId, slot, checked) => ({
+      interviewAvailability: toggleSlot(
+        availabilityOf(values),
+        rowId,
+        slot,
+        checked,
+      ),
+      noAvailableTime: checked ? false : values.noAvailableTime,
     }),
-    detail: (values) =>
-      departments.some((d) => d.id === values.department)
-        ? departmentRequirements[values.department as DepartmentId]
-        : undefined,
+    cellAriaLabel: (row, slot) => `${formatInterviewDate(row.id)} ${slot}`,
+    extraCheckbox: {
+      key: "noAvailableTime",
+      label: "가능한 시간이 없음",
+      onToggle: (checked, values) => ({
+        noAvailableTime: checked,
+        interviewAvailability: checked ? {} : availabilityOf(values),
+        otherTime: checked ? values.otherTime : [],
+      }),
+    },
+  },
+  {
+    type: "time-range",
+    key: "otherTime",
+    title:
+      "위에서 가능한 시간이 없다고 체크한 경우, 면접 가능한 일자 및 시간을 작성해주세요. (대면 기준)",
+    min: INTERVIEW_PERIOD_MIN,
+    max: INTERVIEW_PERIOD_MAX,
+    visibleWhen: (values) => Boolean(values.noAvailableTime),
   },
   {
     type: "dynamic",
