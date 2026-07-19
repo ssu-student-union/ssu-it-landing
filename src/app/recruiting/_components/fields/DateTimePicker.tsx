@@ -1,7 +1,7 @@
 "use client";
 
-import { useId, useState } from "react";
-import { fieldBorderClass } from "../../_lib/fieldState";
+import { useId } from "react";
+import { useFieldFocusState } from "../../_lib/hooks";
 import { FieldError } from "../question/FieldError";
 
 type DateTimePickerProps = {
@@ -31,15 +31,9 @@ export const DateTimePicker = ({
 }: DateTimePickerProps) => {
   const generatedId = useId();
   const inputId = id ?? generatedId;
-  const [focused, setFocused] = useState(false);
-  const [touched, setTouched] = useState(false);
-  const isTouched = touched || submitted;
 
-  const state = !isTouched ? "default" : error ? "error" : "selected";
-  const showError = isTouched && !focused && Boolean(error);
-
-  const borderClassName = focused ? "border-black" : fieldBorderClass[state];
-  const fieldClassName = `w-full border-b-2 bg-transparent py-2 text-black text-lg outline-none transition-colors ${borderClassName}`;
+  const { showError, fieldClassName, handleFocus, handleBlur } =
+    useFieldFocusState({ submitted, error });
 
   return (
     <div className={className}>
@@ -59,11 +53,8 @@ export const DateTimePicker = ({
         min={min}
         max={max}
         onChange={(e) => onChange(e.target.value)}
-        onFocus={() => setFocused(true)}
-        onBlur={() => {
-          setFocused(false);
-          setTouched(true);
-        }}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
         className={fieldClassName}
       />
       <div className="mt-1">

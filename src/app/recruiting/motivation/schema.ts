@@ -3,7 +3,7 @@ import {
   type DepartmentId,
   departments,
 } from "../../../data/recruitingStepTwo";
-import { buildAnswerSchema } from "../_lib/questionConfig";
+import { buildAnswerSchema } from "../_lib/schema";
 
 export type StepTwoFormData = { department: DepartmentId | "" } & Record<
   string,

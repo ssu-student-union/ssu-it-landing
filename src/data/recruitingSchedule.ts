@@ -1,3 +1,10 @@
+import dayjs from "dayjs";
+import "dayjs/locale/ko";
+import isBetween from "dayjs/plugin/isBetween";
+
+dayjs.locale("ko");
+dayjs.extend(isBetween);
+
 export const APPLICATION_PERIOD = {
   start: "2026-02-01",
   end: "2026-02-05",
@@ -30,34 +37,39 @@ export const WEEKEND_SLOT_START_TIMES = [
 ] as const;
 
 export const isWeekendDate = (dateIso: string): boolean => {
-  const day = new Date(`${dateIso}T00:00:00`).getDay();
+  const day = dayjs(`${dateIso}T00:00:00`).day();
   return day === 0 || day === 6;
 };
 
 export const slotStartTimesFor = (dateIso: string): readonly string[] =>
   isWeekendDate(dateIso) ? WEEKEND_SLOT_START_TIMES : WEEKDAY_SLOT_START_TIMES;
 
-const WEEKDAY_LABELS = ["일", "월", "화", "수", "목", "금", "토"];
-
 /** "2026-02-02" → "2월 2일 (월)" */
 export const formatInterviewDate = (dateIso: string): string => {
-  const d = new Date(`${dateIso}T00:00:00`);
-  return `${d.getMonth() + 1}월 ${d.getDate()}일 (${WEEKDAY_LABELS[d.getDay()]})`;
+  return dayjs(`${dateIso}T00:00:00`).format("M월 D일 (ddd)");
 };
 
 /** "2026-07-31" → "7/31(금)" — complete 페이지의 짧은 표기용 */
 export const formatShortDate = (dateIso: string): string => {
-  const d = new Date(`${dateIso}T00:00:00`);
-  return `${d.getMonth() + 1}/${d.getDate()}(${WEEKDAY_LABELS[d.getDay()]})`;
+  return dayjs(`${dateIso}T00:00:00`).format("M/D(ddd)");
 };
 
 /** "19:00" → "19:00 ~ 20:00" */
 export const formatSlotLabel = (startTime: string): string => {
-  const [h, m] = startTime.split(":").map(Number);
-  const endTotal = h * 60 + m + INTERVIEW_SLOT_DURATION_MINUTES;
-  const endH = String(Math.floor(endTotal / 60) % 24).padStart(2, "0");
-  const endM = String(endTotal % 60).padStart(2, "0");
-  return `${startTime} ~ ${endH}:${endM}`;
+  const start = dayjs(`2000-01-01T${startTime}`);
+  const end = start.add(INTERVIEW_SLOT_DURATION_MINUTES, "minute");
+  return `${startTime} ~ ${end.format("HH:mm")}`;
+};
+
+/** 현재 시각 기준 모집 기간 내에 포함되는지 여부 */
+export const isApplicationActive = (): boolean => {
+  const now = dayjs();
+  return now.isBetween(
+    APPLICATION_PERIOD.start,
+    APPLICATION_PERIOD.end,
+    "day",
+    "[]",
+  );
 };
 
 // 9번(면접 가능한 대체 일자/시간) DateTimePicker의 min/max — 면접 기간 전체

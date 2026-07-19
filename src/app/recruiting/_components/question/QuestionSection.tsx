@@ -1,6 +1,6 @@
 import { AnimatePresence, motion } from "motion/react";
 import type { ReactNode } from "react";
-import { EASE_EXPO_OUT } from "../../_lib/easing";
+import { EASE_EXPO_OUT } from "../../_lib/ui";
 
 type QuestionSectionProps = {
   /**
@@ -69,13 +69,13 @@ export const QuestionSection = ({
                 {title}
               </p>
               {description && (
-                <div className="mt-4 text-[#5c5c5c] text-sm leading-relaxed sm:mt-6 sm:text-xl">
+                <div className="mt-4 text-muted text-sm leading-relaxed sm:mt-6 sm:text-xl">
                   {description}
                 </div>
               )}
               {children && <div className="mt-6 sm:mt-8">{children}</div>}
               {callout && (
-                <div className="mt-8 rounded-xl bg-[#f2f2f2] p-5 text-sm leading-relaxed sm:mt-10 sm:p-8 sm:text-xl">
+                <div className="mt-8 rounded-xl bg-surface p-5 text-sm leading-relaxed sm:mt-10 sm:p-8 sm:text-xl">
                   {callout}
                 </div>
               )}

@@ -2,7 +2,7 @@ import Image from "next/image";
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { useId } from "react";
 import checkIcon from "../../../../assets/icons/check.svg";
-import { fieldBorderClass } from "../../_lib/fieldState";
+import { fieldBorderClass } from "../../_lib/ui";
 
 type CheckboxProps = {
   label?: ReactNode;
@@ -25,7 +25,7 @@ export const Checkbox = ({
       className={`inline-flex cursor-pointer items-center gap-2 select-none has-disabled:cursor-not-allowed has-disabled:opacity-50 ${className ?? ""}`}
     >
       <span
-        className={`relative flex size-7 shrink-0 items-center justify-center rounded-md border-2 transition-colors has-checked:border-[#142992] has-checked:bg-[#142992] has-focus-visible:ring-2 has-focus-visible:ring-[#142992] has-focus-visible:ring-offset-2 ${
+        className={`relative flex size-7 shrink-0 items-center justify-center rounded-md border-2 transition-colors has-checked:border-brand has-checked:bg-brand has-focus-visible:ring-2 has-focus-visible:ring-brand has-focus-visible:ring-offset-2 ${
           error ? fieldBorderClass.error : fieldBorderClass.default
         }`}
       >

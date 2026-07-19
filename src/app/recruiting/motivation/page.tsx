@@ -12,10 +12,10 @@ import {
   QuestionRenderer,
   QuestionSection,
 } from "../_components/question";
-import { StepIndicator } from "../_components/StepIndicator";
-import { RECRUITING_STEPS, RECRUITING_STORAGE_KEYS } from "../_lib/constants";
-import { buildEmptyAnswers } from "../_lib/questionConfig";
-import { useFormState } from "../_lib/useFormState";
+import { StepLayout } from "../_components/StepLayout";
+import { RECRUITING_STORAGE_KEYS } from "../_lib/constants";
+import { useFormState } from "../_lib/hooks";
+import { buildEmptyAnswers } from "../_lib/schema";
 import { buildStepTwoSchema, type StepTwoFormData } from "./schema";
 
 const initialValues: StepTwoFormData = {
@@ -51,13 +51,7 @@ export default function RecruitingStepTwoPage() {
   };
 
   return (
-    <main className="mx-auto flex w-full max-w-6xl flex-col gap-10 px-8 py-16 sm:px-12 lg:px-32 xl:px-40">
-      <StepIndicator steps={RECRUITING_STEPS} currentStep={2} />
-
-      <h1 className="font-semibold text-2xl text-black md:text-[1.875rem]">
-        2. 지원 파트 및 지원동기 작성
-      </h1>
-
+    <StepLayout currentStep={2} title="2. 지원 파트 및 지원동기 작성">
       <QuestionList>
         <QuestionSection id="field-department" title="지원부서를 선택해주세요.">
           <div className="flex flex-col gap-3">
@@ -87,7 +81,7 @@ export default function RecruitingStepTwoPage() {
                 : "grid-rows-[0fr] mt-0 opacity-0"
             }`}
           >
-            <div className="overflow-hidden rounded-xl bg-[#f2f2f2] p-5 text-base leading-relaxed sm:p-8 sm:text-2xl">
+            <div className="overflow-hidden rounded-xl bg-surface p-5 text-base leading-relaxed sm:p-8 sm:text-2xl">
               {selectedDepartment?.requirements}
             </div>
           </div>
@@ -113,6 +107,6 @@ export default function RecruitingStepTwoPage() {
           다음
         </Button>
       </div>
-    </main>
+    </StepLayout>
   );
 }

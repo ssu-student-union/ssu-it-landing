@@ -1,9 +1,11 @@
+import dayjs from "dayjs";
 import { z } from "zod";
 import {
   INTERVIEW_DATES,
   WEEKDAY_SLOT_START_TIMES,
   WEEKEND_SLOT_START_TIMES,
 } from "../../../data/recruitingSchedule";
+import { TIME_RANGE_ORDER_MESSAGE } from "../_lib/schema";
 
 const dateEnum = z.enum(INTERVIEW_DATES);
 const slotEnum = z.enum([
@@ -79,12 +81,14 @@ export const stepOneSchema = z
 
     if (
       data.noAvailableTime &&
-      validRanges.some((r) => new Date(r.start) >= new Date(r.end))
+      validRanges.some(
+        (r) => dayjs(r.start).valueOf() >= dayjs(r.end).valueOf(),
+      )
     ) {
       ctx.addIssue({
         path: ["otherTime"],
         code: z.ZodIssueCode.custom,
-        message: "종료 시각은 시작 시각보다 늦어야 해요.",
+        message: TIME_RANGE_ORDER_MESSAGE,
       });
     }
   });

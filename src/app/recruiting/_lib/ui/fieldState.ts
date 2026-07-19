@@ -2,7 +2,7 @@
 export type FieldState = "default" | "selected" | "error";
 
 export const fieldBorderClass: Record<FieldState, string> = {
-  default: "border-[#c4c4c4]",
-  selected: "border-[#142992]",
+  default: "border-line",
+  selected: "border-brand",
   error: "border-red-500",
 };

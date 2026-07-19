@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import type { z } from "zod";
-import { scrollToElementCentered } from "./scrollToElement";
+import { scrollToElementCentered } from "../ui";
 
 /** `storageKey`가 주어졌을 때 sessionStorage에서 이전에 저장된 값을 동기적으로 읽어온다(SSR/파싱 실패 시 `initialValues`로 폴백). */
 function readStoredValues<T>(
@@ -46,11 +46,13 @@ export function useFormState<T extends Record<string, unknown>>(
   );
   const [submitted, setSubmitted] = useState(false);
 
+  // 값이 바뀔 때마다 세션 스토리지에 저장
   useEffect(() => {
     if (!storageKey) return;
     window.sessionStorage.setItem(storageKey, JSON.stringify(values));
   }, [values, storageKey]);
 
+  // 값 변경 헬퍼 함수
   const setField = <K extends keyof T>(
     key: K,
     next: T[K] | ((prev: T[K]) => T[K]),
@@ -63,6 +65,10 @@ export function useFormState<T extends Record<string, unknown>>(
           : next,
     }));
 
+  // 실시간 검증: `errors`는 `values`가 바뀔 때마다 갱신되지만, `fieldError`는
+  // `submitted`가 true일 때만 에러 메시지를 반환한다. 즉, 사용자가 입력을
+  // 시작하면 에러 메시지가 바로 뜨지 않고, "제출" 버튼을 눌러야 에러가
+  // 표시된다.
   const schema = schemaFactory(values);
   const result = schema.safeParse(values);
   const errors: Partial<Record<keyof T, string[]>> = result.success

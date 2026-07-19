@@ -1,6 +1,6 @@
 import { easeOutExpo } from "./easing";
 
-/** 지정한 엘리먼트를 뷰포트 중앙으로 부드럽게 스크롤한다(`useFormState`의 스크롤-투-에러가 사용). */
+/** 지정한 엘리먼트를 뷰포트 중앙으로 부드럽게 스크롤한다. */
 export const scrollToElementCentered = (
   element: HTMLElement,
   duration = 600,

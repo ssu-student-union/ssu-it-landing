@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "motion/react";
-import { EASE_EXPO_OUT } from "../../_lib/easing";
+import { EASE_EXPO_OUT } from "../../_lib/ui";
 
 type FieldErrorProps = {
   message?: string;

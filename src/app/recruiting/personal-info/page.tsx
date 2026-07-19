@@ -28,9 +28,9 @@ import {
   QuestionList,
   QuestionSection,
 } from "../_components/question";
-import { StepIndicator } from "../_components/StepIndicator";
-import { RECRUITING_STEPS, RECRUITING_STORAGE_KEYS } from "../_lib/constants";
-import { useFormState } from "../_lib/useFormState";
+import { StepLayout } from "../_components/StepLayout";
+import { RECRUITING_STORAGE_KEYS } from "../_lib/constants";
+import { useFormState } from "../_lib/hooks";
 import { type StepOneFormData, stepOneSchema } from "./schema";
 
 const weekdayInterviewDates = INTERVIEW_DATES.filter((d) => !isWeekendDate(d));
@@ -109,14 +109,8 @@ export default function RecruitingStepOnePage() {
     }));
 
   return (
-    <main className="mx-auto flex w-full max-w-6xl flex-col gap-10 px-8 py-16 sm:px-12 lg:px-32 xl:px-40">
-      <StepIndicator steps={RECRUITING_STEPS} currentStep={1} />
-
-      <h1 className="font-semibold text-2xl text-black md:text-[1.875rem]">
-        1. 개인정보 동의 및 작성
-      </h1>
-
-      <div className="rounded-xl bg-[#f2f2f2] p-5 text-black text-base leading-relaxed sm:p-8 sm:text-lg">
+    <StepLayout currentStep={1} title="1. 개인정보 동의 및 작성">
+      <div className="rounded-xl bg-surface p-5 text-black text-base leading-relaxed sm:p-8 sm:text-lg">
         <p className="font-semibold">{personalInfoConsent.heading}</p>
         <div className="mt-4 flex flex-col gap-1">
           {personalInfoConsent.body}
@@ -282,6 +276,6 @@ export default function RecruitingStepOnePage() {
           다음
         </Button>
       </div>
-    </main>
+    </StepLayout>
   );
 }

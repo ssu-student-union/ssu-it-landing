@@ -1,16 +1,12 @@
 import type { ReactNode } from "react";
 import { z } from "zod";
+import { maxLengthExceededMessage } from "./messages";
 
 type BaseQuestion = {
-  /**
-   * zod 스키마 필드명이자 `QuestionSection`의 `field-${key}` id로도 그대로
-   * 쓰인다. 같은 폼 안에서는 유일해야 스크롤-투-에러가 정확히 동작한다.
-   */
   key: string;
   title: ReactNode;
   description?: ReactNode;
   callout?: ReactNode;
-  /** 기본값 true. false면 `buildAnswerSchema`가 빈 값을 허용한다. */
   required?: boolean;
 };
 
@@ -22,14 +18,12 @@ type BaseQuestion = {
  */
 export type QuestionConfig =
   | (BaseQuestion & { type: "checkbox-group"; options: string[] })
-  | (BaseQuestion & { type: "radio-group"; options: string[] })
   | (BaseQuestion & {
       type: "textarea";
       maxLength?: number;
       rows?: number;
       placeholder?: string;
-    })
-  | (BaseQuestion & { type: "textfield"; placeholder?: string });
+    });
 
 export type QuestionAnswer = string | string[];
 
@@ -49,15 +43,10 @@ export function buildAnswerSchema(questions: QuestionConfig[]) {
         return [q.key, required ? arr.min(1, "항목을 선택해주세요.") : arr];
       }
 
-      if (q.type === "radio-group") {
-        const str = z.string();
-        return [q.key, required ? str.min(1, "선택해주세요.") : str];
-      }
-
       let str = z.string().trim();
       if (required) str = str.min(1, "내용을 입력해주세요.");
-      if (q.type === "textarea" && q.maxLength) {
-        str = str.max(q.maxLength, `${q.maxLength}자를 초과했어요.`);
+      if (q.maxLength) {
+        str = str.max(q.maxLength, maxLengthExceededMessage(q.maxLength));
       }
       return [q.key, str];
     }),

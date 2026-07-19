@@ -2,7 +2,8 @@
 
 import Image from "next/image";
 import plusIcon from "../../../../assets/icons/plus.svg";
-import { fieldBorderClass } from "../../_lib/fieldState";
+import { TIME_RANGE_ORDER_MESSAGE } from "../../_lib/schema";
+import { fieldBorderClass } from "../../_lib/ui";
 import { FieldError } from "../question/FieldError";
 import { DateTimePicker } from "./DateTimePicker";
 
@@ -42,7 +43,7 @@ export const TimeRangeList = ({
 
   const rangeError = (range: TimeRange) =>
     submitted && range.start && range.end && range.start >= range.end
-      ? "종료 시각은 시작 시각보다 늦어야 해요."
+      ? TIME_RANGE_ORDER_MESSAGE
       : undefined;
 
   return (
@@ -73,7 +74,7 @@ export const TimeRangeList = ({
             <button
               type="button"
               onClick={() => removeRange(index)}
-              className="mb-2 shrink-0 text-[#5c5c5c] text-sm underline underline-offset-2 hover:text-black"
+              className="mb-2 shrink-0 text-muted text-sm underline underline-offset-2 hover:text-black"
             >
               삭제
             </button>

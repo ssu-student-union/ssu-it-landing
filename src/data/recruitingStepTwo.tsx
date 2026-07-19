@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import type { QuestionConfig } from "../app/recruiting/_lib/questionConfig";
+import type { QuestionConfig } from "../app/recruiting/_lib/schema";
 
 export type DepartmentId = "PM" | "Design" | "Frontend" | "Backend" | "HR";
 
@@ -11,7 +11,7 @@ export type Department = {
 };
 
 const highlight = (text: string) => (
-  <b className="font-extrabold text-[#142992]">{text}</b>
+  <b className="font-extrabold text-brand">{text}</b>
 );
 
 const motivationDescription = (

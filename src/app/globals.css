@@ -7,6 +7,24 @@
   --ease-expo-out: cubic-bezier(0.19, 1, 0.22, 1);
 }
 
+/*
+ * 색상 토큰. `@theme inline`과 달리 일반 `@theme`은 `:root`에 CSS 변수를
+ * 방출하므로, Tailwind 유틸(`bg-brand` 등)뿐 아니라 아래 body 스타일이나
+ * SVG `fill="var(--color-brand)"`처럼 var()로도 참조할 수 있다.
+ */
+@theme {
+  --color-brand: #142992; /* 브랜드 블루 */
+  --color-brand-hover: #0f2074;
+  --color-brand-active: #0a1550;
+  --color-on-brand: #efefef; /* 브랜드 배경 위 텍스트 */
+  --color-brand-tint: #e9edf7; /* 완료 화면 글로우 */
+  --color-canvas: #fafafa; /* 페이지 배경 */
+  --color-surface: #f2f2f2; /* 콜아웃·테이블 셀 배경 */
+  --color-muted: #5c5c5c; /* 보조 텍스트 */
+  --color-line: #c4c4c4; /* 필드 기본 테두리 */
+  --color-inactive: #c2c2c2; /* placeholder·비활성 스텝 */
+}
+
 body {
-  background-color: #fafafa;
+  background-color: var(--color-canvas);
 }

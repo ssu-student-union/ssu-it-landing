@@ -16,7 +16,7 @@ export const Button = ({
   return (
     <button
       type={type}
-      className={`flex items-center justify-center gap-0.5 whitespace-nowrap rounded-xl bg-[#142992] px-5 py-3 text-[#efefef] text-[1.875rem] transition-colors hover:bg-[#0f2074] active:bg-[#0a1550] ${
+      className={`flex items-center justify-center gap-0.5 whitespace-nowrap rounded-xl bg-brand px-5 py-3 text-[1.875rem] text-on-brand transition-colors hover:bg-brand-hover active:bg-brand-active ${
         icon ? "font-medium" : "font-semibold"
       } ${className ?? ""}`}
       {...props}

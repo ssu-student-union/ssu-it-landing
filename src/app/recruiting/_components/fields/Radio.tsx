@@ -1,6 +1,6 @@
 import type { ComponentPropsWithoutRef, ReactNode } from "react";
 import { useId } from "react";
-import { fieldBorderClass } from "../../_lib/fieldState";
+import { fieldBorderClass } from "../../_lib/ui";
 
 type RadioProps = {
   label?: ReactNode;
@@ -23,7 +23,7 @@ export const Radio = ({
       className={`inline-flex cursor-pointer items-center gap-2 select-none has-disabled:cursor-not-allowed has-disabled:opacity-50 ${className ?? ""}`}
     >
       <span
-        className={`relative flex size-7 shrink-0 items-center justify-center rounded-full border-2 transition-colors has-checked:border-[#142992] has-focus-visible:ring-2 has-focus-visible:ring-[#142992] has-focus-visible:ring-offset-2 ${
+        className={`relative flex size-7 shrink-0 items-center justify-center rounded-full border-2 transition-colors has-checked:border-brand has-focus-visible:ring-2 has-focus-visible:ring-brand has-focus-visible:ring-offset-2 ${
           error ? fieldBorderClass.error : fieldBorderClass.default
         }`}
       >
@@ -33,7 +33,7 @@ export const Radio = ({
           className="peer absolute inset-0 cursor-pointer opacity-0"
           {...props}
         />
-        <span className="pointer-events-none size-3.5 scale-0 rounded-full bg-[#142992] transition-transform peer-checked:scale-100" />
+        <span className="pointer-events-none size-3.5 scale-0 rounded-full bg-brand transition-transform peer-checked:scale-100" />
       </span>
       {label && <span className="text-black text-lg">{label}</span>}
     </label>

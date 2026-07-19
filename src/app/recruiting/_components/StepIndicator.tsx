@@ -22,11 +22,11 @@ export const StepIndicator = ({
       return (
         <li key={label} className="flex items-center">
           {i > 0 && (
-            <span className="mx-2 h-px w-6 shrink-0 bg-[#c2c2c2] sm:mx-4 sm:w-10" />
+            <span className="mx-2 h-px w-6 shrink-0 bg-inactive sm:mx-4 sm:w-10" />
           )}
           <span
             className={`flex items-center gap-1.5 whitespace-nowrap font-semibold text-base sm:gap-2 sm:text-xl md:text-[1.75rem] ${
-              isDone || isCurrent ? "text-black" : "text-[#c2c2c2]"
+              isDone || isCurrent ? "text-black" : "text-inactive"
             }`}
           >
             {isDone ? (
@@ -38,7 +38,7 @@ export const StepIndicator = ({
                 aria-hidden="true"
                 className="shrink-0 sm:h-7 sm:w-7"
               >
-                <circle cx="12" cy="12" r="12" fill="#142992" />
+                <circle cx="12" cy="12" r="12" fill="var(--color-brand)" />
                 <path
                   d="M7 12.5L10.5 16L17 9"
                   stroke="white"
@@ -54,7 +54,7 @@ export const StepIndicator = ({
                 viewBox="0 0 24 24"
                 fill="none"
                 aria-hidden="true"
-                className={`shrink-0 sm:h-7 sm:w-7 ${isCurrent ? "text-black" : "text-[#c2c2c2]"}`}
+                className={`shrink-0 sm:h-7 sm:w-7 ${isCurrent ? "text-black" : "text-inactive"}`}
               >
                 <path
                   d="M5 13L9.5 17.5L19 7"

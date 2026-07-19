@@ -1,5 +1,5 @@
-import type { QuestionAnswer, QuestionConfig } from "../../_lib/questionConfig";
-import { Checkbox, Radio, Textfield } from "../fields";
+import type { QuestionAnswer, QuestionConfig } from "../../_lib/schema";
+import { Checkbox, Textfield } from "../fields";
 import { FieldError } from "./FieldError";
 import { QuestionSection } from "./QuestionSection";
 
@@ -70,34 +70,6 @@ export const QuestionRenderer = ({
     );
   }
 
-  if (question.type === "radio-group") {
-    return (
-      <QuestionSection
-        id={id}
-        title={question.title}
-        description={question.description}
-        callout={question.callout}
-        animateOnMount
-      >
-        <div className="flex flex-col gap-3">
-          {question.options.map((option) => (
-            <Radio
-              key={option}
-              name={question.key}
-              label={option}
-              checked={value === option}
-              error={Boolean(gatedError)}
-              onChange={() => onChange(option)}
-            />
-          ))}
-        </div>
-        <div className="mt-2">
-          <FieldError message={gatedError} />
-        </div>
-      </QuestionSection>
-    );
-  }
-
   return (
     <QuestionSection
       id={id}
@@ -107,11 +79,9 @@ export const QuestionRenderer = ({
       animateOnMount
     >
       <Textfield
-        multiline={question.type === "textarea"}
-        maxLength={
-          question.type === "textarea" ? question.maxLength : undefined
-        }
-        rows={question.type === "textarea" ? question.rows : undefined}
+        multiline
+        maxLength={question.maxLength}
+        rows={question.rows}
         value={(value as string | undefined) ?? ""}
         onChange={onChange}
         placeholder={question.placeholder}

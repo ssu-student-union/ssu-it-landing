@@ -7,7 +7,7 @@ import {
   ANNOUNCEMENT_DATE,
   formatShortDate,
 } from "../../../data/recruitingSchedule";
-import { StepIndicator } from "../_components/StepIndicator";
+import { StepLayout } from "../_components/StepLayout";
 import { RECRUITING_STEPS, RECRUITING_STORAGE_KEYS } from "../_lib/constants";
 
 export default function RecruitingCompletePage() {
@@ -20,14 +20,12 @@ export default function RecruitingCompletePage() {
   }, []);
 
   return (
-    <main className="mx-auto flex w-full max-w-6xl flex-col items-center gap-16 px-8 py-16 text-center sm:px-12 lg:px-32 xl:px-40">
-      <StepIndicator
-        steps={RECRUITING_STEPS}
-        currentStep={RECRUITING_STEPS.length + 1}
-      />
-
+    <StepLayout
+      currentStep={RECRUITING_STEPS.length + 1}
+      className="items-center gap-16 text-center"
+    >
       <div className="relative flex items-center justify-center">
-        <div className="absolute size-[280px] rounded-full bg-[#e9edf7] blur-3xl sm:size-[394px]" />
+        <div className="absolute size-[280px] rounded-full bg-brand-tint blur-3xl sm:size-[394px]" />
         <Image
           src={astronautImage}
           alt=""
@@ -38,13 +36,13 @@ export default function RecruitingCompletePage() {
 
       <p className="font-semibold text-black text-xl leading-relaxed sm:text-2xl md:text-[1.875rem]">
         서류 합격 발표일은{" "}
-        <span className="font-extrabold text-[#142992]">
+        <span className="font-extrabold text-brand">
           {formatShortDate(ANNOUNCEMENT_DATE)}
         </span>{" "}
         입니다!
         <br />
         지원해 주셔서 감사합니다!
       </p>
-    </main>
+    </StepLayout>
   );
 }

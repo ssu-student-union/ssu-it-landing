@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useId } from "react";
 import uploadIcon from "../../../../assets/icons/upload.svg";
-import { fieldBorderClass } from "../../_lib/fieldState";
+import { fieldBorderClass } from "../../_lib/ui";
 
 type FileUploadProps = {
   file: File | null;
@@ -44,7 +44,7 @@ export const FileUpload = ({
           <button
             type="button"
             onClick={() => onChange(null)}
-            className="text-[#5c5c5c] underline underline-offset-2 hover:text-black"
+            className="text-muted underline underline-offset-2 hover:text-black"
           >
             삭제
           </button>
