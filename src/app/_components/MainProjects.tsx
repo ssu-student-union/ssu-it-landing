@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import arrowCircleIcon from "../../assets/icons/arrow_circle.svg";
+import { Reveal } from "../../common/Reveal";
 import { PROJECTS } from "../../data/projects";
 
 export const MainProjects = () => {
@@ -30,30 +31,32 @@ export const MainProjects = () => {
       </div>
 
       <div className="relative mx-auto mt-24 grid max-w-5xl grid-cols-1 gap-x-12 gap-y-12 sm:mt-16 sm:grid-cols-2 sm:gap-y-16">
-        {PROJECTS.slice(0, 4).map((project) => (
-          <div
-            key={project.title}
-            className="flex flex-col gap-4 sm:gap-7 lg:gap-10"
-          >
-            <div className="relative h-48 w-full max-w-[26.75rem] overflow-hidden rounded-lg sm:h-52 lg:h-[15.75rem]">
-              <Image
-                src={project.image}
-                alt={project.title}
-                fill
-                sizes="(min-width: 640px) 428px, 100vw"
-                className="object-cover"
-              />
-            </div>
+        {PROJECTS.slice(0, 4).map((project, index) => (
+          <Reveal key={project.title} delay={index * 100}>
+            <Link
+              href={`/projects/${project.slug}`}
+              className="group flex flex-col gap-4 sm:gap-7 lg:gap-10"
+            >
+              <div className="relative h-48 w-full max-w-[26.75rem] overflow-hidden rounded-lg sm:h-52 lg:h-[15.75rem]">
+                <Image
+                  src={project.image}
+                  alt={project.title}
+                  fill
+                  sizes="(min-width: 640px) 428px, 100vw"
+                  className="object-cover transition-transform duration-500 ease-in-out group-hover:scale-110"
+                />
+              </div>
 
-            <div>
-              <h3 className="text-left font-bold text-[#e2d7d7] text-2xl sm:text-3xl lg:text-3xl min-[1440px]:text-[2.5rem]">
-                {project.title}
-              </h3>
-              <p className="max-w-103 self-start text-left text-base text-[#e2d7d7] leading-[1.4] sm:text-lg lg:text-lg min-[1440px]:text-xl min-[1440px]:leading-[1.5625rem]">
-                {project.description}
-              </p>
-            </div>
-          </div>
+              <div>
+                <h3 className="text-left font-bold text-[#e2d7d7] text-2xl transition-colors duration-300 group-hover:text-white sm:text-3xl lg:text-3xl min-[1440px]:text-[2.5rem]">
+                  {project.title}
+                </h3>
+                <p className="max-w-103 self-start text-left text-base text-[#e2d7d7] leading-[1.4] sm:text-lg lg:text-lg min-[1440px]:text-xl min-[1440px]:leading-[1.5625rem]">
+                  {project.description}
+                </p>
+              </div>
+            </Link>
+          </Reveal>
         ))}
       </div>
     </div>

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import aboutPhoto from "../../assets/images/about-photo.jpg";
+import { Reveal } from "../../common/Reveal";
 import { StatCounter } from "./StatCounter";
 
 const INTRO_PARAGRAPH = `IT지원위원회는 학내 서비스의 안정적인 운영과 학생 자치 문화의 활성화를 목표로, 학생들이 실제로 사용하는 디지털 서비스와 플랫폼을 직접 기획하고 개발하며 운영하는 조직입니다.
@@ -22,19 +23,22 @@ export const About = () => {
           IT지원위원회란?
         </h2>
         <div className="flex w-full flex-col items-center gap-10 sm:gap-16 lg:flex-row lg:gap-25">
-          <div className="relative h-64 w-full max-w-80 shrink-0 overflow-hidden rounded-xl sm:h-96 sm:max-w-96 lg:h-[37.375rem] lg:w-[26rem] lg:max-w-none">
+          <Reveal className="relative h-64 w-full max-w-80 shrink-0 overflow-hidden rounded-xl sm:h-96 sm:max-w-96 lg:h-[37.375rem] lg:w-[26rem] lg:max-w-none">
             <Image
               src={aboutPhoto}
               alt="IT지원위원회 소개 사진"
               fill
               sizes="(min-width: 1024px) 416px, (min-width: 640px) 384px, 320px"
-              className="object-cover"
+              className="object-cover transition-transform duration-700 ease-out hover:scale-110"
             />
-          </div>
+          </Reveal>
 
-          <p className="max-w-[36.625rem] whitespace-pre-line font-semibold text-base text-[#282323] leading-[1.75rem] sm:text-xl sm:leading-[2rem] lg:text-xl lg:leading-[2rem] min-[1440px]:text-[1.625rem] min-[1440px]:leading-[2.5rem]">
+          <Reveal
+            delay={150}
+            className="max-w-[36.625rem] whitespace-pre-line font-semibold text-base text-[#282323] leading-[1.75rem] sm:text-xl sm:leading-[2rem] lg:text-xl lg:leading-[2rem] min-[1440px]:text-[1.625rem] min-[1440px]:leading-[2.5rem]"
+          >
             {INTRO_PARAGRAPH}
-          </p>
+          </Reveal>
         </div>
       </div>
 
@@ -45,14 +49,17 @@ export const About = () => {
             "linear-gradient(180deg, rgba(169, 195, 224, 0.20) 0%, rgba(53, 80, 92, 0.20) 100%)",
         }}
       >
-        <h3 className="text-center font-medium text-lg text-black tracking-[0.3rem] sm:text-2xl sm:tracking-[0.6rem] lg:text-2xl lg:tracking-[0.6rem] min-[1440px]:text-[2rem] min-[1440px]:tracking-[1.08rem]">
-          2026 IT 지원위원회
-        </h3>
+        <Reveal>
+          <h3 className="text-center font-medium text-lg text-black tracking-[0.3rem] sm:text-2xl sm:tracking-[0.6rem] lg:text-2xl lg:tracking-[0.6rem] min-[1440px]:text-[2rem] min-[1440px]:tracking-[1.08rem]">
+            2026 IT 지원위원회
+          </h3>
+        </Reveal>
 
         <div className="grid w-full grid-cols-1 gap-10 sm:grid-cols-3 sm:gap-8 lg:gap-16">
-          {STATS.map((stat) => (
-            <div
+          {STATS.map((stat, index) => (
+            <Reveal
               key={stat.label}
+              delay={index * 120}
               className="flex flex-col items-center gap-8 whitespace-nowrap sm:gap-10 lg:gap-16"
             >
               <div className="flex w-full flex-col items-center gap-2">
@@ -62,7 +69,7 @@ export const About = () => {
                 <div className="h-px w-full max-w-71.5 bg-[#858C90] border-r" />
               </div>
               <StatCounter target={stat.target} suffix={stat.suffix} />
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>

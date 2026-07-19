@@ -20,19 +20,19 @@ export const Header = () => {
       <nav className="flex items-center gap-3 sm:gap-8 lg:gap-16">
         <Link
           href="#"
-          className="hidden font-semibold text-[#1b1c1c] text-lg whitespace-nowrap sm:block lg:text-xl min-[1440px]:text-2xl"
+          className="relative hidden font-semibold text-[#1b1c1c] text-lg whitespace-nowrap after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-[#1b1c1c] after:transition-all after:duration-300 after:content-[''] hover:after:w-full sm:block lg:text-xl min-[1440px]:text-2xl"
         >
           위원회 소개
         </Link>
         <Link
           href="/projects"
-          className="hidden font-semibold text-[#1b1c1c] text-lg whitespace-nowrap sm:block lg:text-xl min-[1440px]:text-2xl"
+          className="relative hidden font-semibold text-[#1b1c1c] text-lg whitespace-nowrap after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-[#1b1c1c] after:transition-all after:duration-300 after:content-[''] hover:after:w-full sm:block lg:text-xl min-[1440px]:text-2xl"
         >
           진행 프로젝트
         </Link>
         <Link
           href="#"
-          className="flex items-center justify-center whitespace-nowrap rounded-4xl bg-gradient-to-b from-[#4a4a4a] to-black px-4 py-2 font-semibold text-[#e5e5e5] text-sm sm:px-6 sm:text-lg lg:px-8 lg:py-3 lg:text-lg min-[1440px]:text-2xl"
+          className="flex items-center justify-center whitespace-nowrap rounded-4xl bg-gradient-to-b from-[#4a4a4a] to-black px-4 py-2 font-semibold text-[#e5e5e5] text-sm transition-transform duration-300 ease-in-out hover:scale-105 sm:px-6 sm:text-lg lg:px-8 lg:py-3 lg:text-lg min-[1440px]:text-2xl"
         >
           리크루팅
         </Link>
