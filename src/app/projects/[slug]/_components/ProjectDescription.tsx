@@ -10,7 +10,7 @@ export const ProjectDescription = ({
       {description.map((paragraph) => (
         <p
           key={paragraph}
-          className="font-medium text-base text-white leading-[1.4] sm:text-lg lg:text-lg min-[1440px]:text-xl"
+          className="whitespace-pre-line font-medium text-base text-white leading-[1.4] sm:text-lg lg:text-lg min-[1440px]:text-xl"
         >
           {paragraph}
         </p>

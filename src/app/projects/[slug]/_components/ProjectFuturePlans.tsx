@@ -15,7 +15,7 @@ export const ProjectFuturePlans = ({
       <ul className="flex flex-col gap-2 sm:gap-3">
         {futurePlans.map((plan) => (
           <li key={plan.label}>
-            <p className="text-sm text-white sm:text-base lg:text-base min-[1440px]:text-lg">
+            <p className="whitespace-pre-line text-base text-white sm:text-lg lg:text-lg min-[1440px]:text-xl">
               • {plan.label}
             </p>
             {plan.subItems && (
@@ -23,7 +23,7 @@ export const ProjectFuturePlans = ({
                 {plan.subItems.map((subItem) => (
                   <li
                     key={subItem}
-                    className="text-[#cccccc] text-sm sm:text-base"
+                    className="whitespace-pre-line text-[#cccccc] text-sm sm:text-base lg:text-base min-[1440px]:text-lg"
                   >
                     → {subItem}
                   </li>

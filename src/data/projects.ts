@@ -66,7 +66,7 @@ export const PROJECTS: Project[] = [
         },
         {
           role: "Backend",
-          name: "박수민, 백승현, 이태석",
+          name: "장효원, 이성윤, 박찬규",
           description: "서버 및 데이터베이스 개발",
         },
       ],

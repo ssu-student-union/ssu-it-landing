@@ -52,7 +52,7 @@ export default async function ProjectDetailPage({
         <>
           <ProjectDescription description={detail.description} />
 
-          <div className="grid w-full max-w-5xl grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8">
+          <div className="grid w-full max-w-5xl grid-cols-1 gap-6 sm:grid-cols-[482fr_635fr] sm:gap-8">
             <ProjectTeam team={detail.team} />
             <ProjectProgress progressStatus={detail.progressStatus} />
           </div>

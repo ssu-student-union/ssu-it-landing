@@ -11,16 +11,31 @@ export const ProjectTeam = ({ team }: ProjectTeamProps) => {
         팀 소개
       </h2>
       <div className="flex flex-col gap-3 sm:gap-4">
-        {team.map((member) => (
-          <div key={`${member.role}-${member.name}`}>
-            <p className="font-bold text-base text-white sm:text-lg lg:text-lg min-[1440px]:text-xl">
-              {member.role} {member.name}
-            </p>
-            <p className="text-sm text-[#cccccc] sm:text-base">
-              {member.description}
-            </p>
-          </div>
-        ))}
+        {team.map((member) => {
+          const hasMultipleNames = member.name.includes(",");
+
+          return (
+            <div key={`${member.role}-${member.name}`}>
+              {hasMultipleNames ? (
+                <>
+                  <p className="font-bold text-base text-white sm:text-lg lg:text-lg min-[1440px]:text-xl">
+                    {member.role}
+                  </p>
+                  <p className="font-bold text-sm text-white sm:text-base lg:text-base min-[1440px]:text-lg">
+                    {member.name}
+                  </p>
+                </>
+              ) : (
+                <p className="font-bold text-base text-white sm:text-lg lg:text-lg min-[1440px]:text-xl">
+                  {member.role} {member.name}
+                </p>
+              )}
+              <p className="whitespace-pre-line text-sm text-[#cccccc] sm:text-base">
+                {member.description}
+              </p>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
