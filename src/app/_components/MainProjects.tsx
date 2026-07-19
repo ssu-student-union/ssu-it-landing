@@ -23,14 +23,14 @@ export const MainProjects = () => {
               alt=""
               width={64}
               height={64}
-              className="h-8 w-8 cursor-pointer sm:h-10 sm:w-10 lg:h-10 lg:w-10 min-[1440px]:h-16 min-[1440px]:w-16"
+              className="h-10 w-10 max-w-none shrink-0 sm:h-12 sm:w-12 lg:h-12 lg:w-12 min-[1440px]:h-16 min-[1440px]:w-16 cursor-pointer"
             />
           </Link>
         </div>
       </div>
 
       <div className="relative mx-auto mt-24 grid max-w-5xl grid-cols-1 gap-x-12 gap-y-12 sm:mt-16 sm:grid-cols-2 sm:gap-y-16">
-        {PROJECTS.map((project) => (
+        {PROJECTS.slice(0, 4).map((project) => (
           <div
             key={project.title}
             className="flex flex-col gap-4 sm:gap-7 lg:gap-10"
