@@ -106,7 +106,7 @@ export const About = () => {
         <StoryBlock item={STORY_ITEMS[3]} delay={100} />
       </div>
 
-      <div className="relative flex w-full flex-col items-center gap-16 overflow-x-clip px-4 sm:gap-20 sm:px-8 lg:mt-[10.5rem] lg:gap-24">
+      <div className="relative flex w-full flex-col items-center gap-16 overflow-x-clip px-4 sm:gap-20 sm:px-8 lg:mt-[10.5rem] lg:gap-40">
         <Reveal className="flex flex-col items-center gap-3 text-center">
           <p className="font-semibold text-2xl text-[#121212] sm:text-3xl lg:text-[2.8125rem]">
             IT지원위원회에서
@@ -141,7 +141,7 @@ export const About = () => {
                     <Image
                       src={plusIcon}
                       alt=""
-                      className="h-8 w-8 shrink-0 sm:h-10 sm:w-10 lg:h-16 lg:w-16"
+                      className="mb-1 h-8 w-8 shrink-0 sm:mb-1.5 sm:h-10 sm:w-10 lg:mb-2 lg:h-[85px] lg:w-[85px]"
                     />
                   )}
                 </div>
@@ -159,7 +159,7 @@ export const About = () => {
           className="pointer-events-none absolute right-[-180px] hidden h-36 w-36 rotate-[-15.86deg] lg:top-[300px] lg:block lg:h-[459.114px] lg:w-[459.114px]"
         />
 
-        <p className="w-full max-w-5xl text-right text-[#999999] text-xs tracking-[0.05em] sm:text-sm lg:text-base lg:tracking-[0.075rem]">
+        <p className="w-full pr-10 pb-7 text-right font-normal text-xs tracking-[0.05em] sm:text-sm lg:text-lg lg:tracking-[0.075rem]">
           *2026년 기준 데이터
         </p>
       </div>

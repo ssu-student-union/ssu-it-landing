@@ -20,13 +20,13 @@ export const Header = () => {
       <nav className="flex items-center gap-3 sm:gap-8 lg:gap-16">
         <Link
           href="#"
-          className="relative hidden font-semibold text-[#1b1c1c] text-lg whitespace-nowrap after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-[#1b1c1c] after:transition-all after:duration-300 after:content-[''] hover:after:w-full sm:block lg:text-2xl"
+          className="relative hidden font-semibold text-[#1b1c1c] text-lg whitespace-nowrap sm:block lg:text-2xl"
         >
           위원회 소개
         </Link>
         <Link
           href="/projects"
-          className="relative hidden font-semibold text-[#1b1c1c] text-lg whitespace-nowrap after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-[#1b1c1c] after:transition-all after:duration-300 after:content-[''] hover:after:w-full sm:block lg:text-2xl"
+          className="relative hidden font-semibold text-[#1b1c1c] text-lg whitespace-nowrap sm:block lg:text-2xl"
         >
           진행 프로젝트
         </Link>
