@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { Heading } from "../../../common/Heading";
 import { RECRUITING_STEPS } from "../_lib/constants";
 import { StepIndicator } from "./StepIndicator";
 
@@ -23,11 +24,7 @@ export const StepLayout = ({
     className={`mx-auto flex w-full max-w-6xl flex-col px-8 py-16 sm:px-12 lg:px-32 xl:px-40 ${className}`}
   >
     <StepIndicator steps={RECRUITING_STEPS} currentStep={currentStep} />
-    {title && (
-      <h1 className="font-semibold text-2xl text-black md:text-[1.875rem]">
-        {title}
-      </h1>
-    )}
+    {title && <Heading as="h1">{title}</Heading>}
     {children}
   </main>
 );

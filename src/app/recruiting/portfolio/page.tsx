@@ -3,7 +3,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Button } from "../_components/fields";
+import { Button } from "../../../common/Button";
 import { FormRenderer } from "../_components/form";
 import { StepLayout } from "../_components/StepLayout";
 import { RECRUITING_STORAGE_KEYS } from "../_lib/constants";

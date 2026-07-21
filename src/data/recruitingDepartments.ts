@@ -1,40 +1,19 @@
 export type DepartmentId = "PM" | "Design" | "Frontend" | "Backend" | "HR";
 
-/** 지원 부서의 순수 도메인 값. requirements/문항 등 화면 콘텐츠는 `motivation/form.tsx`에 있다. */
+/**
+ * 지원 부서의 순수 도메인 값. Step1 부서 선택 라디오, Notion "지원 부서" select 등
+ * 여러 곳이 공유하는 id/label만 둔다. task 옵션·면접 일정처럼 그 부서의 폼 필드
+ * 하나에만 쓰이는 값은 `motivation/_departments/`의 해당 부서 파일에 직접 둔다.
+ */
 export type Department = {
   id: DepartmentId;
   label: string;
-  /** "희망 Task" 체크박스 옵션. Notion multi-select 옵션(스크립트)과 폼이 공유하는 소스다. */
-  taskOptions: string[];
 };
 
 export const departments: Department[] = [
-  {
-    id: "PM",
-    label: "PM",
-    taskOptions: ["일정/이슈 관리", "요구사항 정의"],
-  },
-  {
-    id: "Design",
-    label: "Design",
-    taskOptions: [
-      "UI/UX 디자인 유지보수",
-      "IT지원위원회의 서비스 마케팅/굿즈 제작",
-    ],
-  },
-  {
-    id: "Frontend",
-    label: "Frontend",
-    taskOptions: ["신규 기능 개발", "유지보수"],
-  },
-  {
-    id: "Backend",
-    label: "Backend",
-    taskOptions: ["API 개발", "인프라 관리"],
-  },
-  {
-    id: "HR",
-    label: "HR",
-    taskOptions: ["채용 프로세스 운영", "조직 문화 기획"],
-  },
+  { id: "PM", label: "PM" },
+  { id: "Design", label: "Design" },
+  { id: "Frontend", label: "Frontend" },
+  { id: "Backend", label: "Backend" },
+  { id: "HR", label: "HR" },
 ];

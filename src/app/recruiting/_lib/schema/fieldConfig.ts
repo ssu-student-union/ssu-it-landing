@@ -92,18 +92,28 @@ type CheckboxMatrixConfig = FieldBase & {
     key: string;
     label: ReactNode;
     onToggle?: (checked: boolean, values: FormValues) => FormValues;
+    /** 체크 시 같은 문항(같은 번호) 안에 이어서 보여줄 대체 일정 입력. */
+    timeRange?: {
+      key: string;
+      description?: ReactNode;
+      min?: string;
+      max?: string;
+    };
   };
-};
-
-type TimeRangeConfig = FieldBase & {
-  type: "time-range";
-  min?: string;
-  max?: string;
 };
 
 type FileConfig = FieldBase & {
   type: "file";
   accept?: string;
+  /** 바이트 단위 업로드 크기 제한. 업로드 UI에 파일 크기와 나란히 표시된다. */
+  maxSize?: number;
+};
+
+/** 링크 입력과 파일 업로드를 한 문항으로 같이 보여준다(예: 포트폴리오 링크 또는 파일). */
+type LinkOrFileConfig = FieldBase & {
+  type: "link-or-file";
+  link: { key: string; placeholder?: string };
+  file: { key: string; accept?: string; maxSize?: number };
 };
 
 /** 현재 값에 따라 하위 필드 목록을 동적으로 만든다(부서별 문항 등). */
@@ -121,8 +131,8 @@ export type FieldConfig =
   | CheckboxConfig
   | RadioMatrixConfig
   | CheckboxMatrixConfig
-  | TimeRangeConfig
   | FileConfig
+  | LinkOrFileConfig
   | DynamicConfig;
 
 /** 단순 필드로 `{ key: 빈 값 }`을 만든다. 배열 필드를 `undefined`로 남기면 zod가 커스텀 메시지 대신 타입 에러를 내보내므로, 타입에 맞는 빈 값으로 채운다. */

@@ -2,5 +2,7 @@
 export const TIME_RANGE_ORDER_MESSAGE =
   "종료 시각은 시작 시각보다 늦어야 해요.";
 
+export const REQUIRED_MESSAGE = "내용을 입력해주세요.";
+
 export const maxLengthExceededMessage = (max: number) =>
   `${max}자를 초과했어요.`;

@@ -13,9 +13,10 @@
  *
  * 실행 결과로 출력되는 database_id를 .env.local의 NOTION_DATABASE_ID에 붙여넣으면 끝.
  *
- * select/multi-select 옵션은 하드코딩하지 않고 앱이 실제로 쓰는 소스
- * (src/data/recruitingGrades.ts, recruitingDepartments.ts, recruitingSchedule.ts)에서
- * 그대로 끌어온다 — 앱 UI와 Notion 프로퍼티 옵션이 어긋나지 않게 하기 위함이다.
+ * select/multi-select 옵션은 하드코딩하지 않고 앱이 실제로 쓰는 소스에서 그대로 끌어온다
+ * — 앱 UI와 Notion 프로퍼티 옵션이 어긋나지 않게 하기 위함이다. 학년/부서 목록은
+ * src/data/recruitingGrades.ts·recruitingDepartments.ts에서, 희망 Task 옵션은 부서마다
+ * 값이 달라 src/app/recruiting/motivation/_departments/의 각 부서 필드 설정에서 가져온다.
  *
  * 주의: 이 스크립트는 프로퍼티 스키마만 생성한다. "기본 뷰"에서 어떤 컬럼을
  * 보여줄지/그룹핑/정렬은 포함하지 않는다 — Notion 저수준 API는 필터·정렬·그룹을
@@ -26,6 +27,7 @@ import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import type { CreateDatabaseParameters } from "@notionhq/client";
 import { Client } from "@notionhq/client";
+import { departmentFields } from "../src/app/recruiting/motivation/_departments";
 import { departments } from "../src/data/recruitingDepartments";
 import { gradeLevels, gradeSemesters } from "../src/data/recruitingGrades";
 import {
@@ -86,7 +88,15 @@ const gradeOptions = gradeLevels.flatMap((level) =>
 const departmentOptions = departments.map((department) => department.id);
 
 const taskOptions = Array.from(
-  new Set(departments.flatMap((department) => department.taskOptions)),
+  new Set(
+    Object.values(departmentFields).flatMap((fields) =>
+      fields.flatMap((field) =>
+        field.type === "checkbox-group" && field.key === "tasks"
+          ? field.options
+          : [],
+      ),
+    ),
+  ),
 );
 
 const properties: Record<string, PropertyConfig> = {

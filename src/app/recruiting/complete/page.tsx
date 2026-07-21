@@ -34,7 +34,7 @@ export default function RecruitingCompletePage() {
         />
       </div>
 
-      <p className="font-semibold text-black text-xl leading-relaxed sm:text-2xl md:text-[1.875rem]">
+      <p className="font-semibold text-ink text-xl leading-relaxed sm:text-2xl md:text-[1.875rem]">
         서류 합격 발표일은{" "}
         <span className="font-extrabold text-brand">
           {formatShortDate(ANNOUNCEMENT_DATE)}

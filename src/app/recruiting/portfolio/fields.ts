@@ -1,19 +1,14 @@
 import type { FieldConfig } from "../_lib/schema";
+import { formatFileSize } from "../_lib/ui";
+import { MAX_FILE_SIZE } from "./constants";
 
 export const stepThreeFields: FieldConfig[] = [
   {
-    type: "text",
-    key: "portfolioLink",
-    title: "포트폴리오 (링크)",
-    description:
-      "ex) Github, Notion, LinkedIn 등 링크 또는 파일을 공유해주세요.",
-    placeholder: "https://...",
-    required: false,
-  },
-  {
-    type: "file",
-    key: "portfolioFile",
-    title: "포트폴리오 (파일)",
-    description: "지원되는 파일 1개를 업로드하세요. 최대 크기는 10 MB입니다.",
+    type: "link-or-file",
+    key: "portfolio",
+    title: "포트폴리오",
+    description: `Github, Notion, LinkedIn 등 링크 또는 파일로 제출해주세요. 파일은 최대 ${formatFileSize(MAX_FILE_SIZE)}까지 업로드할 수 있어요.`,
+    link: { key: "portfolioLink", placeholder: "https://..." },
+    file: { key: "portfolioFile", maxSize: MAX_FILE_SIZE },
   },
 ];

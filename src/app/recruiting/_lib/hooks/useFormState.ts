@@ -18,6 +18,16 @@ function readStoredValues<T>(
   }
 }
 
+/** `values`와 별도 키에 저장되는 `submitted` 플래그. 같은 이유로 미러링한다 — "이전" 이동 시 리마운트돼도 이미 봤던 검증 에러 표시가 사라지지 않게. */
+const submittedStorageKey = (storageKey: string) => `${storageKey}:submitted`;
+
+function readStoredSubmitted(storageKey: string | undefined): boolean {
+  if (!storageKey || typeof window === "undefined") return false;
+  return (
+    window.sessionStorage.getItem(submittedStorageKey(storageKey)) === "true"
+  );
+}
+
 /**
  * 리크루팅 폼 3단계가 공유하는 상태/검증 훅.
  * `schemaFactory`가 함수인 이유: Step2는 선택된 부서에 따라 검증 규칙이
@@ -41,6 +51,7 @@ export function useFormState<T extends Record<string, unknown>>(
   // biome-ignore lint/correctness/useExhaustiveDependencies: 마운트 시 1회만 복원한다
   useEffect(() => {
     setValues(readStoredValues(storageKey, initialValues));
+    setSubmitted(readStoredSubmitted(storageKey));
     setHydrated(true);
   }, []);
 
@@ -48,6 +59,14 @@ export function useFormState<T extends Record<string, unknown>>(
     if (!storageKey || !hydrated) return;
     window.sessionStorage.setItem(storageKey, JSON.stringify(values));
   }, [values, storageKey, hydrated]);
+
+  useEffect(() => {
+    if (!storageKey || !hydrated) return;
+    window.sessionStorage.setItem(
+      submittedStorageKey(storageKey),
+      String(submitted),
+    );
+  }, [submitted, storageKey, hydrated]);
 
   const setField = <K extends keyof T>(
     key: K,

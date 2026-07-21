@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { submitRecruitingApplication } from "../../../../server/notion";
 import { validateSubmission } from "../../../recruiting/_lib/schema";
-import { MAX_FILE_SIZE } from "../../../recruiting/portfolio/schema";
+import { MAX_FILE_SIZE } from "../../../recruiting/portfolio/constants";
 
 function isSubmissionShape(
   value: unknown,

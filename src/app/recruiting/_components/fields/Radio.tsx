@@ -35,7 +35,7 @@ export const Radio = ({
         />
         <span className="pointer-events-none size-3.5 scale-0 rounded-full bg-brand transition-transform peer-checked:scale-100" />
       </span>
-      {label && <span className="text-black text-lg">{label}</span>}
+      {label && <span className="text-ink text-lg">{label}</span>}
     </label>
   );
 };

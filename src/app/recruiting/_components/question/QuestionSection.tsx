@@ -29,7 +29,7 @@ export const QuestionSection = ({
 }: QuestionSectionProps) => (
   <li
     id={id}
-    className={`text-black [counter-increment:question] ${
+    className={`text-ink [counter-increment:question] ${
       visible ? "" : "border-t-0!"
     } ${className ?? ""}`}
   >

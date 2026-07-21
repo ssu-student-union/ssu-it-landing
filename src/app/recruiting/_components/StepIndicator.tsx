@@ -22,7 +22,7 @@ export const StepIndicator = ({
           )}
           <span
             className={`flex items-center gap-1.5 whitespace-nowrap font-semibold text-base sm:gap-2 sm:text-xl md:text-[1.75rem] ${
-              isDone || isCurrent ? "text-black" : "text-inactive"
+              isDone || isCurrent ? "text-ink" : "text-inactive"
             }`}
           >
             {isDone ? (
@@ -50,7 +50,7 @@ export const StepIndicator = ({
                 viewBox="0 0 24 24"
                 fill="none"
                 aria-hidden="true"
-                className={`shrink-0 sm:h-7 sm:w-7 ${isCurrent ? "text-black" : "text-inactive"}`}
+                className={`shrink-0 sm:h-7 sm:w-7 ${isCurrent ? "text-ink" : "text-inactive"}`}
               >
                 <path
                   d="M5 13L9.5 17.5L19 7"

@@ -63,10 +63,12 @@ const filesValue = (
     : [],
 });
 
-const toStringValue = (value: string | string[] | undefined): string =>
+// 부서마다 문항 키 집합이 달라(예: PM은 skillAnswer가 없음) 값이 없거나
+// 타입이 다를 수 있어, 여기서 문자열/배열로 방어적으로 좁힌다.
+const toStringValue = (value: unknown): string =>
   typeof value === "string" ? value : "";
 
-const toStringArray = (value: string | string[] | undefined): string[] =>
+const toStringArray = (value: unknown): string[] =>
   Array.isArray(value) ? value : [];
 
 type InterviewAvailability = StepTwoFormData["interviewAvailability"];

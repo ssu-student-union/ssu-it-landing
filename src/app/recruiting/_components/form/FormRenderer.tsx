@@ -17,6 +17,7 @@ import {
   TimeRangeList,
 } from "../fields";
 import { FieldError, QuestionList, QuestionSection } from "../question";
+import { Expandable } from "./Expandable";
 
 type FormRendererProps<T extends FormValues> = {
   fields: FieldConfig[];
@@ -60,6 +61,7 @@ export function FormRenderer<T extends FormValues>({
             multiline={field.type === "textarea"}
             maxLength={field.maxLength}
             rows={field.rows}
+            required={field.required}
             value={(v[field.key] as string) ?? ""}
             onChange={(next) =>
               update((prev) => ({ ...prev, [field.key]: next }))
@@ -131,17 +133,11 @@ export function FormRenderer<T extends FormValues>({
               <FieldError message={gatedErrorOf(field.key)} />
             </div>
             {field.detail && (
-              <div
-                className={`grid overflow-hidden transition-all duration-300 ease-expo-out ${
-                  field.detail(v)
-                    ? "grid-rows-[1fr] mt-8 opacity-100"
-                    : "grid-rows-[0fr] mt-0 opacity-0"
-                }`}
-              >
-                <div className="overflow-hidden rounded-xl bg-surface p-5 text-base leading-relaxed sm:p-8 sm:text-2xl">
+              <Expandable open={Boolean(field.detail(v))}>
+                <div className="mt-8 rounded-xl bg-surface p-5 text-base leading-relaxed sm:p-8 sm:text-2xl">
                   {field.detail(v)}
                 </div>
-              </div>
+              </Expandable>
             )}
           </>
         );
@@ -178,6 +174,7 @@ export function FormRenderer<T extends FormValues>({
       case "checkbox-matrix": {
         const disabled = field.disabledWhen?.(v) ?? false;
         const extra = field.extraCheckbox;
+        const timeRange = extra?.timeRange;
         return (
           <>
             {field.groups.map((group) => (
@@ -204,18 +201,41 @@ export function FormRenderer<T extends FormValues>({
               />
             ))}
             {extra && (
-              <Checkbox
-                label={extra.label}
-                checked={Boolean(v[extra.key])}
-                onChange={(e) =>
-                  update((prev) =>
-                    extra.onToggle
-                      ? extra.onToggle(e.target.checked, prev)
-                      : { ...prev, [extra.key]: e.target.checked },
-                  )
-                }
-                className="mt-4"
-              />
+              <>
+                <Checkbox
+                  label={extra.label}
+                  checked={Boolean(v[extra.key])}
+                  onChange={(e) =>
+                    update((prev) =>
+                      extra.onToggle
+                        ? extra.onToggle(e.target.checked, prev)
+                        : { ...prev, [extra.key]: e.target.checked },
+                    )
+                  }
+                  className="mt-4"
+                />
+                {timeRange && (
+                  <Expandable open={Boolean(v[extra.key])}>
+                    <div id={`field-${timeRange.key}`} className="mt-6">
+                      {timeRange.description && (
+                        <p className="mb-4 text-ink text-lg">
+                          {timeRange.description}
+                        </p>
+                      )}
+                      <TimeRangeList
+                        value={(v[timeRange.key] as TimeRange[]) ?? []}
+                        onChange={(next) =>
+                          update((prev) => ({ ...prev, [timeRange.key]: next }))
+                        }
+                        min={timeRange.min}
+                        max={timeRange.max}
+                        error={gatedErrorOf(timeRange.key)}
+                        submitted={submitted}
+                      />
+                    </div>
+                  </Expandable>
+                )}
+              </>
             )}
             <div className="mt-2">
               <FieldError message={gatedErrorOf(field.key)} />
@@ -224,20 +244,6 @@ export function FormRenderer<T extends FormValues>({
         );
       }
 
-      case "time-range":
-        return (
-          <TimeRangeList
-            value={(v[field.key] as TimeRange[]) ?? []}
-            onChange={(next) =>
-              update((prev) => ({ ...prev, [field.key]: next }))
-            }
-            min={field.min}
-            max={field.max}
-            error={gatedErrorOf(field.key)}
-            submitted={submitted}
-          />
-        );
-
       case "file":
         return (
           <>
@@ -245,10 +251,40 @@ export function FormRenderer<T extends FormValues>({
               file={files?.[field.key] ?? null}
               onChange={(next) => onFileChange?.(field.key, next)}
               accept={field.accept}
+              maxSize={field.maxSize}
               error={Boolean(gatedErrorOf(field.key))}
             />
             <div className="mt-2">
               <FieldError message={gatedErrorOf(field.key)} />
+            </div>
+          </>
+        );
+
+      case "link-or-file":
+        return (
+          <>
+            <div id={`field-${field.link.key}`}>
+              <Textfield
+                value={(v[field.link.key] as string) ?? ""}
+                onChange={(next) =>
+                  update((prev) => ({ ...prev, [field.link.key]: next }))
+                }
+                placeholder={field.link.placeholder}
+                error={errorOf(field.link.key)}
+                submitted={submitted}
+              />
+            </div>
+            <div id={`field-${field.file.key}`} className="mt-4">
+              <FileUpload
+                file={files?.[field.file.key] ?? null}
+                onChange={(next) => onFileChange?.(field.file.key, next)}
+                accept={field.file.accept}
+                maxSize={field.file.maxSize}
+                error={Boolean(gatedErrorOf(field.file.key))}
+              />
+              <div className="mt-2">
+                <FieldError message={gatedErrorOf(field.file.key)} />
+              </div>
             </div>
           </>
         );
@@ -260,7 +296,7 @@ export function FormRenderer<T extends FormValues>({
 
   const consent = (field: Extract<FieldConfig, { type: "consent" }>) => (
     <Fragment key={field.key}>
-      <div className="rounded-xl bg-surface p-5 text-black text-base leading-relaxed sm:p-8 sm:text-lg">
+      <div className="rounded-xl bg-surface p-5 text-ink text-base leading-relaxed sm:p-8 sm:text-lg">
         <p className="font-semibold">{field.heading}</p>
         <div className="mt-4 flex flex-col gap-1">{field.body}</div>
       </div>
@@ -282,7 +318,7 @@ export function FormRenderer<T extends FormValues>({
 
   const numbered = (field: FieldConfig, animateOnMount: boolean): ReactNode => {
     if (field.type === "dynamic") {
-      return field.resolve(v).map((child) => numbered(child, true));
+      return field.resolve(v).map((child) => numbered(child, animateOnMount));
     }
     return (
       <QuestionSection

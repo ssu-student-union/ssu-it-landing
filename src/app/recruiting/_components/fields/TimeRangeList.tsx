@@ -74,7 +74,7 @@ export const TimeRangeList = ({
             <button
               type="button"
               onClick={() => removeRange(index)}
-              className="mb-2 shrink-0 text-muted text-sm underline underline-offset-2 hover:text-black"
+              className="mb-2 shrink-0 text-muted text-sm underline underline-offset-2 hover:text-ink"
             >
               삭제
             </button>
@@ -84,7 +84,7 @@ export const TimeRangeList = ({
       <button
         type="button"
         onClick={addRange}
-        className={`inline-flex w-fit items-center gap-2.5 rounded-xl border px-5 py-4 text-black text-lg transition-colors ${fieldBorderClass.default}`}
+        className={`inline-flex w-fit items-center gap-2.5 rounded-xl border px-5 py-4 text-ink text-lg transition-colors ${fieldBorderClass.default}`}
       >
         <Image src={plusIcon} alt="" className="size-7.75" />
         시간 추가

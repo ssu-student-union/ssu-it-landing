@@ -41,7 +41,7 @@ export const Checkbox = ({
           className="pointer-events-none size-4 scale-0 transition-transform peer-checked:scale-100"
         />
       </span>
-      {label && <span className="text-black text-lg">{label}</span>}
+      {label && <span className="text-ink text-lg">{label}</span>}
     </label>
   );
 };

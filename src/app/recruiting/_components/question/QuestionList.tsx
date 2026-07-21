@@ -6,7 +6,7 @@ export const QuestionList = ({
   ...props
 }: ComponentPropsWithoutRef<"ol">) => (
   <ol
-    className={`divide-y divide-[#e5e7e8] [counter-reset:question] ${className ?? ""}`}
+    className={`divide-y divide-line [counter-reset:question] ${className ?? ""}`}
     {...props}
   />
 );

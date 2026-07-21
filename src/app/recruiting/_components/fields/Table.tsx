@@ -4,10 +4,13 @@ import { Radio } from "./Radio";
 
 type TableCell = {
   id: string;
+  // 체크박스/라디오 모드
   checked?: boolean;
   disabled?: boolean;
   onChange?: (checked: boolean) => void;
   "aria-label"?: string;
+  // 텍스트 모드(variant="text")에서 셀에 표시할 내용
+  content?: ReactNode;
 };
 
 type TableRow = {
@@ -21,7 +24,8 @@ type TableProps = {
   columns?: string[];
   rows: TableRow[];
   error?: boolean;
-  variant?: "checkbox" | "radio";
+  /** "checkbox"·"radio"=입력 셀, "text"=읽기 전용 텍스트 셀. */
+  variant?: "checkbox" | "radio" | "text";
   name?: string;
   className?: string;
 };
@@ -38,6 +42,7 @@ export const Table = ({
   name,
   className,
 }: TableProps) => {
+  const isText = variant === "text";
   const Field = variant === "radio" ? Radio : Checkbox;
 
   return (
@@ -48,7 +53,9 @@ export const Table = ({
             <tr>
               <th className="sticky left-0 z-10 bg-canvas p-0">
                 <div
-                  className={`flex ${HEADER_HEIGHT} items-center justify-center whitespace-nowrap px-2 font-medium text-black text-lg`}
+                  className={`flex ${HEADER_HEIGHT} items-center whitespace-nowrap font-medium text-ink text-lg ${
+                    isText ? "justify-start px-4" : "justify-center px-2"
+                  }`}
                 >
                   {cornerLabel}
                 </div>
@@ -56,7 +63,9 @@ export const Table = ({
               {columns.map((column) => (
                 <th key={column} className="p-0">
                   <div
-                    className={`flex ${HEADER_HEIGHT} items-center justify-center whitespace-nowrap px-2 text-base text-muted font-medium sm:text-lg`}
+                    className={`flex ${HEADER_HEIGHT} items-center whitespace-nowrap font-medium text-base text-muted sm:text-lg ${
+                      isText ? "justify-start px-4" : "justify-center px-2"
+                    }`}
                   >
                     {column}
                   </div>
@@ -70,7 +79,7 @@ export const Table = ({
             <tr key={row.id}>
               <td className="sticky left-0 z-10 rounded-s-xl bg-surface p-0">
                 <div
-                  className={`flex ${ROW_HEIGHT} items-center whitespace-nowrap px-4 font-medium text-base sm:text-lg`}
+                  className={`flex ${ROW_HEIGHT} items-center whitespace-nowrap px-4 font-medium text-base text-ink sm:text-lg`}
                 >
                   {row.label}
                 </div>
@@ -83,16 +92,24 @@ export const Table = ({
                   }`}
                 >
                   <div
-                    className={`flex ${ROW_HEIGHT} items-center justify-center px-2`}
+                    className={`flex ${ROW_HEIGHT} items-center ${
+                      isText
+                        ? "px-4 font-medium text-base text-ink sm:text-lg"
+                        : "justify-center px-2"
+                    }`}
                   >
-                    <Field
-                      name={name}
-                      checked={cell.checked}
-                      disabled={cell.disabled}
-                      error={error}
-                      aria-label={cell["aria-label"]}
-                      onChange={(e) => cell.onChange?.(e.target.checked)}
-                    />
+                    {isText ? (
+                      cell.content
+                    ) : (
+                      <Field
+                        name={name}
+                        checked={cell.checked}
+                        disabled={cell.disabled}
+                        error={error}
+                        aria-label={cell["aria-label"]}
+                        onChange={(e) => cell.onChange?.(e.target.checked)}
+                      />
+                    )}
                   </div>
                 </td>
               ))}

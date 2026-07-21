@@ -3,21 +3,31 @@ import { dayjs } from "../lib";
 /** `<input type="datetime-local">` 값 포맷. 대체 일정 검증(strict parse)에서 재사용한다. */
 export const LOCAL_DATETIME_FORMAT = "YYYY-MM-DDTHH:mm";
 
+// 5기 신입위원 모집(지원) 기간 — 랜딩·지원 폼이 공유하는 단일 소스.
 export const APPLICATION_PERIOD = {
-  start: "2026-02-01",
-  end: "2026-02-05",
+  start: "2026-07-23",
+  end: "2026-07-30",
 } as const;
 
-// 면접(INTERVIEW_DATES) 종료 직후 — 확정되면 실제 발표일로 교체 (플레이스홀더).
-export const ANNOUNCEMENT_DATE = "2026-02-13";
+// 면접(INTERVIEW_DATES) 종료 직후 최종 발표일.
+export const ANNOUNCEMENT_DATE = "2026-08-05";
+
+// 서류 평가 결과 통보(마감)일 — 확정 시 교체 (플레이스홀더).
+export const DOCUMENT_RESULT_DATE = "2026-07-31";
+
+// IT지원위원회 5기 첫 전체 회의(필참)일 — 확정 시 교체 (플레이스홀더).
+export const GENERAL_MEETING_DATE = "2026-08-20";
+
+// 5기 활동 기간(연·월). 랜딩 "활동 기간" 표기용 — 확정 시 교체 (플레이스홀더).
+export const ACTIVITY_PERIOD = {
+  start: "2026-09",
+  end: "2027-09",
+} as const;
 
 export const INTERVIEW_DATES = [
-  "2026-02-02",
-  "2026-02-03",
-  "2026-02-04",
-  "2026-02-05",
-  "2026-02-07",
-  "2026-02-08",
+  "2026-08-01",
+  "2026-08-02",
+  "2026-08-03",
 ] as const;
 
 export const INTERVIEW_SLOT_DURATION_MINUTES = 60;
@@ -39,9 +49,6 @@ export const isWeekendDate = (dateIso: string): boolean => {
   return day === 0 || day === 6;
 };
 
-export const slotStartTimesFor = (dateIso: string): readonly string[] =>
-  isWeekendDate(dateIso) ? WEEKEND_SLOT_START_TIMES : WEEKDAY_SLOT_START_TIMES;
-
 /** "2026-02-02" → "2월 2일 (월)" */
 export const formatInterviewDate = (dateIso: string): string => {
   return dayjs(`${dateIso}T00:00:00`).format("M월 D일 (ddd)");
@@ -50,6 +57,21 @@ export const formatInterviewDate = (dateIso: string): string => {
 /** "2026-07-31" → "7/31(금)" — complete 페이지의 짧은 표기용 */
 export const formatShortDate = (dateIso: string): string => {
   return dayjs(`${dateIso}T00:00:00`).format("M/D(ddd)");
+};
+
+/** "2026-07-30" → "2026.07.30" — 개요 지원 기간 / 유의사항 마감 표기용 */
+export const formatDotDate = (dateIso: string): string => {
+  return dayjs(`${dateIso}T00:00:00`).format("YYYY.MM.DD");
+};
+
+/** "2026-09" → "2026.09" — 활동 기간 표기용 */
+export const formatYearMonth = (yearMonth: string): string => {
+  return dayjs(`${yearMonth}-01T00:00:00`).format("YYYY.MM");
+};
+
+/** "2026-08-20" → "8/20" — 요일 없는 짧은 표기(유의사항 인라인용) */
+export const formatSlashDate = (dateIso: string): string => {
+  return dayjs(`${dateIso}T00:00:00`).format("M/D");
 };
 
 /** "19:00" → "19:00 ~ 20:00" */

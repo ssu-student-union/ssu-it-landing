@@ -40,7 +40,7 @@ export const DateTimePicker = ({
       {label && (
         <label
           htmlFor={inputId}
-          className="mb-2 block font-medium text-black text-lg"
+          className="mb-2 block font-medium text-ink text-lg"
         >
           {label}
         </label>
