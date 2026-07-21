@@ -54,8 +54,8 @@ export const ProjectList = () => {
               aria-current={page === index}
               className={
                 page === index
-                  ? "flex size-6 items-center justify-center rounded-full bg-[#ededed] font-bold text-[#454a4d] text-sm sm:size-7 sm:text-lg lg:size-7 lg:text-lg 1440:size-7 1440:text-xl"
-                  : "font-bold text-sm text-white sm:text-lg lg:text-lg 1440:text-xl"
+                  ? "flex size-6 items-center justify-center rounded-full bg-[#ededed] font-bold text-[#454a4d] text-sm sm:size-7 sm:text-lg lg:size-7 lg:text-xl"
+                  : "font-bold text-sm text-white sm:text-lg lg:text-xl"
               }
             >
               {index + 1}

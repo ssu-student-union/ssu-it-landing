@@ -83,11 +83,11 @@ export const PartIntro = () => {
       <div className="absolute top-6 left-4 sm:top-10 sm:left-8 lg:top-14">
         <p
           aria-hidden
-          className="pointer-events-none select-none text-6xl font-bold leading-none text-[#dddddd]/[0.14] sm:text-8xl lg:text-8xl 1440:text-[9.375rem]"
+          className="pointer-events-none select-none text-6xl font-bold leading-none text-[#dddddd]/[0.14] sm:text-8xl lg:text-[9.375rem]"
         >
           Part
         </p>
-        <h2 className="absolute inset-0 flex translate-y-0.5 items-end justify-center whitespace-nowrap pb-2 text-2xl leading-none font-bold text-white sm:translate-y-1 sm:pb-4 sm:text-4xl lg:translate-y-2 lg:text-4xl 1440:text-5xl">
+        <h2 className="absolute inset-0 flex translate-y-0.5 items-end justify-center whitespace-nowrap pb-2 text-2xl leading-none font-bold text-white sm:translate-y-1 sm:pb-4 sm:text-4xl lg:translate-y-2 lg:text-5xl">
           파트 소개
         </h2>
       </div>
@@ -146,7 +146,7 @@ export const PartIntro = () => {
                   className="absolute inset-0 flex flex-col justify-between rounded-lg py-4 px-4 shadow-[6px_6px_4px_2px_#303030] backface-hidden sm:py-5 sm:px-5 lg:px-6"
                   style={{ backgroundImage: PART_CARD_GRADIENT }}
                 >
-                  <p className="text-2xl font-semibold text-[#2f2f2f] sm:text-3xl lg:text-3xl 1440:text-4xl">
+                  <p className="text-2xl font-semibold text-[#2f2f2f] sm:text-3xl lg:text-4xl">
                     {part.label}
                   </p>
                   <div className="flex w-full justify-end">
@@ -155,7 +155,7 @@ export const PartIntro = () => {
                       alt=""
                       width={54}
                       height={54}
-                      className="h-9 w-9 sm:h-11 sm:w-11 lg:h-13.5 lg:w-13.5 1440:h-13.5 1440:w-13.5"
+                      className="h-9 w-9 sm:h-11 sm:w-11 lg:h-13.5 lg:w-13.5"
                     />
                   </div>
                 </div>
@@ -164,7 +164,7 @@ export const PartIntro = () => {
                   className="absolute inset-0 flex rotate-y-180 flex-col gap-3 rounded-lg py-4 px-4 shadow-[6px_6px_4px_2px_#303030] backface-hidden sm:py-5 sm:px-5 lg:px-6"
                   style={{ backgroundImage: PART_CARD_BACK_GRADIENT }}
                 >
-                  <p className="text-2xl font-semibold text-white sm:text-3xl lg:text-3xl 1440:text-4xl">
+                  <p className="text-2xl font-semibold text-white sm:text-3xl lg:text-4xl">
                     {part.label}
                   </p>
                   <p className="whitespace-pre-line text-sm leading-relaxed font-medium text-white sm:text-base">

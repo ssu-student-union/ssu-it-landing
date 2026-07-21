@@ -4,7 +4,7 @@ import logo from "../assets/logo.svg";
 
 export const Header = () => {
   return (
-    <header className="flex h-16 w-full items-center justify-between px-4 bg-white sm:h-20 sm:px-8 lg:h-22 lg:px-14 1440:h-25 1440:px-20">
+    <header className="flex h-16 w-full items-center justify-between px-4 bg-white sm:h-20 sm:px-8 lg:h-25 lg:px-20">
       <Link href="/" className="flex items-center gap-2">
         <Image
           src={logo}
@@ -12,7 +12,7 @@ export const Header = () => {
           className="h-auto w-8 sm:w-9 lg:w-10"
           priority
         />
-        <span className="font-bold text-[#1b1c1c] text-lg tracking-[-0.02em] sm:text-xl lg:text-xl 1440:text-[1.75rem]">
+        <span className="font-bold text-[#1b1c1c] text-lg tracking-[-0.02em] sm:text-xl lg:text-[1.75rem]">
           IT지원위원회
         </span>
       </Link>
@@ -20,19 +20,19 @@ export const Header = () => {
       <nav className="flex items-center gap-3 sm:gap-8 lg:gap-16">
         <Link
           href="#"
-          className="relative hidden font-semibold text-[#1b1c1c] text-lg whitespace-nowrap after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-[#1b1c1c] after:transition-all after:duration-300 after:content-[''] hover:after:w-full sm:block lg:text-xl 1440:text-2xl"
+          className="relative hidden font-semibold text-[#1b1c1c] text-lg whitespace-nowrap after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-[#1b1c1c] after:transition-all after:duration-300 after:content-[''] hover:after:w-full sm:block lg:text-2xl"
         >
           위원회 소개
         </Link>
         <Link
           href="/projects"
-          className="relative hidden font-semibold text-[#1b1c1c] text-lg whitespace-nowrap after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-[#1b1c1c] after:transition-all after:duration-300 after:content-[''] hover:after:w-full sm:block lg:text-xl 1440:text-2xl"
+          className="relative hidden font-semibold text-[#1b1c1c] text-lg whitespace-nowrap after:absolute after:-bottom-1 after:left-0 after:h-0.5 after:w-0 after:bg-[#1b1c1c] after:transition-all after:duration-300 after:content-[''] hover:after:w-full sm:block lg:text-2xl"
         >
           진행 프로젝트
         </Link>
         <Link
           href="#"
-          className="flex items-center justify-center whitespace-nowrap rounded-4xl bg-gradient-to-b from-[#4a4a4a] to-black px-4 py-2 font-semibold text-[#e5e5e5] text-sm transition-transform duration-300 ease-in-out hover:scale-105 sm:px-6 sm:text-lg lg:px-8 lg:py-3 lg:text-lg 1440:text-2xl"
+          className="flex items-center justify-center whitespace-nowrap rounded-4xl bg-gradient-to-b from-[#4a4a4a] to-black px-4 py-2 font-semibold text-[#e5e5e5] text-sm transition-transform duration-300 ease-in-out hover:scale-105 sm:px-6 sm:text-lg lg:px-8 lg:py-3 lg:text-2xl"
         >
           리크루팅
         </Link>
