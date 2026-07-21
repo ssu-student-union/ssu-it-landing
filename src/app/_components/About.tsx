@@ -24,6 +24,7 @@ type StoryItem = {
   aspect: string;
   align: "left" | "right";
   theme: "dark" | "light";
+  decoratedWord?: string;
 };
 
 const STORY_ITEMS: StoryItem[] = [
@@ -40,6 +41,7 @@ const STORY_ITEMS: StoryItem[] = [
     aspect: "747/535",
     align: "right",
     theme: "dark",
+    decoratedWord: "직접",
   },
   {
     lines: ["기획부터", "개발까지,", "하나의 팀으로"],
@@ -47,6 +49,7 @@ const STORY_ITEMS: StoryItem[] = [
     aspect: "660/499",
     align: "left",
     theme: "light",
+    decoratedWord: "기획",
   },
   {
     lines: ["아이디어가", "실제로 이루어지기까지"],
@@ -59,6 +62,32 @@ const STORY_ITEMS: StoryItem[] = [
 
 const StoryBlock = ({ item, delay }: { item: StoryItem; delay: number }) => {
   const isRight = item.align === "right";
+  const [firstLine] = item.lines;
+  const decoratedWord = item.decoratedWord;
+  const decoratedLine = decoratedWord
+    ? firstLine.includes(decoratedWord)
+      ? firstLine
+      : item.lines.find((line) => line.includes(decoratedWord))
+    : undefined;
+  const renderedLines = item.lines.map((line) => {
+    if (!decoratedWord || line !== decoratedLine) return line;
+
+    const [beforeWord, afterWord] = line.split(decoratedWord);
+
+    return (
+      <Fragment key={line}>
+        {beforeWord}
+        <span className="relative inline-block">
+          <span className="absolute bottom-[calc(100%+12px)] left-1/2 flex w-[0.9em] -translate-x-1/2 items-center justify-between">
+            <span className="h-[10px] w-[10px] rounded-full bg-current" />
+            <span className="h-[10px] w-[10px] rounded-full bg-current" />
+          </span>
+          {decoratedWord}
+        </span>
+        {afterWord}
+      </Fragment>
+    );
+  });
 
   return (
     <Reveal
@@ -72,7 +101,12 @@ const StoryBlock = ({ item, delay }: { item: StoryItem; delay: number }) => {
           isRight ? "text-right" : "text-left"
         } ${item.theme === "light" ? "text-[#f4f4f4]" : "text-[#322e2e]"}`}
       >
-        {item.lines.join("\n")}
+        {renderedLines.map((line, index) => (
+          <Fragment key={item.lines[index]}>
+            {line}
+            {index < renderedLines.length - 1 && "\n"}
+          </Fragment>
+        ))}
       </p>
       <div
         className="relative w-full overflow-hidden rounded-lg shadow-[7px_10px_14px_0px_rgba(0,0,0,0.25)]"
