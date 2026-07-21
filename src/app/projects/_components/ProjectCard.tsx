@@ -23,10 +23,10 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
       </div>
 
       <div className="flex flex-col items-center gap-2 text-center sm:gap-3">
-        <h3 className="font-bold text-2xl text-[#e2d7d7] sm:text-3xl lg:text-3xl min-[1440px]:text-[2.5rem]">
+        <h3 className="font-bold text-2xl text-[#e2d7d7] sm:text-3xl lg:text-3xl 1440:text-[2.5rem]">
           {project.title}
         </h3>
-        <p className="text-base text-[#e2d7d7] leading-[1.4] sm:text-lg sm:leading-[1.5625rem] lg:text-lg min-[1440px]:text-xl">
+        <p className="text-base text-[#e2d7d7] leading-[1.4] sm:text-lg sm:leading-[1.5625rem] lg:text-lg 1440:text-xl">
           {project.description}
         </p>
       </div>

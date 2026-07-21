@@ -43,7 +43,7 @@ export default async function ProjectDetailPage({
 
   return (
     <main
-      className="flex flex-1 flex-col items-center gap-10 px-4 py-16 sm:gap-14 sm:py-24 lg:gap-16 lg:py-32 min-[1440px]:gap-20"
+      className="flex flex-1 flex-col items-center gap-10 px-4 py-16 sm:gap-14 sm:py-24 lg:gap-16 lg:py-32 1440:gap-20"
       style={{ backgroundImage: DARK_SECTION_GRADIENT }}
     >
       <ProjectHeader title={project.title} subtitle={detail?.subtitle} />
@@ -52,7 +52,7 @@ export default async function ProjectDetailPage({
         <>
           <ProjectDescription description={detail.description} />
 
-          <div className="grid w-full max-w-5xl grid-cols-1 gap-6 sm:grid-cols-[482fr_635fr] sm:gap-8 min-[1440px]:max-w-[73.75rem]">
+          <div className="grid w-full max-w-5xl grid-cols-1 gap-6 sm:grid-cols-[482fr_635fr] sm:gap-8 1440:max-w-[73.75rem]">
             <ProjectTeam team={detail.team} />
             <ProjectProgress progressStatus={detail.progressStatus} />
           </div>
@@ -61,7 +61,7 @@ export default async function ProjectDetailPage({
         </>
       ) : (
         <div className="flex w-full max-w-5xl flex-col gap-4 rounded-[1.25rem] bg-[rgba(208,234,255,0.1)] p-6 sm:p-8 lg:p-10">
-          <p className="font-medium text-base text-white sm:text-lg lg:text-lg min-[1440px]:text-xl">
+          <p className="font-medium text-base text-white sm:text-lg lg:text-lg 1440:text-xl">
             {project.description}
           </p>
           <p className="text-[#cccccc] text-sm sm:text-base">

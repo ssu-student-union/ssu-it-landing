@@ -10,12 +10,12 @@ export const MainProjects = () => {
       <div className="absolute top-0 right-4 sm:right-8">
         <p
           aria-hidden
-          className="pointer-events-none select-none text-6xl font-bold leading-none text-white/[0.14] sm:text-8xl lg:text-8xl min-[1440px]:text-[9.375rem]"
+          className="pointer-events-none select-none text-6xl font-bold leading-none text-white/[0.14] sm:text-8xl lg:text-8xl 1440:text-[9.375rem]"
         >
           Main
         </p>
-        <div className="absolute inset-0 flex -translate-x-6 translate-y-1 items-end justify-start gap-1 pb-2 sm:-translate-x-10 sm:translate-y-3 sm:pb-4 lg:-translate-x-14 lg:translate-y-4 min-[1440px]:-translate-x-20 min-[1440px]:translate-y-6">
-          <h2 className="flex h-10 items-center whitespace-nowrap text-2xl leading-none font-bold text-white sm:h-12 sm:text-4xl lg:h-12 lg:text-4xl min-[1440px]:h-16 min-[1440px]:text-5xl">
+        <div className="absolute inset-0 flex -translate-x-6 translate-y-1 items-end justify-start gap-1 pb-2 sm:-translate-x-10 sm:translate-y-3 sm:pb-4 lg:-translate-x-14 lg:translate-y-4 1440:-translate-x-20 1440:translate-y-6">
+          <h2 className="flex h-10 items-center whitespace-nowrap text-2xl leading-none font-bold text-white sm:h-12 sm:text-4xl lg:h-12 lg:text-4xl 1440:h-16 1440:text-5xl">
             메인 프로젝트
           </h2>
           <Link href="/projects" aria-label="진행 프로젝트 더보기">
@@ -24,7 +24,7 @@ export const MainProjects = () => {
               alt=""
               width={64}
               height={64}
-              className="h-10 w-10 max-w-none shrink-0 sm:h-12 sm:w-12 lg:h-12 lg:w-12 min-[1440px]:h-16 min-[1440px]:w-16 cursor-pointer"
+              className="h-10 w-10 max-w-none shrink-0 sm:h-12 sm:w-12 lg:h-12 lg:w-12 1440:h-16 1440:w-16 cursor-pointer"
             />
           </Link>
         </div>
@@ -48,10 +48,10 @@ export const MainProjects = () => {
               </div>
 
               <div>
-                <h3 className="text-left font-bold text-[#e2d7d7] text-2xl transition-colors duration-300 group-hover:text-white sm:text-3xl lg:text-3xl min-[1440px]:text-[2.625rem]">
+                <h3 className="text-left font-bold text-[#e2d7d7] text-2xl transition-colors duration-300 group-hover:text-white sm:text-3xl lg:text-3xl 1440:text-[2.625rem]">
                   {project.title}
                 </h3>
-                <p className="max-w-103 self-start text-left text-base text-[#e2d7d7] leading-[1.4] sm:text-lg lg:text-lg min-[1440px]:text-xl min-[1440px]:leading-[1.5625rem]">
+                <p className="max-w-103 self-start text-left text-base text-[#e2d7d7] leading-[1.4] sm:text-lg lg:text-lg 1440:text-xl 1440:leading-[1.5625rem]">
                   {project.description}
                 </p>
               </div>

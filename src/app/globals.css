@@ -9,6 +9,7 @@
 @theme {
   --animate-float: float 4s ease-in-out infinite;
   --animate-float-slow: float 5s ease-in-out infinite;
+  --breakpoint-1440: 1440px;
 }
 
 body {

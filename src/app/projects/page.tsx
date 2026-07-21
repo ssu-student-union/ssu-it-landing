@@ -13,10 +13,10 @@ export default function ProjectsPage() {
       style={{ backgroundImage: DARK_SECTION_GRADIENT }}
     >
       <div className="flex w-full max-w-5xl flex-col gap-2 sm:gap-3">
-        <h1 className="font-semibold text-4xl text-white sm:text-5xl lg:text-5xl min-[1440px]:text-[4rem]">
+        <h1 className="font-semibold text-4xl text-white sm:text-5xl lg:text-5xl 1440:text-[4rem]">
           Projects
         </h1>
-        <p className="font-semibold text-lg text-white sm:text-2xl lg:text-2xl min-[1440px]:text-[2.25rem]">
+        <p className="font-semibold text-lg text-white sm:text-2xl lg:text-2xl 1440:text-[2.25rem]">
           함께 고민하고, 함께 만들며 성장한 프로젝트를 소개합니다!
         </p>
       </div>

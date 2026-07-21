@@ -48,15 +48,15 @@ export const Hero = () => {
 
       <div className="absolute bottom-10 left-6 z-10 flex flex-col gap-5 sm:bottom-16 sm:left-12 sm:gap-6 lg:bottom-32.5 lg:left-26 lg:gap-8">
         <h1 className="text-white leading-[1.6] sm:leading-[1.8] lg:leading-[2.1]">
-          <div className="flex items-center gap-3 font-medium text-xl sm:text-3xl lg:text-3xl min-[1440px]:text-4xl">
+          <div className="flex items-center gap-3 font-medium text-xl sm:text-3xl lg:text-3xl 1440:text-4xl">
             <span>더 나은 숭실대학교의 발전을 추구하는</span>
 
             <span
               aria-hidden
-              className="h-px w-10 shrink-0 bg-[#ffebeb] sm:w-16 lg:w-16 min-[1440px]:w-[11.625rem]"
+              className="h-px w-10 shrink-0 bg-[#ffebeb] sm:w-16 lg:w-16 1440:w-[11.625rem]"
             />
           </div>
-          <div className="font-bold text-3xl sm:text-5xl lg:text-5xl min-[1440px]:text-[4rem]">
+          <div className="font-bold text-3xl sm:text-5xl lg:text-5xl 1440:text-[4rem]">
             숭실대학교 IT 지원위원회
           </div>
         </h1>
@@ -64,9 +64,9 @@ export const Hero = () => {
         {/* 리크루팅 페이지 경로 미정 */}
         <Link
           href="#"
-          className="flex h-14 w-36 items-center justify-center rounded-xl border-[3px] border-[#9dcfeb] sm:h-18 sm:w-44 lg:h-18 lg:w-44 min-[1440px]:h-[5.625rem] min-[1440px]:w-[13.25rem]"
+          className="flex h-14 w-36 items-center justify-center rounded-xl border-[3px] border-[#9dcfeb] sm:h-18 sm:w-44 lg:h-18 lg:w-44 1440:h-[5.625rem] 1440:w-[13.25rem]"
         >
-          <span className="bg-gradient-to-r from-[#9dcfeb] to-[#6a8a9c] bg-clip-text font-bold text-lg text-transparent sm:text-2xl lg:text-2xl min-[1440px]:text-2xl">
+          <span className="bg-gradient-to-r from-[#9dcfeb] to-[#6a8a9c] bg-clip-text font-bold text-lg text-transparent sm:text-2xl lg:text-2xl 1440:text-2xl">
             지금 지원하기
           </span>
         </Link>

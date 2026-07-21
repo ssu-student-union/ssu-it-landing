@@ -51,7 +51,7 @@ export const StatCounter = ({
   return (
     <p
       ref={ref}
-      className="text-4xl font-bold text-[#383e42] sm:text-5xl lg:text-5xl min-[1440px]:text-[4rem]"
+      className="text-4xl font-bold text-[#383e42] sm:text-6xl lg:text-6xl 1440:text-[5.625rem]"
     >
       {count}
       {suffix}
