@@ -14,11 +14,11 @@ export const Footer = () => {
         <div className="flex flex-col gap-1.5">
           <div className="flex items-center gap-1">
             <Image src={logo} alt="" className="h-8 w-auto" />
-            <span className="font-semibold text-[#1b1c1c] text-xl">
+            <span className="font-semibold text-[#1b1c1c] text-base sm:text-lg lg:text-lg min-[1440px]:text-xl">
               IT지원위원회
             </span>
           </div>
-          <p className="text-[#1b1c1c] text-[0.9375rem]">
+          <p className="text-[#1b1c1c] text-xs sm:text-sm lg:text-sm min-[1440px]:text-[0.9375rem]">
             숭실대학교 구성원들의 소리 없는 한숨을 찾아 해결합니다
           </p>
         </div>
@@ -56,12 +56,12 @@ export const Footer = () => {
       </div>
 
       <div className="flex flex-col gap-1">
-        <p className="font-semibold text-[#1b1c1c] text-[0.8125rem]">
+        <p className="font-semibold text-[#1b1c1c] text-[0.6875rem] sm:text-xs lg:text-xs min-[1440px]:text-[0.8125rem]">
           위치 : 학생회관 211호
         </p>
         <div className="flex items-center gap-1">
           <Image src={copyright} alt="" className="size-3" />
-          <p className="font-medium text-[#1b1c1c] text-[0.8125rem]">
+          <p className="font-medium text-[#1b1c1c] text-[0.6875rem] sm:text-xs lg:text-xs min-[1440px]:text-[0.8125rem]">
             IT. All rights reserved.
           </p>
         </div>

@@ -48,7 +48,7 @@ export const MainProjects = () => {
               </div>
 
               <div>
-                <h3 className="text-left font-bold text-[#e2d7d7] text-2xl transition-colors duration-300 group-hover:text-white sm:text-3xl lg:text-3xl min-[1440px]:text-[2.5rem]">
+                <h3 className="text-left font-bold text-[#e2d7d7] text-2xl transition-colors duration-300 group-hover:text-white sm:text-3xl lg:text-3xl min-[1440px]:text-[2.625rem]">
                   {project.title}
                 </h3>
                 <p className="max-w-103 self-start text-left text-base text-[#e2d7d7] leading-[1.4] sm:text-lg lg:text-lg min-[1440px]:text-xl min-[1440px]:leading-[1.5625rem]">

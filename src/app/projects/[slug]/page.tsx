@@ -43,7 +43,7 @@ export default async function ProjectDetailPage({
 
   return (
     <main
-      className="flex flex-1 flex-col items-center gap-10 px-4 py-16 sm:gap-14 sm:py-24 lg:gap-16 lg:py-32"
+      className="flex flex-1 flex-col items-center gap-10 px-4 py-16 sm:gap-14 sm:py-24 lg:gap-16 lg:py-32 min-[1440px]:gap-20"
       style={{ backgroundImage: DARK_SECTION_GRADIENT }}
     >
       <ProjectHeader title={project.title} subtitle={detail?.subtitle} />
@@ -52,7 +52,7 @@ export default async function ProjectDetailPage({
         <>
           <ProjectDescription description={detail.description} />
 
-          <div className="grid w-full max-w-5xl grid-cols-1 gap-6 sm:grid-cols-[482fr_635fr] sm:gap-8">
+          <div className="grid w-full max-w-5xl grid-cols-1 gap-6 sm:grid-cols-[482fr_635fr] sm:gap-8 min-[1440px]:max-w-[73.75rem]">
             <ProjectTeam team={detail.team} />
             <ProjectProgress progressStatus={detail.progressStatus} />
           </div>

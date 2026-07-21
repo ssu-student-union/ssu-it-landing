@@ -5,8 +5,8 @@ type ProjectHeaderProps = {
 
 export const ProjectHeader = ({ title, subtitle }: ProjectHeaderProps) => {
   return (
-    <div className="flex w-full max-w-5xl flex-col gap-2 sm:gap-3">
-      <h1 className="font-semibold text-4xl text-white sm:text-5xl lg:text-5xl min-[1440px]:text-[4rem]">
+    <div className="flex w-full max-w-5xl flex-col gap-2 sm:gap-3 min-[1440px]:max-w-[73.75rem]">
+      <h1 className="font-semibold text-4xl text-white sm:text-5xl lg:text-5xl min-[1440px]:text-6xl">
         {title}
       </h1>
       {subtitle && (

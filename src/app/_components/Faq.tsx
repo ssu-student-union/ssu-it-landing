@@ -56,7 +56,7 @@ export const Faq = () => {
                     alt=""
                     width={40}
                     height={40}
-                    className="h-6 w-6 shrink-0 transition-transform duration-300 ease-in-out group-aria-expanded:rotate-180 sm:h-8 sm:w-8 lg:h-8 lg:w-8 min-[1440px]:h-10 min-[1440px]:w-10"
+                    className="h-6 w-6 shrink-0 transition-transform duration-300 ease-in-out group-aria-expanded:rotate-180 sm:h-8 sm:w-8 lg:h-8 lg:w-8 min-[1440px]:h-[2.625rem] min-[1440px]:w-[2.625rem]"
                   />
                 </>
               }
