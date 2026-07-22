@@ -40,4 +40,4 @@ next-env.d.ts
 .env*
 
 # claude code
-.claude/settings.local.json
+.claude/
