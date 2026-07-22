@@ -12,36 +12,36 @@ export const Hero = () => {
       className="relative h-[26rem] overflow-hidden sm:h-[32rem] lg:h-212.5"
       style={{ backgroundImage: DARK_SECTION_GRADIENT }}
     >
-      <div className="pointer-events-none absolute right-0 bottom-0 hidden h-[23.6425rem] w-[28.515rem] md:block">
+      <div className="pointer-events-none absolute right-0 bottom-0 h-48 w-58 sm:h-68 sm:w-82 md:h-[23.6425rem] md:w-[28.515rem]">
         <Image
           src={heroGraphicRight2}
           alt=""
           fill
-          sizes="457px"
+          sizes="(min-width: 768px) 457px, (min-width: 640px) 328px, 232px"
           className="z-0 animate-float-slow object-contain object-right-bottom"
         />
         <Image
           src={heroGraphicRight1}
           alt=""
           fill
-          sizes="457px"
+          sizes="(min-width: 768px) 457px, (min-width: 640px) 328px, 232px"
           className="z-10 animate-float-slow object-contain object-right-bottom"
         />
       </div>
 
-      <div className="pointer-events-none absolute top-0 left-0 hidden h-[18.0625rem] w-[17.4375rem] md:block">
+      <div className="pointer-events-none absolute top-0 left-0 h-40 w-40 sm:h-52 sm:w-52 md:h-[18.0625rem] md:w-[17.4375rem]">
         <Image
           src={heroGraphicLeft2}
           alt=""
           fill
-          sizes="280px"
+          sizes="(min-width: 768px) 280px, (min-width: 640px) 208px, 160px"
           className="z-0 animate-float object-contain object-left-top"
         />
         <Image
           src={heroGraphicLeft1}
           alt=""
           fill
-          sizes="280px"
+          sizes="(min-width: 768px) 280px, (min-width: 640px) 208px, 160px"
           className="z-10 animate-float object-contain object-left-top"
         />
       </div>
