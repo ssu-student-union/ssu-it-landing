@@ -140,35 +140,6 @@ export const notes = {
   ] satisfies Contact[],
 } as const;
 
-export type FaqItem = { q: string; a: string };
-
-// Q4(부서 이동)·Q5(참가 TF 변경) 답변은 정책 추정치로, 운영진 확인 필요 (임시).
-export const faq = {
-  title: "FAQ / 답변",
-  items: [
-    {
-      q: "Q1. 활동기간은 얼마나 되나요?",
-      a: "5기 활동은 2026년 9월부터 2027년 9월까지 약 1년이며, 최소 1학기 활동을 원칙으로 합니다.",
-    },
-    {
-      q: "Q2. 휴학생도 지원 가능한가요?",
-      a: "네, 숭실대학교 재학생과 휴학생 모두 지원 가능합니다. 전공 제한도 없습니다.",
-    },
-    {
-      q: "Q3. 코딩테스트를 따로 진행하나요?",
-      a: "별도의 코딩테스트는 없습니다. 선발은 '서류 → 면접' 순으로 진행되며, 결과는 개별 안내됩니다.",
-    },
-    {
-      q: "Q4. 부서 이동이 가능한가요?",
-      a: "지원은 1개 파트에만 가능하며, 선발된 파트에서 활동하게 됩니다. 활동 중 부서 이동은 원칙적으로 어렵습니다.",
-    },
-    {
-      q: "Q5. 참가 TF 변경이 가능한가요?",
-      a: "TF 구성은 활동 시작 후 조율되며, 상황에 따라 변경 가능성이 있으나 확정 배정은 운영진과 협의해 결정됩니다.",
-    },
-  ] satisfies FaqItem[],
-} as const;
-
 export const timeline = { title: "모집 일정" } as const;
 
 export type TimelineItem = { label: string; date: string; last: boolean };

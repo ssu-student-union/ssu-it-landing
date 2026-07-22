@@ -42,7 +42,7 @@ export const stepOneFields: FieldConfig[] = [
     // Frontend는 이번 기수 미채용이라 선택할 수 없게 막아둔다.
     options: departments.map((d) => ({
       id: d.id,
-      label: d.id === "Frontend" ? `${d.label} (이번 기수 미모집)` : d.label,
+      label: d.id,
       disabled: d.id === "Frontend",
     })),
   },
