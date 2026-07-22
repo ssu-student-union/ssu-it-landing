@@ -61,10 +61,15 @@ const PARTS = [
 export const PartIntro = () => {
   const [start, setStart] = useState(0);
   const [visibleCount, setVisibleCount] = useState(MAX_VISIBLE_COUNT);
+  const [isMobile, setIsMobile] = useState(false);
+  const [flippedLabel, setFlippedLabel] = useState<string | null>(null);
   const maxStart = Math.max(0, PARTS.length - visibleCount);
 
   useEffect(() => {
-    const handleResize = () => setVisibleCount(getVisibleCount());
+    const handleResize = () => {
+      setVisibleCount(getVisibleCount());
+      setIsMobile(!window.matchMedia("(min-width: 640px)").matches);
+    };
     handleResize();
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -140,13 +145,22 @@ export const PartIntro = () => {
             <button
               key={part.label}
               type="button"
-              onClick={() =>
-                trackEvent("part_card_click", { part: part.label })
-              }
+              onClick={() => {
+                trackEvent("part_card_click", { part: part.label });
+                if (isMobile) {
+                  setFlippedLabel((prev) =>
+                    prev === part.label ? null : part.label,
+                  );
+                }
+              }}
               className="group h-56 shrink-0 px-2 text-left perspective-[1000px] sm:h-64 sm:px-3 lg:h-68 lg:px-4"
               style={{ width: `${100 / PARTS.length}%` }}
             >
-              <div className="relative h-full w-full transition-transform duration-700 ease-in-out transform-3d group-hover:rotate-y-180">
+              <div
+                className={`relative h-full w-full transition-transform duration-700 ease-in-out transform-3d group-hover:rotate-y-180 ${
+                  flippedLabel === part.label ? "rotate-y-180" : ""
+                }`}
+              >
                 <div
                   className="absolute inset-0 flex flex-col justify-between rounded-lg py-4 px-4 shadow-[6px_6px_4px_2px_#303030] backface-hidden sm:py-5 sm:px-5 lg:px-6"
                   style={{ backgroundImage: PART_CARD_GRADIENT }}
