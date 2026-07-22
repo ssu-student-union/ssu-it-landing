@@ -1,12 +1,12 @@
 import type { StaticImageData } from "next/image";
-import campusClubImage from "../assets/images/campus-club.png";
-import campusMapImage from "../assets/images/campus-map.png";
-import chatbotImage from "../assets/images/chat-bot.png";
-import itLandingImage from "../assets/images/it-landing.png";
-import passuImage from "../assets/images/passu.png";
-import reclinerImage from "../assets/images/recliner.png";
-import ssuportImage from "../assets/images/ssuport.png";
-import studentCouncilImage from "../assets/images/student-council.png";
+import campusClubImage from "../assets/images/campus-club.webp";
+import campusMapImage from "../assets/images/campus-map.webp";
+import chatbotImage from "../assets/images/chat-bot.webp";
+import itLandingImage from "../assets/images/it-landing.webp";
+import passuImage from "../assets/images/passu.webp";
+import reclinerImage from "../assets/images/recliner.webp";
+import ssuportImage from "../assets/images/ssuport.webp";
+import studentCouncilImage from "../assets/images/student-council.webp";
 
 export type TeamRole = {
   role: string;

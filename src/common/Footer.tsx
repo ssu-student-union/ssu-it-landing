@@ -29,28 +29,28 @@ export const Footer = () => {
             aria-label="Instagram"
             className="flex size-9 items-center justify-center rounded-full bg-[#e5e7e8]"
           >
-            <Image src={instagram} alt="" className="size-5" />
+            <Image src={instagram} alt="" className="w-5 h-auto" />
           </Link>
           <Link
             href="#"
             aria-label="이메일"
             className="flex size-9 items-center justify-center rounded-full bg-[#e5e7e8]"
           >
-            <Image src={mail} alt="" className="size-5" />
+            <Image src={mail} alt="" className="w-5 h-auto" />
           </Link>
           <Link
             href="#"
             aria-label="카카오톡"
             className="flex size-9 items-center justify-center rounded-full bg-[#e5e7e8]"
           >
-            <Image src={kakao} alt="" className="size-5" />
+            <Image src={kakao} alt="" className="w-5 h-auto" />
           </Link>
           <Link
             href="#"
             aria-label="LinkedIn"
             className="flex size-9 items-center justify-center rounded-full bg-[#e5e7e8]"
           >
-            <Image src={linkedIn} alt="" className="size-5" />
+            <Image src={linkedIn} alt="" className="w-5 h-auto" />
           </Link>
         </div>
       </div>

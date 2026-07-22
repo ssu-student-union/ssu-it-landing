@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useEffect } from "react";
-import astronautImage from "../../../assets/images/complete-astronaut.png";
+import completeImage from "../../../assets/images/complete.webp";
 import {
   ANNOUNCEMENT_DATE,
   formatShortDate,
@@ -27,7 +27,7 @@ export default function RecruitingCompletePage() {
       <div className="relative flex items-center justify-center">
         <div className="absolute size-70 rounded-full bg-brand-tint blur-3xl sm:size-98.5" />
         <Image
-          src={astronautImage}
+          src={completeImage}
           alt=""
           priority
           className="relative size-70 sm:size-98.5"

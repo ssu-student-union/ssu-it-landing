@@ -9,9 +9,9 @@ import {
 import Image, { type StaticImageData } from "next/image";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import earthImage from "../../../assets/images/hero/earth-bottom-left.png";
-import planetBottomRightImage from "../../../assets/images/hero/planet-bottom-right.png";
-import planetTopRightImage from "../../../assets/images/hero/planet-top-right.png";
+import earthImage from "../../../assets/images/hero/earth-bottom-left.webp";
+import planetBottomRightImage from "../../../assets/images/hero/planet-bottom-right.webp";
+import planetTopRightImage from "../../../assets/images/hero/planet-top-right.webp";
 import { Button } from "../../../common/Button";
 import { dayjs } from "../../../lib";
 import { EASE_EXPO_OUT } from "../_lib/ui";
