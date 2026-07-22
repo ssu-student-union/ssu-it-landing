@@ -25,21 +25,27 @@ export const Footer = () => {
 
         <div className="flex items-center gap-3.75">
           <Link
-            href="#"
+            href="https://www.instagram.com/ssu_it_support"
+            target="_blank"
+            rel="noreferrer"
             aria-label="Instagram"
             className="flex size-9 items-center justify-center rounded-full bg-[#e5e7e8]"
           >
             <Image src={instagram} alt="" className="w-5 h-auto" />
           </Link>
           <Link
-            href="#"
+            href="https://mail.google.com/mail/?view=cm&fs=1&to=ssudeveloper2024@gmail.com"
+            target="_blank"
+            rel="noreferrer"
             aria-label="이메일"
             className="flex size-9 items-center justify-center rounded-full bg-[#e5e7e8]"
           >
             <Image src={mail} alt="" className="w-5 h-auto" />
           </Link>
           <Link
-            href="#"
+            href="http://pf.kakao.com/_SRGqn"
+            target="_blank"
+            rel="noreferrer"
             aria-label="카카오톡"
             className="flex size-9 items-center justify-center rounded-full bg-[#e5e7e8]"
           >
