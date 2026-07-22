@@ -7,6 +7,7 @@ describe("stepThreeSchema", () => {
     const result = stepThreeSchema.safeParse({
       portfolioLink: "https://example.com",
       portfolioFile: null,
+      activityCommitmentAck: true,
     });
     expect(result.success).toBe(true);
   });
@@ -15,6 +16,7 @@ describe("stepThreeSchema", () => {
     const result = stepThreeSchema.safeParse({
       portfolioLink: "",
       portfolioFile: { name: "portfolio.pdf", size: 1024 },
+      activityCommitmentAck: true,
     });
     expect(result.success).toBe(true);
   });
@@ -23,6 +25,7 @@ describe("stepThreeSchema", () => {
     const result = stepThreeSchema.safeParse({
       portfolioLink: "https://example.com",
       portfolioFile: { name: "portfolio.pdf", size: 1024 },
+      activityCommitmentAck: true,
     });
     expect(result.success).toBe(true);
   });
@@ -31,6 +34,7 @@ describe("stepThreeSchema", () => {
     const result = stepThreeSchema.safeParse({
       portfolioLink: "",
       portfolioFile: null,
+      activityCommitmentAck: true,
     });
     expect(result.success).toBe(false);
     if (!result.success) {
@@ -45,6 +49,7 @@ describe("stepThreeSchema", () => {
     const result = stepThreeSchema.safeParse({
       portfolioLink: "   ",
       portfolioFile: null,
+      activityCommitmentAck: true,
     });
     expect(result.success).toBe(false);
   });
@@ -53,6 +58,7 @@ describe("stepThreeSchema", () => {
     const result = stepThreeSchema.safeParse({
       portfolioLink: "https://example.com",
       portfolioFile: { name: "huge.pdf", size: MAX_FILE_SIZE + 1 },
+      activityCommitmentAck: true,
     });
     expect(result.success).toBe(false);
     if (!result.success) {
@@ -66,7 +72,21 @@ describe("stepThreeSchema", () => {
     const result = stepThreeSchema.safeParse({
       portfolioLink: "",
       portfolioFile: { name: "ok.pdf", size: MAX_FILE_SIZE },
+      activityCommitmentAck: true,
     });
     expect(result.success).toBe(true);
+  });
+
+  it("activityCommitmentAck를 체크하지 않으면 실패한다", () => {
+    const result = stepThreeSchema.safeParse({
+      portfolioLink: "https://example.com",
+      portfolioFile: null,
+      activityCommitmentAck: false,
+    });
+    expect(result.success).toBe(false);
+    if (!result.success) {
+      const paths = result.error.issues.map((issue) => issue.path.join("."));
+      expect(paths).toContain("activityCommitmentAck");
+    }
   });
 });

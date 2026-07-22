@@ -31,6 +31,7 @@ const validStepTwo = {
 const validStepThree = {
   ...stepThreeInitialValues,
   portfolioLink: "https://example.com",
+  activityCommitmentAck: true,
 };
 
 describe("validateSubmission", () => {

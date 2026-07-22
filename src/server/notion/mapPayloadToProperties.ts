@@ -81,6 +81,23 @@ const toStringValue = (value: unknown): string =>
 const toStringArray = (value: unknown): string[] =>
   Array.isArray(value) ? value : [];
 
+/** "역량 서술" 자리를 채우는 필드 키는 부서마다 다르다: PM은 priorityTaskStrategy,
+ * HR은 별도의 두 경험 문항을 이어붙인다. */
+function skillAnswerOf(stepTwo: StepTwoFormData): string {
+  if (stepTwo.skillAnswer) return toStringValue(stepTwo.skillAnswer);
+  if (stepTwo.priorityTaskStrategy)
+    return toStringValue(stepTwo.priorityTaskStrategy);
+
+  const process = toStringValue(stepTwo.processStructureExperience);
+  const coordination = toStringValue(stepTwo.stakeholderCoordinationExperience);
+  return [
+    process && `[운영 구조 개선 경험]\n${process}`,
+    coordination && `[이해관계자 조율 경험]\n${coordination}`,
+  ]
+    .filter(Boolean)
+    .join("\n\n");
+}
+
 type InterviewAvailability = StepTwoFormData["interviewAvailability"];
 type InterviewSlots = NonNullable<
   InterviewAvailability[keyof InterviewAvailability]
@@ -203,15 +220,14 @@ export function mapPayloadToProperties(
     [NOTION_PROPERTIES.fitReason]: richTextValue(
       toStringValue(stepTwo.fitReason),
     ),
-    // PM은 skillAnswer 대신 priorityTaskStrategy 문항을 쓴다(부서마다 이 자리를
-    // 채우는 필드 키가 다르다).
-    [NOTION_PROPERTIES.skillAnswer]: richTextValue(
-      toStringValue(stepTwo.skillAnswer ?? stepTwo.priorityTaskStrategy),
-    ),
+    [NOTION_PROPERTIES.skillAnswer]: richTextValue(skillAnswerOf(stepTwo)),
     [NOTION_PROPERTIES.portfolioLink]: urlValue(stepThree.portfolioLink),
     [NOTION_PROPERTIES.portfolioFile]: filesValue(
       fileUploadId,
       stepThree.portfolioFile?.name,
+    ),
+    [NOTION_PROPERTIES.activityCommitmentAck]: checkboxValue(
+      stepThree.activityCommitmentAck,
     ),
   };
 }

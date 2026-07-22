@@ -5,7 +5,7 @@ import { EASE_EXPO_OUT } from "../../_lib/ui";
 type QuestionSectionProps = {
   /** DOM id. `field-${스키마 키}` 형태로 준다 — `useFormState`(`_lib/hooks/useFormState.ts`)의 스크롤-투-에러가 이 값으로 필드를 찾는다. */
   id?: string;
-  title: ReactNode;
+  title?: ReactNode;
   description?: ReactNode;
   callout?: ReactNode;
   children?: ReactNode;
@@ -43,15 +43,21 @@ export const QuestionSection = ({
           transition={{ duration: 0.3, ease: EASE_EXPO_OUT }}
           className="overflow-hidden"
         >
-          <div className="flex items-start gap-2 py-8 ps-2 sm:gap-3 sm:py-10 sm:ps-3">
-            <span
-              aria-hidden="true"
-              className="shrink-0 font-medium text-xl before:content-[counter(question)'.'] sm:text-2xl md:text-[1.875rem]"
-            />
+          <div
+            className={`flex items-start py-8 sm:py-10 ${title ? "gap-2 ps-2 sm:gap-3 sm:ps-3" : ""}`}
+          >
+            {title && (
+              <span
+                aria-hidden="true"
+                className="shrink-0 font-medium text-xl before:content-[counter(question)'.'] sm:text-2xl md:text-[1.875rem]"
+              />
+            )}
             <div className="min-w-0 flex-1">
-              <p className="font-medium text-xl sm:text-2xl md:text-[1.875rem]">
-                {title}
-              </p>
+              {title && (
+                <p className="font-medium text-xl sm:text-2xl md:text-[1.875rem]">
+                  {title}
+                </p>
+              )}
               {description && (
                 <div className="mt-4 text-muted text-sm leading-relaxed sm:mt-6 sm:text-xl">
                   {description}

@@ -129,6 +129,7 @@ const properties: Record<string, PropertyConfig> = {
   [NOTION_PROPERTIES.skillAnswer]: richText(),
   [NOTION_PROPERTIES.portfolioLink]: url(),
   [NOTION_PROPERTIES.portfolioFile]: files(),
+  [NOTION_PROPERTIES.activityCommitmentAck]: checkbox(),
   [NOTION_PROPERTIES.submittedAt]: createdTime(),
 };
 

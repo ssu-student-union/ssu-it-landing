@@ -26,6 +26,7 @@ export const NOTION_PROPERTIES = {
   skillAnswer: "역량 서술",
   portfolioLink: "포트폴리오 링크",
   portfolioFile: "포트폴리오 파일",
+  activityCommitmentAck: "활동 기간 필수 인지",
   /** Notion이 자동 관리하는 created_time 프로퍼티. 앱 코드에서는 값을 쓰지 않는다. */
   submittedAt: "제출 일시",
 } as const;

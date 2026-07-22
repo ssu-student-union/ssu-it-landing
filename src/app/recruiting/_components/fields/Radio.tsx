@@ -17,8 +17,7 @@ export const Radio = ({
 }: RadioProps) => {
   const generatedId = useId();
   const inputId = id ?? generatedId;
-  // disabled 옵션은 애초에 고를 수 없으니, 같은 문항의 다른 옵션이 미선택으로
-  // 에러가 나도 이 옵션까지 에러(유효성) 표시가 뜨면 오히려 헷갈린다.
+  // disabled 옵션은 애초에 고를 수 없으니 에러(유효성) 표시를 띄우지 않는다.
   const showError = error && !disabled;
 
   return (

@@ -39,8 +39,7 @@ type InterviewFieldParams = {
   dates: InterviewDateRange[];
 };
 
-/** 주어진 날짜 묶음(같은 평일/주말 그룹)의 열(시간대 합집합)과 행, 날짜별 선택 가능 여부를 만든다.
- * 날짜마다 실제 가능한 시간이 달라도 표는 하나로 두고, 그 날짜에 해당하지 않는 칸만 선택 불가로 표시한다. */
+/** 날짜마다 실제 가능한 시간이 달라도 표는 하나로 두고, 해당 없는 칸만 선택 불가로 표시한다. */
 function buildGroup(
   groupDates: InterviewDateRange[],
   cornerLabel: string,

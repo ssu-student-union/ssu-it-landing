@@ -19,4 +19,9 @@ export const stepThreeFields: FieldConfig[] = [
     maxSize: MAX_FILE_SIZE,
     sharedErrorKey: "portfolioLink",
   },
+  {
+    type: "checkbox",
+    key: "activityCommitmentAck",
+    label: "IT지원위원회는 1년 이상의 활동이 필수인 점을 알고 있습니다.",
+  },
 ];

@@ -28,6 +28,7 @@ const baseStepTwo: StepTwoFormData = {
 const stepThree: StepThreeFormData = {
   portfolioLink: "https://example.com",
   portfolioFile: null,
+  activityCommitmentAck: true,
 };
 
 function properties(
@@ -70,6 +71,42 @@ describe("mapPayloadToProperties — skillAnswer 폴백", () => {
     expect(props[NOTION_PROPERTIES.skillAnswer]).toEqual({
       type: "rich_text",
       rich_text: [{ type: "text", text: { content: "" } }],
+    });
+  });
+
+  it("HR은 두 경험 문항을 라벨과 함께 이어붙인다", () => {
+    const props = properties({
+      ...baseStepTwo,
+      processStructureExperience: "운영 구조 경험",
+      stakeholderCoordinationExperience: "이해관계자 조율 경험",
+    });
+    expect(props[NOTION_PROPERTIES.skillAnswer]).toEqual({
+      type: "rich_text",
+      rich_text: [
+        {
+          type: "text",
+          text: {
+            content:
+              "[운영 구조 개선 경험]\n운영 구조 경험\n\n[이해관계자 조율 경험]\n이해관계자 조율 경험",
+          },
+        },
+      ],
+    });
+  });
+
+  it("HR 문항 중 하나만 채워도 그 하나만 라벨과 함께 담는다", () => {
+    const props = properties({
+      ...baseStepTwo,
+      processStructureExperience: "운영 구조 경험",
+    });
+    expect(props[NOTION_PROPERTIES.skillAnswer]).toEqual({
+      type: "rich_text",
+      rich_text: [
+        {
+          type: "text",
+          text: { content: "[운영 구조 개선 경험]\n운영 구조 경험" },
+        },
+      ],
     });
   });
 });
@@ -204,6 +241,16 @@ describe("mapPayloadToProperties — 포트폴리오 파일/링크", () => {
     expect(props[NOTION_PROPERTIES.portfolioLink]).toEqual({
       type: "url",
       url: null,
+    });
+  });
+
+  it("activityCommitmentAck 체크 여부를 checkbox로 그대로 옮긴다", () => {
+    const props = properties(baseStepTwo, undefined, {
+      activityCommitmentAck: true,
+    });
+    expect(props[NOTION_PROPERTIES.activityCommitmentAck]).toEqual({
+      type: "checkbox",
+      checkbox: true,
     });
   });
 });

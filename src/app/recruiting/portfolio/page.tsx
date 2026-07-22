@@ -79,6 +79,7 @@ export default function RecruitingStepThreePage() {
         stepThree: {
           portfolioLink: values.portfolioLink,
           portfolioFile: values.portfolioFile,
+          activityCommitmentAck: values.activityCommitmentAck,
         },
       }),
     );

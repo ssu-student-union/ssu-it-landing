@@ -1,8 +1,6 @@
 import type { FieldConfig } from "../../_lib/schema";
 import { buildInterviewField } from "./interviewField";
 
-const skillPlaceholder = "ex) 채용 프로세스 기획 경험 (플레이스홀더)";
-
 export const hrFields: FieldConfig[] = [
   buildInterviewField({
     dates: [
@@ -12,17 +10,18 @@ export const hrFields: FieldConfig[] = [
     ],
   }),
   {
-    key: "tasks",
-    type: "checkbox-group",
-    title: "해당 분야에서 본인이 더 기여하고 싶은 Task를 선택해주세요.",
-    options: ["채용 프로세스 운영", "조직 문화 기획"],
-  },
-  {
-    key: "skillAnswer",
+    key: "processStructureExperience",
     type: "textarea",
     title:
-      "해당 분야와 관련된 본인의 역량을 구체적으로 서술해주세요. (500자 이내)",
-    placeholder: skillPlaceholder,
+      "조직 활동 중 반복되는 비효율이나 문제를 발견하고, 이를 임시방편이 아닌 지속 가능한 운영 구조(매뉴얼, 규칙, 템플릿 등)를 만들어 근본적으로 해결했던 경험에 대해 서술해 주세요. (500자 이내)",
+    maxLength: 500,
+    rows: 4,
+  },
+  {
+    key: "stakeholderCoordinationExperience",
+    type: "textarea",
+    title:
+      "프로젝트나 행사 기획 등에서 다양한 이해관계자와의 의견 차이나 일정 충돌을 조율해야 했던 경험을 적고, 당시 상황을 어떻게 정확하고 빠르게 해결했는지 본인만의 소통 방식을 포함하여 작성해 주세요. (500자 이내)",
     maxLength: 500,
     rows: 4,
   },

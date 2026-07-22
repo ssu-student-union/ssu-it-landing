@@ -13,8 +13,7 @@ function interviewFieldOf(fields: FieldConfig[]) {
   );
 }
 
-/** 면접 가능 시간 문항이 있으면, 날짜(행)별로 실제 선택 가능한 시간대만 모은다.
- * 문항이 없으면(department 미선택 등) undefined를 반환해 호출부가 전체 풀로 폴백하게 한다. */
+/** 날짜(행)별로 실제 선택 가능한 시간대만 모은다. 문항이 없으면 undefined로 폴백을 알린다. */
 function allowedSlotsByDate(
   fields: FieldConfig[],
 ): Map<string, Set<string>> | undefined {

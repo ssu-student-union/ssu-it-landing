@@ -14,6 +14,9 @@ export const stepThreeSchema = z
   .object({
     portfolioLink: z.string().trim().default(""),
     portfolioFile: fileMeta,
+    activityCommitmentAck: z
+      .boolean()
+      .refine((v) => v, "IT지원위원회 활동 기간(1년 이상)을 확인해주세요."),
   })
   .superRefine((data, ctx) => {
     if (!data.portfolioLink && !data.portfolioFile) {
@@ -30,4 +33,5 @@ export type StepThreeFormData = z.infer<typeof stepThreeSchema>;
 export const stepThreeInitialValues: StepThreeFormData = {
   portfolioLink: "",
   portfolioFile: null,
+  activityCommitmentAck: false,
 };

@@ -73,6 +73,29 @@ export function FormRenderer<T extends FormValues>({
           />
         );
 
+      case "checkbox": {
+        const gatedError = gatedErrorOf(field.key);
+        return (
+          <>
+            <Checkbox
+              label={field.label}
+              checked={Boolean(v[field.key])}
+              error={Boolean(gatedError)}
+              onChange={(e) =>
+                update((prev) =>
+                  field.onToggle
+                    ? field.onToggle(e.target.checked, prev)
+                    : { ...prev, [field.key]: e.target.checked },
+                )
+              }
+            />
+            <div className="mt-2">
+              <FieldError message={gatedError} />
+            </div>
+          </>
+        );
+      }
+
       case "checkbox-group": {
         const gatedError = gatedErrorOf(field.key);
         return (
