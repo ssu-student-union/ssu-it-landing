@@ -10,7 +10,7 @@ const dim = (text: string, dimmed?: boolean): ReactNode =>
 export const PartsTable = () => (
   <section className="w-full px-4 sm:px-6 lg:px-8">
     <div className="mx-auto max-w-5xl py-12 sm:py-16 lg:py-20">
-      <SectionTitle>{parts.title}</SectionTitle>
+      <SectionTitle icon>{parts.title}</SectionTitle>
       <Table
         variant="text"
         className="mt-8 sm:mt-10"

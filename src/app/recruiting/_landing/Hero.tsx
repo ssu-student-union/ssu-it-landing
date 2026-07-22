@@ -22,7 +22,7 @@ type PlanetConfig = {
   key: string;
   src: StaticImageData;
   style: { left: string; top: string; width: string };
-  float: { y: number[]; duration: number; delay: number };
+  float: { y: number[]; rotate: number[]; duration: number; delay: number };
   /** 스크롤 시 이 행성만 독립적으로 이동하는 거리(px). 행성마다 달라야 패럴랙스처럼 보인다. */
   parallax: number;
 };
@@ -33,22 +33,22 @@ const PLANETS: PlanetConfig[] = [
     key: "earth",
     src: earthImage,
     style: { left: "-14.7%", top: "28.6%", width: "40.7%" },
-    float: { y: [0, -16, 0], duration: 9, delay: 0 },
-    parallax: 90,
+    float: { y: [0, -32, 0], rotate: [0, -3, 3, 0], duration: 8, delay: 0 },
+    parallax: 180,
   },
   {
     key: "top-right",
     src: planetTopRightImage,
     style: { left: "78.1%", top: "-22.8%", width: "30.2%" },
-    float: { y: [0, 14, 0], duration: 11, delay: 0.6 },
-    parallax: -60,
+    float: { y: [0, 28, 0], rotate: [0, 4, -4, 0], duration: 10, delay: 0.6 },
+    parallax: -120,
   },
   {
     key: "bottom-right",
     src: planetBottomRightImage,
     style: { left: "86.3%", top: "78.4%", width: "17.7%" },
-    float: { y: [0, -10, 0], duration: 8, delay: 1.1 },
-    parallax: 130,
+    float: { y: [0, -22, 0], rotate: [0, -5, 5, 0], duration: 7, delay: 1.1 },
+    parallax: 260,
   },
 ];
 
@@ -126,7 +126,7 @@ export const Hero = () => {
   };
 
   return (
-    <section className="w-full px-4 sm:px-6 lg:px-8">
+    <section className="w-full px-4 sm:px-6 lg:px-18">
       <div
         ref={heroRef}
         className="@container relative aspect-1276/615 w-full overflow-hidden rounded-2xl"
@@ -182,7 +182,7 @@ export const Hero = () => {
             style={{ ...planet.style, y: parallaxByKey[planet.key] }}
           >
             <motion.div
-              animate={{ y: planet.float.y }}
+              animate={{ y: planet.float.y, rotate: planet.float.rotate }}
               transition={{
                 duration: planet.float.duration,
                 delay: planet.float.delay,

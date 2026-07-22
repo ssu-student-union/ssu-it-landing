@@ -36,12 +36,12 @@ describe("useFormState", () => {
     expect(result.current.values.name).toBe("홍길동");
   });
 
-  it("submitted 플래그도 별도 키로 복원한다", () => {
+  it("이전에 저장된 submitted 흔적이 있어도 마운트 시에는 항상 false로 시작한다(회귀: 폼 재진입 시 전부 에러로 뜨던 문제)", () => {
     window.sessionStorage.setItem("step-test:submitted", "true");
     const { result } = renderHook(() =>
       useFormState(schema, initialValues, "step-test"),
     );
-    expect(result.current.submitted).toBe(true);
+    expect(result.current.submitted).toBe(false);
   });
 
   it("setField로 값을 바꾸면 sessionStorage에 미러링된다", () => {

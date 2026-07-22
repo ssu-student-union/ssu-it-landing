@@ -13,7 +13,7 @@ export const Header = () => {
           className="h-auto w-8 sm:w-9 lg:w-10"
           priority
         />
-        <span className="font-bold text-[#1b1c1c] text-lg tracking-[-0.02em] sm:text-xl lg:text-[1.75rem]">
+        <span className="font-bold text-ink text-lg tracking-[-0.02em] sm:text-xl lg:text-[1.75rem]">
           IT지원위원회
         </span>
       </Link>
@@ -29,7 +29,7 @@ export const Header = () => {
           href="/projects"
           className="relative hidden font-semibold text-[#1b1c1c] text-lg whitespace-nowrap sm:block lg:text-2xl"
         >
-          진행 프로젝트
+          프로젝트
         </Link>
         <TrackedLink
           href="/recruiting"

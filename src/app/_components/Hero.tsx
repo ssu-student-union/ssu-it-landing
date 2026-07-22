@@ -61,9 +61,9 @@ export const Hero = () => {
           </div>
         </h1>
 
-        {/* 리크루팅 페이지 경로 미정 */}
+        {/* 리크루팅 페이지 경로 연결 */}
         <TrackedLink
-          href="#"
+          href="/recruiting"
           eventName="cta_apply_click"
           className="flex h-14 w-36 items-center justify-center rounded-xl border-[3px] border-[#9dcfeb] sm:h-18 sm:w-44 lg:h-[5.625rem] lg:w-[13.25rem]"
         >

@@ -27,7 +27,7 @@ const getVisibleCount = () => {
 
 const PARTS = [
   {
-    label: "Product",
+    label: "PM",
     description:
       "프로젝트의 방향과 일정을 관리합니다. 파트 간 협업이 매끄럽게 굴러가도록 조율합니다.\n 아이디어가 실제 서비스로 완성되게 이끕니다.",
     icon: productIcon,
@@ -94,7 +94,7 @@ export const PartIntro = () => {
       </div>
 
       <div className="relative mx-auto flex max-w-5xl items-center justify-end">
-        <div className="flex h-9 w-[4.6875rem] items-center justify-center gap-7 rounded-[1.25rem] border border-white p-2">
+        <div className="flex h-9 w-18.75 items-center justify-center gap-7 rounded-[1.25rem] border border-white p-2">
           <button
             type="button"
             onClick={goPrev}
