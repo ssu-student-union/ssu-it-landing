@@ -5,6 +5,11 @@ import { useId } from "react";
 import uploadIcon from "../../../../assets/icons/upload.svg";
 import { fieldBorderClass, formatFileSize } from "../../_lib/ui";
 
+/** 모바일에서는 축소된 크기로 시작해 `sm`부터 기존(데스크톱) 디자인 크기로 맞춘다. */
+const RESPONSIVE_CONTROL_CLASSES =
+  "gap-2 px-4 py-3 text-base sm:gap-2.5 sm:px-5 sm:py-4 sm:text-lg";
+const RESPONSIVE_ICON_CLASSES = "size-6 sm:size-7.75";
+
 type FileUploadProps = {
   file: File | null;
   onChange: (file: File | null) => void;
@@ -24,16 +29,19 @@ export const FileUpload = ({
   const isOverSize = Boolean(
     file && maxSize !== undefined && file.size > maxSize,
   );
+  const borderClassName = error
+    ? fieldBorderClass.error
+    : file
+      ? fieldBorderClass.selected
+      : fieldBorderClass.default;
 
   return (
     <div>
       <label
         htmlFor={inputId}
-        className={`inline-flex cursor-pointer items-center gap-2.5 rounded-xl border px-5 py-4 text-ink text-lg transition-colors ${
-          error ? fieldBorderClass.error : fieldBorderClass.default
-        }`}
+        className={`inline-flex cursor-pointer items-center rounded-xl border text-ink transition-colors ${RESPONSIVE_CONTROL_CLASSES} ${borderClassName}`}
       >
-        <Image src={uploadIcon} alt="" className="size-7.75" />
+        <Image src={uploadIcon} alt="" className={RESPONSIVE_ICON_CLASSES} />
         파일 업로드
         <input
           id={inputId}

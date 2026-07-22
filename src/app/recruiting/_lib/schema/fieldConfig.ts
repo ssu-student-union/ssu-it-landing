@@ -107,13 +107,9 @@ type FileConfig = FieldBase & {
   accept?: string;
   /** 바이트 단위 업로드 크기 제한. 업로드 UI에 파일 크기와 나란히 표시된다. */
   maxSize?: number;
-};
-
-/** 링크 입력과 파일 업로드를 한 문항으로 같이 보여준다(예: 포트폴리오 링크 또는 파일). */
-type LinkOrFileConfig = FieldBase & {
-  type: "link-or-file";
-  link: { key: string; placeholder?: string };
-  file: { key: string; accept?: string; maxSize?: number };
+  /** 다른 필드가 대표로 들고 있는 에러 키(예: "링크 또는 파일 중 하나 필수" 규칙이
+   * 링크 쪽에만 issue된 경우). 메시지는 중복 표시하지 않고, 테두리만 함께 빨갛게 만든다. */
+  sharedErrorKey?: string;
 };
 
 /** 현재 값에 따라 하위 필드 목록을 동적으로 만든다(부서별 문항 등). */
@@ -132,7 +128,6 @@ export type FieldConfig =
   | RadioMatrixConfig
   | CheckboxMatrixConfig
   | FileConfig
-  | LinkOrFileConfig
   | DynamicConfig;
 
 /** 단순 필드로 `{ key: 빈 값 }`을 만든다. 배열 필드를 `undefined`로 남기면 zod가 커스텀 메시지 대신 타입 에러를 내보내므로, 타입에 맞는 빈 값으로 채운다. */

@@ -17,16 +17,10 @@ export const stepThreeSchema = z
   })
   .superRefine((data, ctx) => {
     if (!data.portfolioLink && !data.portfolioFile) {
-      const message = "포트폴리오 링크 또는 파일 중 하나는 필수예요.";
       ctx.addIssue({
         path: ["portfolioLink"],
         code: z.ZodIssueCode.custom,
-        message,
-      });
-      ctx.addIssue({
-        path: ["portfolioFile"],
-        code: z.ZodIssueCode.custom,
-        message,
+        message: "포트폴리오 링크 또는 파일 중 하나는 필수예요.",
       });
     }
   });

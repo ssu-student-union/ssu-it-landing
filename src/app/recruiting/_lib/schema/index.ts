@@ -6,6 +6,7 @@ export {
 } from "./fieldConfig";
 export {
   maxLengthExceededMessage,
+  NOTION_TEXT_MAX_LENGTH,
   REQUIRED_MESSAGE,
   TIME_RANGE_ORDER_MESSAGE,
 } from "./messages";

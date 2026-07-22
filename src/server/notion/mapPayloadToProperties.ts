@@ -1,4 +1,6 @@
 import type { CreatePageParameters } from "@notionhq/client";
+import { NOTION_TEXT_MAX_LENGTH } from "../../app/recruiting/_lib/schema";
+import { departmentFields } from "../../app/recruiting/motivation/_departments";
 import type { StepTwoFormData } from "../../app/recruiting/motivation/schema";
 import type { StepOneFormData } from "../../app/recruiting/personal-info/schema";
 import type { StepThreeFormData } from "../../app/recruiting/portfolio/schema";
@@ -12,14 +14,22 @@ import { NOTION_PROPERTIES } from "./propertyNames";
 type NotionProperties = NonNullable<CreatePageParameters["properties"]>;
 type NotionPropertyValue = NotionProperties[string];
 
+/** Notion API는 rich_text/title 콘텐츠를 2000자로 하드 제한한다. 사용자 입력
+ * 필드는 이미 클라이언트 schema에서 이 길이 이하로 막지만, 면접 일정 요약처럼
+ * 여러 값을 이어붙여 만드는 파생 텍스트까지 포함해 여기서 최종 방어선으로 자른다. */
+const clampToNotionLimit = (content: string): string =>
+  content.length > NOTION_TEXT_MAX_LENGTH
+    ? content.slice(0, NOTION_TEXT_MAX_LENGTH)
+    : content;
+
 const titleValue = (content: string): NotionPropertyValue => ({
   type: "title",
-  title: [{ type: "text", text: { content } }],
+  title: [{ type: "text", text: { content: clampToNotionLimit(content) } }],
 });
 
 const richTextValue = (content: string): NotionPropertyValue => ({
   type: "rich_text",
-  rich_text: [{ type: "text", text: { content } }],
+  rich_text: [{ type: "text", text: { content: clampToNotionLimit(content) } }],
 });
 
 const selectValue = (name: string): NotionPropertyValue => ({
@@ -95,6 +105,38 @@ function summarizeInterviewAvailability(
   };
 }
 
+/** PM 부서 "taskPriorities" 문항(행 id → 순위 슬롯)의 행 id를 실제 라벨로
+ * 바꾸기 위해, 그 필드 설정에서 행 id → 라벨 맵을 끌어온다. */
+function taskPriorityRowLabels(): Record<string, string> {
+  const field = departmentFields.PM.find(
+    (f) => f.type === "checkbox-matrix" && f.key === "taskPriorities",
+  );
+  if (!field || field.type !== "checkbox-matrix") return {};
+  return Object.fromEntries(
+    field.groups
+      .flatMap((group) => group.rows)
+      .map((row) => [row.id, String(row.label)]),
+  );
+}
+
+/** `taskPriorities`(행 id → 순위 슬롯 "1"~"4")를 순위 오름차순 라벨 배열로 바꾼다.
+ * PM이 아닌 부서는 이 값이 비어있어 빈 배열이 된다. Notion multi_select 태그는
+ * 넘긴 순서 그대로 보여주므로, 배열 순서가 곧 순위를 나타낸다. */
+function collectTaskPriorities(
+  taskPriorities: StepTwoFormData["taskPriorities"],
+): string[] {
+  const labelsByRowId = taskPriorityRowLabels();
+  const labelBySlot = new Map(
+    Object.entries(taskPriorities ?? {}).map(([rowId, slot]) => [
+      slot,
+      labelsByRowId[rowId] ?? rowId,
+    ]),
+  );
+  return ["1", "2", "3", "4"]
+    .map((slot) => labelBySlot.get(slot))
+    .filter((label): label is string => Boolean(label));
+}
+
 function summarizeOtherTime(ranges: StepTwoFormData["otherTime"]): string {
   return ranges
     .filter((range) => range.start && range.end)
@@ -151,15 +193,20 @@ export function mapPayloadToProperties(
       stepTwo.noAvailableTime,
     ),
     [NOTION_PROPERTIES.recruitingDepartment]: selectValue(stepOne.department),
-    [NOTION_PROPERTIES.tasks]: multiSelectValue(toStringArray(stepTwo.tasks)),
+    [NOTION_PROPERTIES.tasks]: multiSelectValue([
+      ...toStringArray(stepTwo.tasks),
+      ...collectTaskPriorities(stepTwo.taskPriorities),
+    ]),
     [NOTION_PROPERTIES.motivation]: richTextValue(
       toStringValue(stepTwo.motivation),
     ),
     [NOTION_PROPERTIES.fitReason]: richTextValue(
       toStringValue(stepTwo.fitReason),
     ),
+    // PM은 skillAnswer 대신 priorityTaskStrategy 문항을 쓴다(부서마다 이 자리를
+    // 채우는 필드 키가 다르다).
     [NOTION_PROPERTIES.skillAnswer]: richTextValue(
-      toStringValue(stepTwo.skillAnswer),
+      toStringValue(stepTwo.skillAnswer ?? stepTwo.priorityTaskStrategy),
     ),
     [NOTION_PROPERTIES.portfolioLink]: urlValue(stepThree.portfolioLink),
     [NOTION_PROPERTIES.portfolioFile]: filesValue(

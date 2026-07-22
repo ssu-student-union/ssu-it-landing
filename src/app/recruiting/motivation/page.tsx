@@ -4,11 +4,12 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { Button } from "../../../common/Button";
 import type { DepartmentId } from "../../../data/recruitingDepartments";
-import { FormRenderer } from "../_components/form";
+import { Callout, FormRenderer } from "../_components/form";
 import { StepLayout } from "../_components/StepLayout";
 import { RECRUITING_STORAGE_KEYS } from "../_lib/constants";
 import { useFormState } from "../_lib/hooks";
 import { buildEmptyAnswers } from "../_lib/schema";
+import { departmentRequirementsFor } from "./departmentRequirements";
 import { questionsFor, stepTwoFields } from "./fields";
 import { buildStepTwoSchema, stepTwoInitialValues } from "./schema";
 
@@ -54,8 +55,11 @@ export default function RecruitingStepTwoPage() {
     if (validate().success) router.push("/recruiting/portfolio");
   };
 
+  const requirements = departmentRequirementsFor(values.department);
+
   return (
     <StepLayout currentStep={2} title="2. 면접 시간 선택 및 지원동기 작성">
+      {requirements && <Callout>{requirements}</Callout>}
       <FormRenderer
         fields={stepTwoFields}
         values={values}

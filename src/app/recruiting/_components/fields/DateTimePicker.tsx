@@ -33,7 +33,7 @@ export const DateTimePicker = ({
   const inputId = id ?? generatedId;
 
   const { showError, fieldClassName, handleFocus, handleBlur } =
-    useFieldFocusState({ submitted, error });
+    useFieldFocusState({ submitted, error, hasValue: value.length > 0 });
 
   return (
     <div className={className}>

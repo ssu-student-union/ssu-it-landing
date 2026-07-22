@@ -17,6 +17,7 @@ import {
   TimeRangeList,
 } from "../fields";
 import { FieldError, QuestionList, QuestionSection } from "../question";
+import { Callout } from "./Callout";
 import { Expandable } from "./Expandable";
 
 type FormRendererProps<T extends FormValues> = {
@@ -134,9 +135,7 @@ export function FormRenderer<T extends FormValues>({
             </div>
             {field.detail && (
               <Expandable open={Boolean(field.detail(v))}>
-                <div className="mt-8 rounded-xl bg-surface p-5 text-base leading-relaxed sm:p-8 sm:text-2xl">
-                  {field.detail(v)}
-                </div>
+                <Callout className="mt-8">{field.detail(v)}</Callout>
               </Expandable>
             )}
           </>
@@ -244,7 +243,12 @@ export function FormRenderer<T extends FormValues>({
         );
       }
 
-      case "file":
+      case "file": {
+        const ownError = gatedErrorOf(field.key);
+        const sharedError = field.sharedErrorKey
+          ? gatedErrorOf(field.sharedErrorKey)
+          : undefined;
+        const displayError = ownError ?? sharedError;
         return (
           <>
             <FileUpload
@@ -252,42 +256,14 @@ export function FormRenderer<T extends FormValues>({
               onChange={(next) => onFileChange?.(field.key, next)}
               accept={field.accept}
               maxSize={field.maxSize}
-              error={Boolean(gatedErrorOf(field.key))}
+              error={Boolean(displayError)}
             />
             <div className="mt-2">
-              <FieldError message={gatedErrorOf(field.key)} />
+              <FieldError message={displayError} />
             </div>
           </>
         );
-
-      case "link-or-file":
-        return (
-          <>
-            <div id={`field-${field.link.key}`}>
-              <Textfield
-                value={(v[field.link.key] as string) ?? ""}
-                onChange={(next) =>
-                  update((prev) => ({ ...prev, [field.link.key]: next }))
-                }
-                placeholder={field.link.placeholder}
-                error={errorOf(field.link.key)}
-                submitted={submitted}
-              />
-            </div>
-            <div id={`field-${field.file.key}`} className="mt-4">
-              <FileUpload
-                file={files?.[field.file.key] ?? null}
-                onChange={(next) => onFileChange?.(field.file.key, next)}
-                accept={field.file.accept}
-                maxSize={field.file.maxSize}
-                error={Boolean(gatedErrorOf(field.file.key))}
-              />
-              <div className="mt-2">
-                <FieldError message={gatedErrorOf(field.file.key)} />
-              </div>
-            </div>
-          </>
-        );
+      }
 
       default:
         return null;
@@ -296,10 +272,10 @@ export function FormRenderer<T extends FormValues>({
 
   const consent = (field: Extract<FieldConfig, { type: "consent" }>) => (
     <Fragment key={field.key}>
-      <div className="rounded-xl bg-surface p-5 text-ink text-base leading-relaxed sm:p-8 sm:text-lg">
+      <Callout>
         <p className="font-semibold">{field.heading}</p>
         <div className="mt-4 flex flex-col gap-1">{field.body}</div>
-      </div>
+      </Callout>
       <div id={`field-${field.key}`}>
         <Checkbox
           label={field.checkboxLabel}

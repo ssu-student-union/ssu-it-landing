@@ -60,7 +60,7 @@ export const Header = () => {
         </span>
       </Link>
 
-      <nav className="hidden items-center gap-8 lg:flex xl:gap-16">
+      <nav className="hidden items-center gap-8 md:flex xl:gap-16">
         {NAV_LINKS.map((link) => (
           <Link
             key={link.label}
@@ -83,7 +83,7 @@ export const Header = () => {
         aria-label={open ? "메뉴 닫기" : "메뉴 열기"}
         aria-expanded={open}
         onClick={() => setOpen((prev) => !prev)}
-        className="relative flex size-9 flex-col items-center justify-center gap-1.5 lg:hidden"
+        className="relative flex size-9 flex-col items-center justify-center gap-1.5 md:hidden"
       >
         <motion.span
           animate={open ? { rotate: 45, y: 8 } : { rotate: 0, y: 0 }}
@@ -110,7 +110,7 @@ export const Header = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.25, ease: "easeInOut" }}
-            className="fixed inset-x-0 top-16 bottom-0 z-40 bg-black/30 backdrop-blur-sm sm:top-20 lg:hidden"
+            className="fixed inset-x-0 top-16 bottom-0 z-40 bg-black/30 backdrop-blur-sm sm:top-20 md:hidden"
             onClick={() => setOpen(false)}
           />
         )}
@@ -124,7 +124,7 @@ export const Header = () => {
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
             transition={{ duration: 0.3, ease: EASE }}
-            className="absolute top-full left-0 z-50 flex w-full flex-col overflow-hidden bg-white shadow-md lg:hidden"
+            className="absolute top-full left-0 z-50 flex w-full flex-col overflow-hidden bg-white shadow-md md:hidden"
           >
             <div className="flex flex-col px-4 pt-1 pb-5">
               {NAV_LINKS.map((link, i) => (

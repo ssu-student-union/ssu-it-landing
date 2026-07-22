@@ -4,8 +4,10 @@ import {
   buildInterviewAvailabilityField,
   fieldSchemaEntry,
   otherTimeShape,
+  taskPrioritiesShape,
   validateInterviewAvailability,
   validateOtherTime,
+  validateTaskPriorities,
 } from "./_schema";
 import { questionsFor } from "./fields";
 
@@ -14,6 +16,7 @@ export type StepTwoFormData = {
   interviewAvailability: Partial<Record<string, string[]>>;
   noAvailableTime: boolean;
   otherTime: { start: string; end: string }[];
+  taskPriorities: Record<string, string>;
   motivation?: string;
   fitReason?: string;
 } & Record<string, unknown>;
@@ -39,11 +42,13 @@ export function buildStepTwoSchema(
       interviewAvailability: buildInterviewAvailabilityField(fields),
       noAvailableTime: z.boolean().default(false),
       otherTime: otherTimeShape,
+      taskPriorities: taskPrioritiesShape,
       ...dynamicShape,
     })
     .superRefine((data, ctx) => {
       validateInterviewAvailability(data, ctx);
       validateOtherTime(data, ctx);
+      validateTaskPriorities(fields, data, ctx);
     }) as unknown as z.ZodType<StepTwoFormData, unknown>;
 }
 
@@ -52,4 +57,5 @@ export const stepTwoInitialValues: StepTwoFormData = {
   interviewAvailability: {},
   noAvailableTime: false,
   otherTime: [],
+  taskPriorities: {},
 };

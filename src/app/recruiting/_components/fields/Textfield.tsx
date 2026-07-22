@@ -69,6 +69,7 @@ export const Textfield = ({
       submitted,
       error: errorMessage,
       bypassGate: isOverLimit || isEmptyRequired,
+      hasValue: value.trim().length > 0,
     });
 
   const inputClassName = `${fieldClassName} placeholder:text-inactive`;

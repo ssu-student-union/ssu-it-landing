@@ -90,11 +90,21 @@ const departmentOptions = departments.map((department) => department.id);
 const taskOptions = Array.from(
   new Set(
     Object.values(departmentFields).flatMap((fields) =>
-      fields.flatMap((field) =>
-        field.type === "checkbox-group" && field.key === "tasks"
-          ? field.options
-          : [],
-      ),
+      fields.flatMap((field) => {
+        if (field.type === "checkbox-group" && field.key === "tasks") {
+          return field.options;
+        }
+        // PM은 순위 배정용 표(checkbox-matrix)라 옵션이 열이 아니라 행에 있다.
+        if (
+          field.type === "checkbox-matrix" &&
+          field.key === "taskPriorities"
+        ) {
+          return field.groups
+            .flatMap((group) => group.rows)
+            .map((row) => String(row.label));
+        }
+        return [];
+      }),
     ),
   ),
 );
