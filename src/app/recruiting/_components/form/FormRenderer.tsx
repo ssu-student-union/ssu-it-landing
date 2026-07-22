@@ -171,6 +171,7 @@ export function FormRenderer<T extends FormValues>({
             <Table
               variant="radio"
               name={field.name}
+              cornerLabel={field.cornerLabel}
               columns={field.columns}
               error={Boolean(gatedErrorOf(field.key))}
               rows={field.rows.map((row) => ({

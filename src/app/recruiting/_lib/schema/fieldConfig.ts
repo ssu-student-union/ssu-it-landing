@@ -59,6 +59,7 @@ type MatrixRow = { id: string; label: ReactNode };
 type RadioMatrixConfig = FieldBase & {
   type: "radio-matrix";
   name: string;
+  cornerLabel?: ReactNode;
   columns: string[];
   rows: MatrixRow[];
   cellValue: (row: MatrixRow, columnIndex: number) => string;

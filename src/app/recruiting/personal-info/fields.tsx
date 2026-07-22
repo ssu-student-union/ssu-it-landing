@@ -8,7 +8,7 @@ export const stepOneFields: FieldConfig[] = [
     key: "agree",
     unnumbered: true,
     heading:
-      "[IT지원위원회 4기 신입위원으로 지원함에 따른 개인정보이용동의 안내]",
+      "[IT지원위원회 5기 신입위원으로 지원함에 따른 개인정보이용동의 안내]",
     body: (
       <>
         <p>
@@ -81,6 +81,7 @@ export const stepOneFields: FieldConfig[] = [
     key: "grade",
     name: "grade",
     title: "학년을 선택해주세요.",
+    cornerLabel: "2026-2학기 기준",
     columns: gradeSemesters,
     rows: gradeLevels.map((level) => ({ id: level, label: level })),
     cellValue: (row, columnIndex) => `${row.id}-${gradeSemesters[columnIndex]}`,
