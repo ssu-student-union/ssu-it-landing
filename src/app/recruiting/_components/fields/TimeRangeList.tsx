@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import plusIcon from "../../../../assets/icons/plus.svg";
+import plusIcon from "../../../../assets/icons/plus_thin.svg";
 import { dayjs } from "../../../../lib";
 import { TIME_RANGE_ORDER_MESSAGE } from "../../_lib/schema";
 import { fieldBorderClass } from "../../_lib/ui";
