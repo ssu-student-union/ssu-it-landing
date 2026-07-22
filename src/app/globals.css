@@ -24,8 +24,20 @@
   --color-muted: #5c5c5c; /* 보조 텍스트 */
   --color-line: #c4c4c4; /* 필드 기본 테두리 */
   --color-inactive: #c2c2c2; /* placeholder·비활성 스텝 */
+  --animate-float: float 4s ease-in-out infinite;
+  --animate-float-slow: float 5s ease-in-out infinite;
 }
 
 body {
   background-color: var(--color-canvas);
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
