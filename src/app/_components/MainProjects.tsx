@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import arrowCircleIcon from "../../assets/icons/arrow_circle.svg";
 import { Reveal } from "../../common/Reveal";
+import { TrackedLink } from "../../common/TrackedLink";
 import { PROJECTS } from "../../data/projects";
 
 export const MainProjects = () => {
@@ -33,8 +34,10 @@ export const MainProjects = () => {
       <div className="relative mx-auto mt-24 grid max-w-5xl grid-cols-1 gap-x-12 gap-y-12 sm:mt-16 sm:grid-cols-2 sm:gap-y-16">
         {PROJECTS.slice(0, 4).map((project, index) => (
           <Reveal key={project.title} delay={index * 100}>
-            <Link
+            <TrackedLink
               href={`/projects/${project.slug}`}
+              eventName="project_card_click"
+              eventParams={{ project: project.slug }}
               className="group flex flex-col gap-4 sm:gap-7 lg:gap-10"
             >
               <div className="relative h-48 w-full max-w-[26.75rem] overflow-hidden rounded-lg sm:h-52 lg:h-[15.75rem]">
@@ -55,7 +58,7 @@ export const MainProjects = () => {
                   {project.description}
                 </p>
               </div>
-            </Link>
+            </TrackedLink>
           </Reveal>
         ))}
       </div>

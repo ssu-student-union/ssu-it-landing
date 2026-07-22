@@ -1,6 +1,8 @@
 "use client";
 
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { trackEvent } from "../../../common/analytics";
 import { Button } from "../../../common/Button";
 import { FormRenderer } from "../_components/form";
 import { StepLayout } from "../_components/StepLayout";
@@ -18,8 +20,14 @@ export default function RecruitingStepOnePage() {
       RECRUITING_STORAGE_KEYS.stepOne,
     );
 
+  useEffect(() => {
+    trackEvent("form_start");
+  }, []);
+
   const handleNext = () => {
-    if (validate().success) router.push("/recruiting/motivation");
+    if (!validate().success) return;
+    trackEvent("form_step_complete", { step: 1 });
+    router.push("/recruiting/motivation");
   };
 
   return (
