@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
 import { Footer } from "../common/Footer";
+import { GoogleAnalytics } from "../common/GoogleAnalytics";
 import { Header } from "../common/Header";
 import { pretendard } from "../fonts";
 import "./globals.css";
+
+const GA_MEASUREMENT_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
 export const metadata: Metadata = {
   title: {
@@ -44,6 +47,9 @@ export default function RootLayout({
   return (
     <html lang="ko" className={`h-full antialiased ${pretendard.variable}`}>
       <body className="min-h-full flex flex-col">
+        {GA_MEASUREMENT_ID && (
+          <GoogleAnalytics measurementId={GA_MEASUREMENT_ID} />
+        )}
         <Header />
         {children}
         <Footer />
