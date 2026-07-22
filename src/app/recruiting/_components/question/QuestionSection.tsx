@@ -49,12 +49,12 @@ export const QuestionSection = ({
             {title && (
               <span
                 aria-hidden="true"
-                className="shrink-0 font-medium text-xl before:content-[counter(question)'.'] sm:text-2xl md:text-[1.875rem]"
+                className="shrink-0 font-medium text-lg before:content-[counter(question)'.'] sm:text-xl md:text-2xl"
               />
             )}
             <div className="min-w-0 flex-1">
               {title && (
-                <p className="font-medium text-xl sm:text-2xl md:text-[1.875rem]">
+                <p className="font-medium text-lg sm:text-xl md:text-2xl">
                   {title}
                 </p>
               )}
