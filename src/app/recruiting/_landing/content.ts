@@ -115,7 +115,7 @@ export const notes = {
   bullets: [
     "숭실대학교 재학생·휴학생 모두 지원 가능합니다.",
     "지원은 1개 파트에만 가능합니다.",
-    `합격 시 8월 전체 회의(${formatSlashDate(GENERAL_MEETING_DATE)} 예정)에 필참해야 하며, 최소 1학기 활동을 원칙으로 합니다.`,
+    `합격 시 8월 전체 회의(${formatSlashDate(GENERAL_MEETING_DATE)} 예정)에 필참해야 하며, 최소 2학기 활동을 원칙으로 합니다.`,
     "선발은 '서류 → 면접' 순으로 진행되며, 결과는 개별 안내됩니다.",
     "제출된 지원서는 채용 목적 외 사용되지 않으며, 마감 후 수정·추가 제출은 불가합니다.",
     `지원 마감: ${formatDotDate(APPLICATION_PERIOD.end)} 23:59 (마감 후 접수 불가)`,

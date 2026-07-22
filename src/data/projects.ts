@@ -217,7 +217,7 @@ export const PROJECTS: Project[] = [
         },
         {
           role: "Design",
-          name: "베희진",
+          name: "배희진",
           description: "UI/UX 디자인 및 사용자 경험 개선",
         },
         {
@@ -301,7 +301,7 @@ export const PROJECTS: Project[] = [
         },
         {
           role: "Design",
-          name: "베희진",
+          name: "배희진",
           description: "UI/UX 디자인 및 사용자 경험 개선",
         },
         {
