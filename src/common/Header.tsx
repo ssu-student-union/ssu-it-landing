@@ -1,8 +1,14 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import logo from "../assets/logo.svg";
 
 export const Header = () => {
+  const pathname = usePathname();
+  const isRecruitingPage = pathname?.startsWith("/recruiting");
+
   return (
     <header className="flex h-16 w-full items-center justify-between px-4 bg-white sm:h-20 sm:px-8 lg:h-25 lg:px-20">
       <Link href="/" className="flex items-center gap-2">
@@ -30,12 +36,14 @@ export const Header = () => {
         >
           진행 프로젝트
         </Link>
-        <Link
-          href="/recruiting"
-          className="flex items-center justify-center whitespace-nowrap rounded-4xl bg-gradient-to-b from-[#4a4a4a] to-black px-4 py-2 font-semibold text-[#e5e5e5] text-sm transition-transform duration-300 ease-in-out hover:scale-105 sm:px-6 sm:text-lg lg:px-8 lg:py-3 lg:text-2xl"
-        >
-          리크루팅
-        </Link>
+        {!isRecruitingPage && (
+          <Link
+            href="/recruiting"
+            className="flex items-center justify-center whitespace-nowrap rounded-4xl bg-gradient-to-b from-[#4a4a4a] to-black px-4 py-2 font-semibold text-[#e5e5e5] text-sm transition-transform duration-300 ease-in-out hover:scale-105 sm:px-6 sm:text-lg lg:px-8 lg:py-3 lg:text-2xl"
+          >
+            리크루팅
+          </Link>
+        )}
       </nav>
     </header>
   );
