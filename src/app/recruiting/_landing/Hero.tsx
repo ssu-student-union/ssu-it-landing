@@ -182,13 +182,21 @@ export const Hero = () => {
             style={{ ...planet.style, y: parallaxByKey[planet.key] }}
           >
             <motion.div
-              animate={{ y: planet.float.y, rotate: planet.float.rotate }}
-              transition={{
-                duration: planet.float.duration,
-                delay: planet.float.delay,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
+              animate={
+                planet.key === "earth"
+                  ? { y: planet.float.y, rotate: planet.float.rotate }
+                  : undefined
+              }
+              transition={
+                planet.key === "earth"
+                  ? {
+                      duration: planet.float.duration,
+                      delay: planet.float.delay,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                    }
+                  : undefined
+              }
             >
               <Image
                 src={planet.src}
