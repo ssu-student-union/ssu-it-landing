@@ -80,9 +80,9 @@ const StoryBlock = ({ item, delay }: { item: StoryItem; delay: number }) => {
       <Fragment key={line}>
         {beforeWord}
         <span className="relative inline-block">
-          <span className="absolute bottom-[calc(100%+12px)] left-1/2 flex w-[0.9em] -translate-x-1/2 items-center justify-between">
-            <span className="h-[10px] w-[10px] rounded-full bg-current" />
-            <span className="h-[10px] w-[10px] rounded-full bg-current" />
+          <span className="absolute bottom-[calc(100%+6px)] left-1/2 flex w-[0.9em] -translate-x-1/2 items-center justify-between sm:bottom-[calc(100%+8px)] lg:bottom-[calc(100%+12px)]">
+            <span className="h-1.5 w-1.5 rounded-full bg-current sm:h-2 sm:w-2 lg:h-[10px] lg:w-[10px]" />
+            <span className="h-1.5 w-1.5 rounded-full bg-current sm:h-2 sm:w-2 lg:h-[10px] lg:w-[10px]" />
           </span>
           {decoratedWord}
         </span>
