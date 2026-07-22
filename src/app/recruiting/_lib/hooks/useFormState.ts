@@ -18,21 +18,14 @@ function readStoredValues<T>(
   }
 }
 
-/** `values`와 별도 키에 저장되는 `submitted` 플래그. 같은 이유로 미러링한다 — "이전" 이동 시 리마운트돼도 이미 봤던 검증 에러 표시가 사라지지 않게. */
-const submittedStorageKey = (storageKey: string) => `${storageKey}:submitted`;
-
-function readStoredSubmitted(storageKey: string | undefined): boolean {
-  if (!storageKey || typeof window === "undefined") return false;
-  return (
-    window.sessionStorage.getItem(submittedStorageKey(storageKey)) === "true"
-  );
-}
-
 /**
  * 리크루팅 폼 3단계가 공유하는 상태/검증 훅.
  * `schemaFactory`가 함수인 이유: Step2는 선택된 부서에 따라 검증 규칙이
  * 달라져 훅 호출 시점엔 최신 `values`를 모른다. `storageKey`를 넘기면
  * `values`를 sessionStorage에 미러링해 "이전" 이동 시 리마운트돼도 값을 지킨다.
+ * `submitted`는 값과 달리 영속시키지 않는다 — 마운트마다 새로 시작해야, 폼을
+ * 완전히 벗어났다 나중에 돌아왔을 때 건드리지도 않은 필드까지 전부 에러로
+ * 뜨는 걸 막을 수 있다.
  * 실패 시 zod `fieldErrors`의 첫 번째 키로 `field-${key}` 엘리먼트를 찾아
  * 스크롤하므로, 각 페이지의 문항 순서는 스키마 필드 선언 순서와 같아야 한다.
  */
@@ -51,7 +44,6 @@ export function useFormState<T extends Record<string, unknown>>(
   // biome-ignore lint/correctness/useExhaustiveDependencies: 마운트 시 1회만 복원한다
   useEffect(() => {
     setValues(readStoredValues(storageKey, initialValues));
-    setSubmitted(readStoredSubmitted(storageKey));
     setHydrated(true);
   }, []);
 
@@ -59,14 +51,6 @@ export function useFormState<T extends Record<string, unknown>>(
     if (!storageKey || !hydrated) return;
     window.sessionStorage.setItem(storageKey, JSON.stringify(values));
   }, [values, storageKey, hydrated]);
-
-  useEffect(() => {
-    if (!storageKey || !hydrated) return;
-    window.sessionStorage.setItem(
-      submittedStorageKey(storageKey),
-      String(submitted),
-    );
-  }, [submitted, storageKey, hydrated]);
 
   const setField = <K extends keyof T>(
     key: K,
