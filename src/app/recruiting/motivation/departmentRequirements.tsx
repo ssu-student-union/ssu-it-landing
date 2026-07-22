@@ -229,7 +229,7 @@ const REQUIREMENTS: Record<DepartmentId, ReactNode> = {
           ],
         },
         {
-          heading: "SSUPORT",
+          heading: "SSUport",
           lines: [
             {
               label: "[필수]",
