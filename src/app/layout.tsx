@@ -5,6 +5,7 @@ import { pretendard } from "../fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://ssu-it-landing.vercel.app"),
   title: {
     default: "숭실대학교 IT지원위원회",
     template: "%s | 숭실대학교 IT지원위원회",
