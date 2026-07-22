@@ -8,6 +8,7 @@ import designIcon from "../../assets/icons/design.svg";
 import frontendIcon from "../../assets/icons/frontend.svg";
 import hrIcon from "../../assets/icons/hr.svg";
 import productIcon from "../../assets/icons/product.svg";
+import { trackEvent } from "../../common/analytics";
 
 const PART_CARD_GRADIENT =
   "linear-gradient(54.28deg, #6197ee 3.19%, #45b5e9 50.1%, #10d7e2 91.44%)";
@@ -136,9 +137,13 @@ export const PartIntro = () => {
           }}
         >
           {PARTS.map((part) => (
-            <div
+            <button
               key={part.label}
-              className="group h-56 shrink-0 px-2 perspective-[1000px] sm:h-64 sm:px-3 lg:h-68 lg:px-4"
+              type="button"
+              onClick={() =>
+                trackEvent("part_card_click", { part: part.label })
+              }
+              className="group h-56 shrink-0 px-2 text-left perspective-[1000px] sm:h-64 sm:px-3 lg:h-68 lg:px-4"
               style={{ width: `${100 / PARTS.length}%` }}
             >
               <div className="relative h-full w-full transition-transform duration-700 ease-in-out transform-3d group-hover:rotate-y-180">
@@ -172,7 +177,7 @@ export const PartIntro = () => {
                   </p>
                 </div>
               </div>
-            </div>
+            </button>
           ))}
         </div>
       </div>

@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { trackEvent } from "../../../common/analytics";
 import { Button } from "../../../common/Button";
 import type { DepartmentId } from "../../../data/recruitingDepartments";
 import { Callout, FormRenderer } from "../_components/form";
@@ -52,7 +53,9 @@ export default function RecruitingStepTwoPage() {
 
   const handlePrev = () => router.push("/recruiting/personal-info");
   const handleNext = () => {
-    if (validate().success) router.push("/recruiting/portfolio");
+    if (!validate().success) return;
+    trackEvent("form_step_complete", { step: 2 });
+    router.push("/recruiting/portfolio");
   };
 
   const requirements = departmentRequirementsFor(values.department);

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import logo from "../assets/logo.svg";
+import { TrackedLink } from "./TrackedLink";
 
 export const Header = () => {
   return (
@@ -30,12 +31,13 @@ export const Header = () => {
         >
           진행 프로젝트
         </Link>
-        <Link
+        <TrackedLink
           href="/recruiting"
+          eventName="recruit_banner_click"
           className="flex items-center justify-center whitespace-nowrap rounded-4xl bg-gradient-to-b from-[#4a4a4a] to-black px-4 py-2 font-semibold text-[#e5e5e5] text-sm transition-transform duration-300 ease-in-out hover:scale-105 sm:px-6 sm:text-lg lg:px-8 lg:py-3 lg:text-2xl"
         >
           리크루팅
-        </Link>
+        </TrackedLink>
       </nav>
     </header>
   );

@@ -12,6 +12,7 @@ import { useEffect, useRef, useState } from "react";
 import earthImage from "../../../assets/images/hero/earth-bottom-left.webp";
 import planetBottomRightImage from "../../../assets/images/hero/planet-bottom-right.webp";
 import planetTopRightImage from "../../../assets/images/hero/planet-top-right.webp";
+import { trackEvent } from "../../../common/analytics";
 import { Button } from "../../../common/Button";
 import { dayjs } from "../../../lib";
 import { EASE_EXPO_OUT } from "../_lib/ui";
@@ -226,7 +227,13 @@ export const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3, ease: EASE_EXPO_OUT }}
           >
-            <Button gradient onClick={() => router.push(hero.applyHref)}>
+            <Button
+              gradient
+              onClick={() => {
+                trackEvent("recruit_apply_click");
+                router.push(hero.applyHref);
+              }}
+            >
               지원하기
             </Button>
           </motion.div>

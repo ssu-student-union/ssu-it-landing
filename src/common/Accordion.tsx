@@ -8,6 +8,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { trackEvent } from "./analytics";
 
 type AccordionContextValue = {
   openId: string | null;
@@ -82,7 +83,10 @@ export const AccordionItem = ({
       <button
         type="button"
         aria-expanded={isOpen}
-        onClick={() => context.toggle(itemId)}
+        onClick={() => {
+          if (!isOpen) trackEvent("faq_open", { question: itemId });
+          context.toggle(itemId);
+        }}
         className={`group w-full cursor-pointer text-left ${triggerClassName ?? ""}`}
       >
         {trigger}

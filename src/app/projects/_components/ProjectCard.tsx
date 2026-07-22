@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import { TrackedLink } from "../../../common/TrackedLink";
 import type { Project } from "../../../data/projects";
 
 type ProjectCardProps = {
@@ -8,8 +8,10 @@ type ProjectCardProps = {
 
 export const ProjectCard = ({ project }: ProjectCardProps) => {
   return (
-    <Link
+    <TrackedLink
       href={`/projects/${project.slug}`}
+      eventName="project_card_click"
+      eventParams={{ project: project.slug }}
       className="flex cursor-pointer flex-col items-center gap-6 rounded-2xl bg-[#434343]/50 p-6 transition-transform duration-300 ease-in-out hover:scale-105 sm:gap-10 lg:p-7"
     >
       <div className="relative h-40 w-full overflow-hidden rounded-lg sm:h-52 lg:h-[15.75rem]">
@@ -30,6 +32,6 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
           {project.description}
         </p>
       </div>
-    </Link>
+    </TrackedLink>
   );
 };

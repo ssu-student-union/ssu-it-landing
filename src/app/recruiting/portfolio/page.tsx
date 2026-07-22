@@ -3,6 +3,7 @@
 import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import { trackEvent } from "../../../common/analytics";
 import { Button } from "../../../common/Button";
 import { FormRenderer } from "../_components/form";
 import { StepLayout } from "../_components/StepLayout";
@@ -52,7 +53,10 @@ export default function RecruitingStepThreePage() {
 
   const submitMutation = useMutation({
     mutationFn: submitApplication,
-    onSuccess: () => router.push("/recruiting/complete"),
+    onSuccess: () => {
+      trackEvent("form_submit_success");
+      router.push("/recruiting/complete");
+    },
   });
 
   const handlePrev = () => router.push("/recruiting/motivation");
@@ -88,7 +92,9 @@ export default function RecruitingStepThreePage() {
   };
 
   const handleComplete = () => {
-    if (validate().success) submitMutation.mutate(buildFormData());
+    if (!validate().success) return;
+    trackEvent("form_step_complete", { step: 3 });
+    submitMutation.mutate(buildFormData());
   };
 
   return (

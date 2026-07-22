@@ -1,9 +1,9 @@
 import Image from "next/image";
-import Link from "next/link";
 import heroGraphicLeft1 from "../../assets/images/hero-graphic-left-1.webp";
 import heroGraphicLeft2 from "../../assets/images/hero-graphic-left-2.webp";
 import heroGraphicRight1 from "../../assets/images/hero-graphic-right-1.webp";
 import heroGraphicRight2 from "../../assets/images/hero-graphic-right-2.webp";
+import { TrackedLink } from "../../common/TrackedLink";
 import { DARK_SECTION_GRADIENT } from "./gradients";
 
 export const Hero = () => {
@@ -62,14 +62,15 @@ export const Hero = () => {
         </h1>
 
         {/* 리크루팅 페이지 경로 미정 */}
-        <Link
+        <TrackedLink
           href="#"
+          eventName="cta_apply_click"
           className="flex h-14 w-36 items-center justify-center rounded-xl border-[3px] border-[#9dcfeb] sm:h-18 sm:w-44 lg:h-[5.625rem] lg:w-[13.25rem]"
         >
           <span className="bg-gradient-to-r from-[#9dcfeb] to-[#6a8a9c] bg-clip-text font-bold text-lg text-transparent sm:text-2xl lg:text-2xl">
             지금 지원하기
           </span>
-        </Link>
+        </TrackedLink>
       </div>
     </section>
   );
