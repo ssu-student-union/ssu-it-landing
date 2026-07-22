@@ -93,7 +93,7 @@ export const PartIntro = () => {
       </div>
 
       <div className="relative mx-auto flex max-w-5xl items-center justify-end">
-        <div className="flex h-9 w-[4.6875rem] items-center justify-center gap-7 rounded-[1.25rem] border border-white p-2">
+        <div className="flex h-9 w-18.75 items-center justify-center gap-7 rounded-[1.25rem] border border-white p-2">
           <button
             type="button"
             onClick={goPrev}
