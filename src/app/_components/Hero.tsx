@@ -46,8 +46,8 @@ export const Hero = () => {
         />
       </div>
 
-      <div className="absolute bottom-10 left-6 z-10 flex flex-col gap-5 sm:bottom-16 sm:left-12 sm:gap-6 lg:bottom-32.5 lg:left-26 lg:gap-8">
-        <h1 className="text-white leading-[1.6] sm:leading-[1.8] lg:leading-[2.1]">
+      <div className="absolute bottom-10 left-6 z-10 flex flex-col gap-5 sm:bottom-16 sm:left-12 sm:gap-6 lg:bottom-32.5 lg:left-26 lg:gap-16">
+        <h1 className="flex flex-col text-white leading-[1.6] sm:leading-[1.8] lg:leading-[2.1] sm:gap-3 lg:gap-5">
           <div className="flex items-center gap-3 font-medium text-xl sm:text-3xl lg:text-4xl">
             <span>더 나은 숭실대학교의 발전을 추구하는</span>
 
