@@ -26,7 +26,7 @@ const getVisibleCount = () => {
 
 const PARTS = [
   {
-    label: "Product",
+    label: "PM",
     description:
       "프로젝트의 방향과 일정을 관리합니다. 파트 간 협업이 매끄럽게 굴러가도록 조율합니다.\n 아이디어가 실제 서비스로 완성되게 이끕니다.",
     icon: productIcon,
