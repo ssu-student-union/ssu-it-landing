@@ -12,16 +12,11 @@ export const backendFields: FieldConfig[] = [
     ],
   }),
   {
-    key: "tasks",
-    type: "checkbox-group",
-    title: "해당 분야에서 본인이 더 기여하고 싶은 Task를 선택해주세요.",
-    options: ["API 개발", "인프라 관리"],
-  },
-  {
     key: "skillAnswer",
     type: "textarea",
-    title:
-      "해당 분야와 관련된 본인의 역량을 구체적으로 서술해주세요. (500자 이내)",
+    title: "사용 가능한 기술 스택과 관련 경험을 작성해주세요. (500자 이내)",
+    description:
+      "AWS, SSO, 데이터베이스 등 인프라 관련 경험이 있다면 함께 작성해주세요.",
     placeholder: skillPlaceholder,
     maxLength: 500,
     rows: 4,
