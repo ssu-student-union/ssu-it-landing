@@ -20,8 +20,8 @@ export const GENERAL_MEETING_DATE = "2026-08-20";
 
 // 5기 활동 기간(연·월). 랜딩 "활동 기간" 표기용 — 확정 시 교체 (플레이스홀더).
 export const ACTIVITY_PERIOD = {
-  start: "2026-09",
-  end: "2027-09",
+  start: "2026-08",
+  end: "2027-08",
 } as const;
 
 export const INTERVIEW_DATES = [
