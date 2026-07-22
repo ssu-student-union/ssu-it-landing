@@ -10,7 +10,7 @@ export const StepIndicator = ({
   currentStep,
   className,
 }: StepIndicatorProps) => (
-  <ol className={`flex flex-wrap items-center gap-y-2 ${className ?? ""}`}>
+  <ol className={`flex flex-nowrap items-center ${className ?? ""}`}>
     {steps.map((label, i) => {
       const stepNumber = i + 1;
       const isDone = stepNumber < currentStep;
@@ -18,11 +18,15 @@ export const StepIndicator = ({
       return (
         <li key={label} className="flex items-center">
           {i > 0 && (
-            <span className="mx-2 h-px w-6 shrink-0 bg-inactive sm:mx-4 sm:w-10" />
+            <span
+              className={`mx-2 h-px w-6 shrink-0 sm:mx-4 sm:w-10 md:w-15 ${
+                stepNumber - 1 < currentStep ? "bg-brand" : "bg-inactive"
+              }`}
+            />
           )}
           <span
             className={`flex items-center gap-1.5 whitespace-nowrap font-semibold text-base sm:gap-2 sm:text-xl md:text-[1.75rem] ${
-              isDone || isCurrent ? "text-ink" : "text-inactive"
+              isDone ? "text-brand" : isCurrent ? "text-ink" : "text-inactive"
             }`}
           >
             {isDone ? (
@@ -32,7 +36,7 @@ export const StepIndicator = ({
                 viewBox="0 0 24 24"
                 fill="none"
                 aria-hidden="true"
-                className="shrink-0 sm:h-7 sm:w-7"
+                className="shrink-0 sm:h-7 sm:w-7 md:size-10.5"
               >
                 <circle cx="12" cy="12" r="12" fill="var(--color-brand)" />
                 <path
@@ -50,10 +54,17 @@ export const StepIndicator = ({
                 viewBox="0 0 24 24"
                 fill="none"
                 aria-hidden="true"
-                className={`shrink-0 sm:h-7 sm:w-7 ${isCurrent ? "text-ink" : "text-inactive"}`}
+                className={`shrink-0 sm:h-7 sm:w-7 md:size-10.5 ${isCurrent ? "text-ink" : "text-inactive"}`}
               >
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="11"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                />
                 <path
-                  d="M5 13L9.5 17.5L19 7"
+                  d="M7 12.5L10.5 16L17 9"
                   stroke="currentColor"
                   strokeWidth="2"
                   strokeLinecap="round"

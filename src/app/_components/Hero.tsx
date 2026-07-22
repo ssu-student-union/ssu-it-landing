@@ -61,9 +61,9 @@ export const Hero = () => {
           </div>
         </h1>
 
-        {/* 리크루팅 페이지 경로 미정 */}
+        {/* 리크루팅 페이지 경로 연결 */}
         <Link
-          href="#"
+          href="/recruiting"
           className="flex h-14 w-36 items-center justify-center rounded-xl border-[3px] border-[#9dcfeb] sm:h-18 sm:w-44 lg:h-[5.625rem] lg:w-[13.25rem]"
         >
           <span className="bg-gradient-to-r from-[#9dcfeb] to-[#6a8a9c] bg-clip-text font-bold text-lg text-transparent sm:text-2xl lg:text-2xl">
