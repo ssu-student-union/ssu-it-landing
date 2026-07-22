@@ -5,8 +5,35 @@ import { pretendard } from "../fonts";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "숭실대학교 IT지원위원회",
-  description: "숭실대학교 IT지원위원회 공식 홈페이지",
+  title: {
+    default: "숭실대학교 IT지원위원회",
+    template: "%s | 숭실대학교 IT지원위원회",
+  },
+  description:
+    "숭실대학교 IT지원위원회 공식 홈페이지 - 학생들의 불편함을 IT 기술로 해결합니다.",
+  keywords: [
+    "숭실대학교",
+    "IT지원위원회",
+    "숭실대 IT",
+    "숭실대 개발",
+    "숭실대 기획",
+    "SSU IT",
+  ],
+  authors: [{ name: "숭실대학교 IT지원위원회" }],
+  openGraph: {
+    title: "숭실대학교 IT지원위원회",
+    description:
+      "숭실대학교 IT지원위원회 공식 홈페이지 - 학생들의 불편함을 IT 기술로 해결합니다.",
+    siteName: "숭실대학교 IT지원위원회",
+    locale: "ko_KR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "숭실대학교 IT지원위원회",
+    description:
+      "숭실대학교 IT지원위원회 공식 홈페이지 - 학생들의 불편함을 IT 기술로 해결합니다.",
+  },
 };
 
 export default function RootLayout({

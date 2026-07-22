@@ -3,7 +3,7 @@ import { DARK_SECTION_GRADIENT } from "../_components/gradients";
 import { ProjectList } from "./_components/ProjectList";
 
 export const metadata: Metadata = {
-  title: "진행 프로젝트 | 숭실대학교 IT지원위원회",
+  title: "진행 프로젝트",
 };
 
 export default function ProjectsPage() {

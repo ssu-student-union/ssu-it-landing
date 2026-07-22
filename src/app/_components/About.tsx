@@ -3,11 +3,11 @@ import Image from "next/image";
 import { Fragment } from "react";
 import arrowDownIcon from "../../assets/icons/arrow_down.svg";
 import plusIcon from "../../assets/icons/plus.svg";
-import dogMascot from "../../assets/images/about-mascot-dog.png";
-import ideaImage from "../../assets/images/about-story-idea.jpg";
-import lectureImage from "../../assets/images/about-story-lecture.jpg";
-import teamImage from "../../assets/images/about-story-team.jpg";
-import techstackImage from "../../assets/images/about-story-techstack.jpg";
+import dogMascot from "../../assets/images/about-mascot-dog.webp";
+import ideaImage from "../../assets/images/about-story-idea.webp";
+import lectureImage from "../../assets/images/about-story-lecture.webp";
+import teamImage from "../../assets/images/about-story-team.webp";
+import techstackImage from "../../assets/images/about-story-techstack.webp";
 import { Reveal } from "../../common/Reveal";
 import { ABOUT_DARK_FADE_GRADIENT } from "./gradients";
 import { StatCounter } from "./StatCounter";
@@ -126,7 +126,7 @@ const StoryBlock = ({ item, delay }: { item: StoryItem; delay: number }) => {
 
 export const About = () => {
   return (
-    <section className="flex flex-col items-center gap-20 px-4 pt-20 sm:gap-28 sm:px-8 sm:pt-32 lg:gap-83 lg:px-0 lg:pt-50">
+    <section className="flex w-full flex-col items-center gap-20 pt-20 sm:gap-28 sm:pt-32 lg:gap-83 lg:pt-50">
       <div className="flex w-full flex-col gap-20 px-4 sm:gap-28 sm:px-8 lg:gap-32 lg:px-40">
         <StoryBlock item={STORY_ITEMS[0]} delay={0} />
         <StoryBlock item={STORY_ITEMS[1]} delay={100} />

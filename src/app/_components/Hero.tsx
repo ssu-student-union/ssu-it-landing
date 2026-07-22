@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
-import heroGraphicLeft1 from "../../assets/images/hero-graphic-left-1.png";
-import heroGraphicLeft2 from "../../assets/images/hero-graphic-left-2.png";
-import heroGraphicRight1 from "../../assets/images/hero-graphic-right-1.png";
-import heroGraphicRight2 from "../../assets/images/hero-graphic-right-2.png";
+import heroGraphicLeft1 from "../../assets/images/hero-graphic-left-1.webp";
+import heroGraphicLeft2 from "../../assets/images/hero-graphic-left-2.webp";
+import heroGraphicRight1 from "../../assets/images/hero-graphic-right-1.webp";
+import heroGraphicRight2 from "../../assets/images/hero-graphic-right-2.webp";
 import { DARK_SECTION_GRADIENT } from "./gradients";
 
 export const Hero = () => {
