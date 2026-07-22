@@ -25,6 +25,7 @@ type StoryItem = {
   align: "left" | "right";
   theme: "dark" | "light";
   decoratedWord?: string;
+  direction?: "up" | "down";
 };
 
 const STORY_ITEMS: StoryItem[] = [
@@ -34,6 +35,7 @@ const STORY_ITEMS: StoryItem[] = [
     aspect: "783/430",
     align: "left",
     theme: "dark",
+    direction: "down",
   },
   {
     lines: ["학생이 직접 만들고,", "기획합니다"],
@@ -92,6 +94,7 @@ const StoryBlock = ({ item, delay }: { item: StoryItem; delay: number }) => {
   return (
     <Reveal
       delay={delay}
+      direction={item.direction}
       className={`flex w-full max-w-2xl flex-col gap-6 sm:gap-8 lg:max-w-3xl ${
         isRight ? "ml-auto items-end" : "mr-auto items-start"
       }`}
