@@ -204,6 +204,7 @@ const REQUIREMENTS: Record<DepartmentId, ReactNode> = {
               label: "[필수]",
               text: "Python을 활용한 웹/앱 어플리케이션 개발 경험이 있으신 분",
             },
+
             {
               label: "[우대]",
               text: "Django 또는 AWS Serverless 어플리케이션 개발 경험이 있으신 분",

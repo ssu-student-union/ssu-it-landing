@@ -23,9 +23,7 @@ export const generateMetadata = async ({
   const project = PROJECTS.find((item) => item.slug === slug);
 
   return {
-    title: project
-      ? `${project.title} | 숭실대학교 IT지원위원회`
-      : "숭실대학교 IT지원위원회",
+    title: project ? project.title : undefined,
   };
 };
 
