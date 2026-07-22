@@ -1,6 +1,7 @@
 import type { StaticImageData } from "next/image";
 import campusClubImage from "../assets/images/campus-club.png";
 import campusMapImage from "../assets/images/campus-map.png";
+import chatbotImage from "../assets/images/chat-bot.png";
 import itLandingImage from "../assets/images/it-landing.png";
 import passuImage from "../assets/images/passu.png";
 import reclinerImage from "../assets/images/recliner.png";
@@ -98,7 +99,7 @@ export const PROJECTS: Project[] = [
   {
     slug: "campus-club",
     title: "동아리연합회 홈페이지",
-    description: "중앙동아리들의 정보 전달 및 행정처리를 위한 서비스",
+    description: "중앙동아리들의 정보\n전달 및 행정처리를 위한 서비스",
     image: campusClubImage,
     detail: {
       subtitle: "동아리 운영 관리 시스템",
@@ -201,7 +202,7 @@ export const PROJECTS: Project[] = [
     slug: "passu",
     title: "PASSU",
     description:
-      "수기 수령증 작성과 재학생 인증을 간소화한 디지털 수령증 서비스",
+      "수기 수령증 작성과 재학생 인증을 간소화한\n디지털 수령증 서비스",
     image: passuImage,
     detail: {
       subtitle: "디지털수령증 플랫폼",
@@ -372,7 +373,7 @@ export const PROJECTS: Project[] = [
     title: "총학생회 카카오톡 챗봇",
     description:
       "정보 접근성을 향상하고자 학교생활도우미 US:SUM 챗봇 서비스를 개발 및 운영",
-    image: itLandingImage,
+    image: chatbotImage,
     detail: {
       subtitle: "학교 생활 도우미 챗봇 서비스",
       description: [

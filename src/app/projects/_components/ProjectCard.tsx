@@ -10,7 +10,7 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
   return (
     <Link
       href={`/projects/${project.slug}`}
-      className="flex cursor-pointer flex-col items-center gap-6 rounded-2xl bg-[#434343]/50 p-6 transition-transform duration-300 ease-in-out hover:scale-105 sm:gap-10 sm:p-8 lg:p-10"
+      className="flex cursor-pointer flex-col items-center gap-6 rounded-2xl bg-[#434343]/50 p-6 transition-transform duration-300 ease-in-out hover:scale-105 sm:gap-10 lg:p-7"
     >
       <div className="relative h-40 w-full overflow-hidden rounded-lg sm:h-52 lg:h-[15.75rem]">
         <Image
@@ -26,7 +26,7 @@ export const ProjectCard = ({ project }: ProjectCardProps) => {
         <h3 className="font-bold text-2xl text-[#e2d7d7] sm:text-3xl lg:text-[2.5rem]">
           {project.title}
         </h3>
-        <p className="text-base text-[#e2d7d7] leading-[1.4] sm:text-lg sm:leading-[1.5625rem] lg:text-xl">
+        <p className="text-base text-[#e2d7d7] leading-[1.4] whitespace-pre-line sm:text-lg sm:leading-[1.5625rem] lg:text-xl">
           {project.description}
         </p>
       </div>
