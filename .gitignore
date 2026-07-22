@@ -37,6 +37,10 @@ next-env.d.ts
 
 # mise
 .mise.local.toml
+.env*
+
+# claude code
+.claude/settings.local.json
 
 # 로컬 전용 회고 문서
-/docs/회고-리크루팅-폼-리팩토링.md
+/docs
