@@ -2,7 +2,7 @@ import Image from "next/image";
 import chevronBlackIcon from "../../assets/icons/chevron_black.svg";
 import { Accordion, AccordionItem } from "../../common/Accordion";
 
-const FAQ_ITEMS = [
+export const FAQ_ITEMS = [
   {
     question: "Q1. 활동기간은 얼마나 되나요?",
     answer: "최소 2학기 이상 활동이 원칙입니다.",
@@ -32,7 +32,7 @@ export const Faq = () => {
   return (
     <section className="flex flex-col items-center gap-6 bg-[#fafafa] px-4 py-16 sm:gap-8 sm:py-24 lg:gap-10 lg:py-32">
       <h2 className="w-full max-w-4xl font-bold text-[#262323] text-xl sm:text-2xl lg:text-[2rem]">
-        FAQ/ 답변
+        FAQ / 답변
       </h2>
 
       <Accordion className="flex w-full max-w-4xl flex-col gap-3 sm:gap-4">
