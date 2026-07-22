@@ -125,7 +125,7 @@ export const Hero = () => {
   };
 
   return (
-    <section className="w-full px-4 sm:px-6 lg:px-8">
+    <section className="w-full px-2 sm:px-8 lg:px-18">
       <div
         ref={heroRef}
         className="@container relative aspect-1276/615 w-full overflow-hidden rounded-2xl"
