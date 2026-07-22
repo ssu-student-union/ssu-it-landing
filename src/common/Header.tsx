@@ -19,7 +19,7 @@ export const Header = () => {
 
       <nav className="flex items-center gap-3 sm:gap-8 lg:gap-16">
         <Link
-          href="#"
+          href="/"
           className="relative hidden font-semibold text-[#1b1c1c] text-lg whitespace-nowrap sm:block lg:text-2xl"
         >
           위원회 소개

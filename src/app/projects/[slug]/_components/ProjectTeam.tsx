@@ -17,7 +17,7 @@ export const ProjectTeam = ({ team }: ProjectTeamProps) => {
           height={70}
           className="h-10 w-auto lg:h-[4.375rem]"
         />
-        <h2 className="font-bold text-xl text-white sm:text-2xl lg:text-[2.625rem]">
+        <h2 className="font-semibold text-xl text-white sm:text-2xl lg:text-[2.625rem]">
           팀 소개
         </h2>
       </div>
@@ -41,7 +41,7 @@ export const ProjectTeam = ({ team }: ProjectTeamProps) => {
                   {member.role} {member.name}
                 </p>
               )}
-              <p className="whitespace-pre-line text-sm text-[#cccccc] sm:text-base lg:text-2xl">
+              <p className="whitespace-pre-line text-sm font-medium text-[#cccccc] sm:text-base lg:text-2xl">
                 {member.description}
               </p>
             </div>

@@ -38,7 +38,7 @@ export type Project = {
 export const PROJECTS: Project[] = [
   {
     slug: "ssuport",
-    title: "SSUPORT",
+    title: "SSUport",
     description: "총학생회 특별장학금 신청/관리 시스템 서비스",
     image: ssuportImage,
     detail: {
@@ -178,7 +178,7 @@ export const PROJECTS: Project[] = [
         },
       ],
       progressStatus: [
-        "홈페이지 1차/2차 배포 완료 & 3차 개발 및 대규모 리팩토링",
+        "홈페이지 1차/2차 배포 완료 &\n3차 개발 및 대규모 리팩토링",
         "SSO 구축 및 PASSU 연동",
         "홈페이지 3차 개발 배포 예정 및 4차 개발",
       ],
@@ -234,8 +234,8 @@ export const PROJECTS: Project[] = [
       progressStatus: [
         "MVP 개발 및 POC 진행",
         "자치기구 대상 PASSU 의견 수렴",
-        "총학생회 및 자치기구 홍보 진행(전체간부수련회)",
-        "2025년 3월 총학생회 개강행사 도입 (이틀 간 1,000명 배부)",
+        "총학생회 및 자치기구 홍보 진행\n(전체간부수련회)",
+        "2025년 3월 총학생회 개강행사 도입\n(이틀 간 1,000명 배부)",
       ],
       futurePlans: [
         { label: "중앙감사위원회 대상 정식 도입 추진" },
@@ -251,7 +251,7 @@ export const PROJECTS: Project[] = [
     slug: "campus-map",
     title: "캠퍼스맵",
     description:
-      "최신 정보를 제공하는 캠퍼스맵 챗봇과 웹사이트를 구현한 서비스",
+      "최신 정보를 제공하는 캠퍼스맵 챗봇과\n웹사이트를 구현한 서비스",
     image: campusMapImage,
     detail: {
       subtitle: "교내 시설 정보 제공 서비스",
@@ -286,7 +286,7 @@ export const PROJECTS: Project[] = [
     slug: "it-landing",
     title: "IT지원위원회 랜딩페이지",
     description:
-      "IT지원위원회를 한 눈에 이해할 수 있는 디지털 서비스/플랫폼을 기획·개발·운영",
+      "IT지원위원회를 한 눈에 이해할 수 있는\n디지털 서비스/플랫폼을 기획·개발·운영",
     image: itLandingImage,
     detail: {
       subtitle: "IT지원위원회 공식 홈페이지",
@@ -337,7 +337,7 @@ export const PROJECTS: Project[] = [
     slug: "recliner",
     title: "리클라이너 예약시스템",
     description:
-      "중앙도서관 리클라이너 좌석의 무분별한 사용 및 독점을 방지하기 위해 개발한 시스템",
+      "중앙도서관 리클라이너 좌석의 무분별한 사용\n및 독점을 방지하기 위해 개발한 시스템",
     image: reclinerImage,
     detail: {
       subtitle: "중앙도서관 리클라이너 좌석 예약 서비스",
@@ -354,7 +354,7 @@ export const PROJECTS: Project[] = [
       ],
       progressStatus: [
         "디자인 및 개발 완료",
-        "중앙도서관 설치 및 시범 운영(9/11 ~ 9/30)",
+        "중앙도서관 설치 및 시범 운영\n(9/11 ~ 9/30)",
         "중앙도서관 정식 운영(10/1)",
       ],
       futurePlans: [
@@ -372,7 +372,7 @@ export const PROJECTS: Project[] = [
     slug: "chatbot",
     title: "총학생회 카카오톡 챗봇",
     description:
-      "정보 접근성을 향상하고자 학교생활도우미 US:SUM 챗봇 서비스를 개발 및 운영",
+      "정보 접근성을 향상하고자 학교생활도우미\nUS:SUM 챗봇 서비스를 개발 및 운영",
     image: chatbotImage,
     detail: {
       subtitle: "학교 생활 도우미 챗봇 서비스",

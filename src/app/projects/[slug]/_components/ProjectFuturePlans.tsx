@@ -19,25 +19,20 @@ export const ProjectFuturePlans = ({
           height={70}
           className="h-10 w-auto lg:h-[4.375rem]"
         />
-        <h2 className="font-bold text-xl text-white sm:text-2xl lg:text-[2.625rem]">
+        <h2 className="font-semibold text-xl text-white sm:text-2xl lg:text-[2.625rem]">
           향후 계획
         </h2>
       </div>
-      <ul className="flex flex-col gap-3 sm:gap-4 lg:gap-3">
+      <ul className="list-disc space-y-3 pl-5 font-medium text-base text-white leading-[1.5] marker:text-[0.65em] marker:text-[#cdc4c4] sm:space-y-4 sm:pl-6 sm:text-lg lg:space-y-3 lg:text-[2.125rem] lg:leading-[3.75rem]">
         {futurePlans.map((plan) => (
-          <li key={plan.label} className="flex flex-col gap-1">
-            <div className="flex items-start gap-3">
-              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#cdc4c4] sm:mt-2.5" />
-              <p className="whitespace-pre-line text-base text-white leading-[1.5] sm:text-lg lg:text-[2.125rem] lg:leading-[3.75rem]">
-                {plan.label}
-              </p>
-            </div>
+          <li key={plan.label} className="whitespace-pre-line">
+            <span>{plan.label}</span>
             {plan.subItems && (
-              <ul className="flex flex-col gap-1 pl-[1.375rem]">
+              <ul className="mt-1 flex flex-col gap-1 pl-2">
                 {plan.subItems.map((subItem) => (
                   <li
                     key={subItem}
-                    className="whitespace-pre-line text-[#cccccc] text-sm leading-[1.5] sm:text-base lg:text-2xl"
+                    className="whitespace-pre-line leading-[1.5] text-base lg:text-[2.125rem]"
                   >
                     → {subItem}
                   </li>
