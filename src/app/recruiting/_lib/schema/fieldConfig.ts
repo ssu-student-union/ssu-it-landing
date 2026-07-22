@@ -33,7 +33,7 @@ type CheckboxGroupConfig = FieldBase & {
 type RadioGroupConfig = FieldBase & {
   type: "radio-group";
   name: string;
-  options: { id: string; label: ReactNode }[];
+  options: { id: string; label: ReactNode; disabled?: boolean }[];
   /** 선택 시 폼 값을 통째로 대체한다(부서 변경 시 이전 답변 리셋 등). */
   onSelect?: (id: string, values: FormValues) => FormValues;
   /** 선택값에 따라 아래 애니메이션 박스로 보여줄 상세(부서 requirements 등). */
@@ -72,6 +72,8 @@ type MatrixGroup = {
   /** 각 열에 대응하는 슬롯 키(라벨과 별개의 원본 값). */
   slots: string[];
   className?: string;
+  /** 특정 행에서 이 슬롯이 실제로 선택 가능한지. 생략하면 그룹의 모든 슬롯이 모든 행에서 선택 가능(기존 동작). */
+  isSlotAvailable?: (rowId: string, slot: string) => boolean;
 };
 
 type CheckboxMatrixConfig = FieldBase & {

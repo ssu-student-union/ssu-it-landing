@@ -38,9 +38,11 @@ function assignPriority(
 
 export const pmFields: FieldConfig[] = [
   buildInterviewField({
-    interviewDates: ["2026-02-02", "2026-02-03", "2026-02-07"],
-    weekdaySlots: ["19:00", "20:00"],
-    weekendSlots: ["10:00", "11:00", "12:00", "13:00"],
+    dates: [
+      { id: "2026-08-01", start: "13:00", end: "20:00" },
+      { id: "2026-08-02", start: "12:00", end: "20:00" },
+      { id: "2026-08-03", start: "19:00", end: "22:00" },
+    ],
   }),
   {
     key: "taskPriorities",

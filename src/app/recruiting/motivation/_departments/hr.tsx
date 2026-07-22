@@ -5,9 +5,11 @@ const skillPlaceholder = "ex) 채용 프로세스 기획 경험 (플레이스홀
 
 export const hrFields: FieldConfig[] = [
   buildInterviewField({
-    interviewDates: ["2026-02-02", "2026-02-07", "2026-02-08"],
-    weekdaySlots: ["19:00", "20:00"],
-    weekendSlots: ["10:00", "11:00", "15:00", "16:00"],
+    dates: [
+      { id: "2026-08-01", start: "12:00", end: "17:00" },
+      { id: "2026-08-02", start: "12:00", end: "20:00" },
+      { id: "2026-08-03", start: "19:00", end: "22:00" },
+    ],
   }),
   {
     key: "tasks",

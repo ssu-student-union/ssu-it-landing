@@ -39,7 +39,12 @@ export const stepOneFields: FieldConfig[] = [
     key: "department",
     name: "department",
     title: "지원파트를 선택해주세요.",
-    options: departments.map((d) => ({ id: d.id, label: d.label })),
+    // Frontend는 이번 기수 미채용이라 선택할 수 없게 막아둔다.
+    options: departments.map((d) => ({
+      id: d.id,
+      label: d.id === "Frontend" ? `${d.label} (이번 기수 미모집)` : d.label,
+      disabled: d.id === "Frontend",
+    })),
   },
   {
     type: "text",

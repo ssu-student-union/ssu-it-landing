@@ -5,9 +5,11 @@ const skillPlaceholder = "ex) Node.js / 중 / API 설계 경험 (플레이스홀
 
 export const backendFields: FieldConfig[] = [
   buildInterviewField({
-    interviewDates: ["2026-02-02", "2026-02-05", "2026-02-08"],
-    weekdaySlots: ["19:00", "21:00"],
-    weekendSlots: ["14:00", "15:00", "16:00", "17:00"],
+    dates: [
+      { id: "2026-08-01", start: "12:00", end: "20:00" },
+      { id: "2026-08-02", start: "12:00", end: "20:00" },
+      { id: "2026-08-03", start: "19:00", end: "22:00" },
+    ],
   }),
   {
     key: "tasks",

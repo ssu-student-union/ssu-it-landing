@@ -81,6 +81,25 @@ export const formatSlotLabel = (startTime: string): string => {
   return `${startTime} ~ ${end.format("HH:mm")}`;
 };
 
+/** "13:00"~"20:00" 같은 연속 구간을 INTERVIEW_SLOT_DURATION_MINUTES 단위 시작 시각 목록으로 바꾼다. */
+export const expandTimeRangeToSlots = (
+  start: string,
+  end: string,
+): string[] => {
+  const slots: string[] = [];
+  const rangeEnd = dayjs(`2000-01-01T${end}`);
+  let cursor = dayjs(`2000-01-01T${start}`);
+  while (
+    cursor
+      .add(INTERVIEW_SLOT_DURATION_MINUTES, "minute")
+      .isSameOrBefore(rangeEnd)
+  ) {
+    slots.push(cursor.format("HH:mm"));
+    cursor = cursor.add(INTERVIEW_SLOT_DURATION_MINUTES, "minute");
+  }
+  return slots;
+};
+
 /** 현재 시각 기준 모집 기간 내에 포함되는지 여부 */
 export const isApplicationActive = (): boolean => {
   const now = dayjs();

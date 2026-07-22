@@ -6,9 +6,11 @@ const skillPlaceholder =
 
 export const designFields: FieldConfig[] = [
   buildInterviewField({
-    interviewDates: ["2026-02-03", "2026-02-04", "2026-02-07"],
-    weekdaySlots: ["20:00", "21:00"],
-    weekendSlots: ["13:00", "14:00", "15:00", "16:00"],
+    dates: [
+      { id: "2026-08-01", start: "12:00", end: "20:00" },
+      { id: "2026-08-02", start: "12:00", end: "14:00" },
+      { id: "2026-08-03", start: "19:00", end: "22:00" },
+    ],
   }),
   {
     key: "tasks",

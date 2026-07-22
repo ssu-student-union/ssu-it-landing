@@ -46,7 +46,7 @@ export function buildStepTwoSchema(
       ...dynamicShape,
     })
     .superRefine((data, ctx) => {
-      validateInterviewAvailability(data, ctx);
+      validateInterviewAvailability(fields, data, ctx);
       validateOtherTime(data, ctx);
       validateTaskPriorities(fields, data, ctx);
     }) as unknown as z.ZodType<StepTwoFormData, unknown>;

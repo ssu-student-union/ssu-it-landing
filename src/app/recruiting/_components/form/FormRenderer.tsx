@@ -119,6 +119,7 @@ export function FormRenderer<T extends FormValues>({
                   name={field.name}
                   label={option.label}
                   checked={v[field.key] === option.id}
+                  disabled={option.disabled}
                   error={Boolean(gatedErrorOf(field.key))}
                   onChange={() =>
                     update((prev) =>
@@ -190,7 +191,9 @@ export function FormRenderer<T extends FormValues>({
                     id: `${row.id}-${slot}`,
                     "aria-label": field.cellAriaLabel?.(row, slot),
                     checked: field.getChecked(v, row.id, slot),
-                    disabled,
+                    disabled:
+                      disabled ||
+                      !(group.isSlotAvailable?.(row.id, slot) ?? true),
                     onChange: (checked: boolean) =>
                       update((prev) =>
                         field.onToggle(prev, row.id, slot, checked),

@@ -3,9 +3,12 @@ import { buildInterviewField } from "./interviewField";
 
 export const frontendFields: FieldConfig[] = [
   buildInterviewField({
-    interviewDates: ["2026-02-04", "2026-02-05", "2026-02-08"],
-    weekdaySlots: ["19:00", "20:00", "21:00"],
-    weekendSlots: ["10:00", "11:00", "14:00", "15:00"],
+    // Frontend는 이번 기수 미채용 — 실제 일정 확정 전 자리표시자.
+    dates: [
+      { id: "2026-02-04", start: "19:00", end: "22:00" },
+      { id: "2026-02-05", start: "19:00", end: "22:00" },
+      { id: "2026-02-08", start: "10:00", end: "16:00" },
+    ],
   }),
   {
     key: "techStack",
