@@ -37,6 +37,7 @@ next-env.d.ts
 
 # mise
 .mise.local.toml
+.env*
 
 # claude code
 .claude/
