@@ -1,18 +1,32 @@
 name: Deploy to Vercel
 
 on:
-  push:
+  pull_request:
+    types: [closed]
     branches: [main]
 
 jobs:
   deploy:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
     env:
       VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
       VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Reauthor merge commit
+        run: |
+          git config user.name "SSU Developer"
+          git config user.email "ssudeveloper2024@gmail.com"
+          git commit --amend --author="SSU Developer <ssudeveloper2024@gmail.com>" --no-edit
+          git push origin main --force-with-lease
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v4
