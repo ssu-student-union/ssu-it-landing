@@ -16,6 +16,9 @@ type StepLayoutProps = {
   children: ReactNode;
 };
 
+// 테스트용 자동 입력 FAB 노출 여부 (이 값을 false로 변경하면 폼 전체에서 자동 입력 버튼이 제거됩니다)
+const SHOW_AUTOFILL = true;
+
 /** 리크루팅 4개 페이지가 공유하는 페이지 골격: `<main>` + 스텝 표시 + 제목. */
 export const StepLayout = ({
   currentStep,
@@ -30,7 +33,7 @@ export const StepLayout = ({
     <StepIndicator steps={RECRUITING_STEPS} currentStep={currentStep} />
     {title && <Heading as="h1">{title}</Heading>}
     {children}
-    {currentStep >= 1 && currentStep <= 3 && onAutofill && (
+    {SHOW_AUTOFILL && currentStep >= 1 && currentStep <= 3 && onAutofill && (
       <FormAutofillFAB onAutofill={onAutofill} />
     )}
   </main>

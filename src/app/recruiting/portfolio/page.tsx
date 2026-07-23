@@ -100,8 +100,10 @@ export default function RecruitingStepThreePage() {
   const handleAutofill = () => {
     setValues((prev) => ({
       ...prev,
-      portfolioLink: "https://github.com/ssu-student-union/ssu-it-landing",
-      activityCommitmentAck: true,
+      portfolioLink: prev.portfolioLink?.trim()
+        ? prev.portfolioLink
+        : "https://github.com/ssu-student-union/ssu-it-landing",
+      activityCommitmentAck: prev.activityCommitmentAck || true,
     }));
   };
 

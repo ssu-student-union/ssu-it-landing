@@ -33,13 +33,13 @@ export default function RecruitingStepOnePage() {
   const handleAutofill = () => {
     setValues((prev) => ({
       ...prev,
-      agree: true,
-      name: "테스터",
-      studentId: "20241234",
-      phone: "010-1234-5678",
-      college: "IT대학",
-      major: "소프트웨어학부",
-      grade: "2학년-2학기",
+      agree: prev.agree || true,
+      name: prev.name?.trim() ? prev.name : "테스터",
+      studentId: prev.studentId?.trim() ? prev.studentId : "20241234",
+      phone: prev.phone?.trim() ? prev.phone : "010-1234-5678",
+      college: prev.college?.trim() ? prev.college : "IT대학",
+      major: prev.major?.trim() ? prev.major : "소프트웨어학부",
+      grade: prev.grade ? prev.grade : "2학년-2학기",
     }));
   };
 
