@@ -53,7 +53,7 @@ export const ClosedHero = () => {
           onChange={(e) => setEmail(e.target.value)}
           placeholder={closedNotice.emailPlaceholder}
           disabled={status === "submitting"}
-          className="flex-1 rounded-xl border border-inactive px-4 py-2.5 text-ink placeholder:text-inactive"
+          className="min-w-0 flex-1 rounded-xl border border-inactive px-4 py-2.5 text-base text-ink placeholder:text-inactive"
         />
         <CtaButton type="submit" disabled={status === "submitting"}>
           {closedNotice.submitLabel}
