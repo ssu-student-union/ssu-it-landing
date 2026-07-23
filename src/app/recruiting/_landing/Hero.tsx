@@ -126,10 +126,10 @@ export const Hero = () => {
   };
 
   return (
-    <section className="w-full px-4 sm:px-6 lg:px-18">
+    <section className="w-full px-4 sm:px-6 lg:px-8">
       <div
         ref={heroRef}
-        className="@container relative aspect-1276/615 w-full overflow-hidden rounded-2xl"
+        className="@container relative mx-auto aspect-1276/615 w-full max-w-5xl overflow-hidden rounded-2xl"
         style={{
           background:
             "linear-gradient(180deg, #060608 0%, #170b30 45%, #2c1150 100%)",
