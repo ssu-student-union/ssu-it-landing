@@ -3,11 +3,13 @@
 import { useId, useState } from "react";
 import { useFieldFocusState } from "../../_lib/hooks";
 import { maxLengthExceededMessage, REQUIRED_MESSAGE } from "../../_lib/schema";
-import { FieldError } from "../question/FieldError";
+import { FieldError } from "../question";
 
 type TextfieldProps = {
   label?: string;
   multiline?: boolean;
+  /** 단일 행(`multiline`이 아닐 때)의 `<input type>`. 기본값 "text". */
+  type?: "text" | "email";
   maxLength?: number;
   rows?: number;
   value: string;
@@ -33,6 +35,7 @@ type TextfieldProps = {
 export const Textfield = ({
   label,
   multiline = false,
+  type = "text",
   maxLength,
   rows = 6,
   value,
@@ -107,7 +110,7 @@ export const Textfield = ({
         <input
           id={inputId}
           name={name}
-          type="text"
+          type={type}
           value={value}
           placeholder={placeholder}
           disabled={disabled}

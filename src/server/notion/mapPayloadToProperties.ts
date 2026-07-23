@@ -125,7 +125,7 @@ function summarizeInterviewAvailability(
 /** PM 부서 "taskPriorities" 문항(행 id → 순위 슬롯)의 행 id를 실제 라벨로
  * 바꾸기 위해, 그 필드 설정에서 행 id → 라벨 맵을 끌어온다. */
 function taskPriorityRowLabels(): Record<string, string> {
-  const field = departmentFields.PM.find(
+  const field = departmentFields.pm.find(
     (f) => f.type === "checkbox-matrix" && f.key === "taskPriorities",
   );
   if (!field || field.type !== "checkbox-matrix") return {};

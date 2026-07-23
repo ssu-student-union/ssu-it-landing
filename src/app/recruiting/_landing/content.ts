@@ -48,7 +48,7 @@ export const overview = {
     },
     {
       label: "활동 방식",
-      value: "전체회의 : 월 1회 TF별 회의 : TF별 상이 + 상시 협업",
+      value: "전체 회의 : 월 1회\nTF 회의 : TF별 상이 + 상시 협업",
     },
     { label: "지원 기간", value: `~${formatDotDate(APPLICATION_PERIOD.end)}` },
     { label: "활동 혜택", value: "실무 프로젝트 경험, OB 네트워크, 수료증 등" },
@@ -69,15 +69,15 @@ export const parts = {
   cornerLabel: "파트",
   columns: ["인원", "자격 · 우대사항"],
   rows: [
-    { part: "PM", count: "1~2명", note: "TF 무관" },
+    { part: "PM", count: "1~2명", note: "-" },
     { part: "Design", count: "2명", note: "-" },
-    { part: "Frontend", count: "0명", note: "", dimmed: true },
+    { part: "Frontend", count: "0명", note: "5기 모집 없음", dimmed: true },
     {
       part: "Backend",
       count: "6명",
       note: "TF 이외 AWS/SSO 관련 기술 보유자 필요",
     },
-    { part: "HR", count: "1~2명", note: "TF 무관" },
+    { part: "HR", count: "1~2명", note: "-" },
   ] satisfies PartRow[],
 } as const;
 
@@ -144,10 +144,10 @@ export const notes = {
 
 /** 지원 기간이 아닐 때 Hero 자리를 대체하는 마감 안내 카피. */
 export const closedNotice = {
-  headlineLines: ["모집 기간이 되면 메일로 알려드릴게요", "감사합니다!"],
-  nextRoundLabel: `6기 모집 예정 날짜: ${formatDotDate(NEXT_RECRUITING_ROUND_DATE)}`,
-  emailPlaceholder: "ex. abc123@gmail.com",
-  submitLabel: "알림 신청하기",
+  headlineLines: ["모집 기간이 되면 알려드려요", "감사합니다!"],
+  nextRoundLabel: `${formatYearMonth(NEXT_RECRUITING_ROUND_DATE)}에 6기 모집 예정`,
+  emailPlaceholder: "example@gmail.com",
+  submitLabel: "알림 받기",
 } as const;
 
 export const timeline = { title: "모집 일정" } as const;

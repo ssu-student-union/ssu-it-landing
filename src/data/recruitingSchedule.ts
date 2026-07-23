@@ -25,7 +25,7 @@ export const ACTIVITY_PERIOD = {
 } as const;
 
 // 다음 기수 모집 예정일
-export const NEXT_RECRUITING_ROUND_DATE = "2027-02-28";
+export const NEXT_RECRUITING_ROUND_DATE = "2027-02";
 
 export const INTERVIEW_DATES = [
   "2026-08-01",

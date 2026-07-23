@@ -1,4 +1,4 @@
-export type DepartmentId = "PM" | "Design" | "Frontend" | "Backend" | "HR";
+export type DepartmentId = "pm" | "design" | "frontend" | "backend" | "hr";
 
 /**
  * 지원 부서의 순수 도메인 값. Step1 부서 선택 라디오, Notion "지원 부서" select 등
@@ -11,9 +11,14 @@ export type Department = {
 };
 
 export const departments: Department[] = [
-  { id: "PM", label: "PM" },
-  { id: "Design", label: "Design" },
-  { id: "Frontend", label: "Frontend" },
-  { id: "Backend", label: "Backend" },
-  { id: "HR", label: "HR" },
+  { id: "pm", label: "PM" },
+  { id: "design", label: "Design" },
+  { id: "frontend", label: "Frontend" },
+  { id: "backend", label: "Backend" },
+  { id: "hr", label: "HR" },
 ];
+
+/** 값이 실제로 존재하는 부서 id인지 확인한다. 폼(클라이언트)·서버 재검증 양쪽에서 공유. */
+export function isDepartmentId(value: string): value is DepartmentId {
+  return departments.some((department) => department.id === value);
+}

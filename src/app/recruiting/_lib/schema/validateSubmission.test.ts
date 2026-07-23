@@ -13,12 +13,12 @@ const validStepOne = {
   college: "정보과학대학",
   major: "IT융합전공",
   grade: "2학년 1학기",
-  department: "Frontend",
+  department: "frontend",
 };
 
 const validStepTwo = {
   ...stepTwoInitialValues,
-  department: "Frontend",
+  department: "frontend",
   interviewAvailability: {},
   noAvailableTime: true,
   otherTime: [{ start: "2026-02-01T19:00", end: "2026-02-01T20:00" }],
