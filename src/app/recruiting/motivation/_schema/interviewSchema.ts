@@ -13,7 +13,9 @@ function interviewFieldOf(fields: FieldConfig[]) {
   );
 }
 
-/** 날짜(행)별로 실제 선택 가능한 시간대만 모은다. 문항이 없으면 undefined로 폴백을 알린다. */
+/** 날짜별로 실제 선택 가능한 시간대만 모은다. 문항이 없으면 undefined로 폴백을 알린다.
+ * 표는 행=시간대·열=날짜로 transpose돼 있지만(`interviewField.ts`), 이 함수가 반환하는
+ * `Map<날짜, Set<시간대>>` 형태는 저장 데이터(`interviewAvailability`)와 맞춰 그대로 둔다. */
 function allowedSlotsByDate(
   fields: FieldConfig[],
 ): Map<string, Set<string>> | undefined {
@@ -22,11 +24,11 @@ function allowedSlotsByDate(
 
   const map = new Map<string, Set<string>>();
   for (const group of interviewField.groups) {
-    for (const row of group.rows) {
-      const allowed = group.slots.filter(
-        (slot) => group.isSlotAvailable?.(row.id, slot) ?? true,
-      );
-      map.set(row.id, new Set(allowed));
+    for (const date of group.slots) {
+      const allowed = group.rows
+        .map((row) => row.id)
+        .filter((time) => group.isSlotAvailable?.(time, date) ?? true);
+      map.set(date, new Set(allowed));
     }
   }
   return map;
