@@ -17,3 +17,8 @@ export const departments: Department[] = [
   { id: "backend", label: "Backend" },
   { id: "hr", label: "HR" },
 ];
+
+/** 값이 실제로 존재하는 부서 id인지 확인한다. 폼(클라이언트)·서버 재검증 양쪽에서 공유. */
+export function isDepartmentId(value: string): value is DepartmentId {
+  return departments.some((department) => department.id === value);
+}
