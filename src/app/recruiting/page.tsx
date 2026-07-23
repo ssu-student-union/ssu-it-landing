@@ -31,8 +31,8 @@ export default function RecruitingPage() {
       {active ? <Hero /> : <ClosedHero />}
       {active && <RecruitOverview />}
       {active && <SectionDivider />}
-      <PartsTable />
-      <SectionDivider />
+      {active && <PartsTable />}
+      {active && <SectionDivider />}
       {active && <Timeline />}
       {active && <SectionDivider />}
       <IdealCandidates />

@@ -1,7 +1,7 @@
 "use client";
 
 import { type FormEvent, useState } from "react";
-import { Button } from "../../../common/Button";
+import { CtaButton } from "../../../common/CtaButton";
 import { closedNotice } from "./content";
 
 type SubmitStatus = "idle" | "submitting" | "success" | "error";
@@ -55,9 +55,9 @@ export const ClosedHero = () => {
           disabled={status === "submitting"}
           className="flex-1 rounded-xl border border-inactive px-4 py-2.5 text-ink placeholder:text-inactive"
         />
-        <Button gradient type="submit" disabled={status === "submitting"}>
+        <CtaButton type="submit" disabled={status === "submitting"}>
           {closedNotice.submitLabel}
-        </Button>
+        </CtaButton>
       </form>
 
       {status === "success" && (
