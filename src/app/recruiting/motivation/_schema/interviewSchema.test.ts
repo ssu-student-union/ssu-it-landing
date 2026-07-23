@@ -12,26 +12,30 @@ import {
 import { collectIssues } from "./testHelpers";
 
 // 8/3은 항상 선택 가능, 8/1은 13:00만, 8/2는 10:00만 실제로 열려있는 날짜별 가용성 픽스처.
+// 표는 행=시간대·열=날짜로 transpose돼 있다(interviewField.ts와 동일한 관례).
 const fieldsWithMatrix: FieldConfig[] = [
   {
     type: "checkbox-matrix",
     key: "interviewAvailability",
     groups: [
       {
-        columns: ["19:00", "20:00"],
-        rows: [{ id: "2026-08-03", label: "8/3" }],
-        slots: ["19:00", "20:00"],
+        columns: ["8/3"],
+        rows: [
+          { id: "19:00", label: "19:00" },
+          { id: "20:00", label: "20:00" },
+        ],
+        slots: ["2026-08-03"],
         isSlotAvailable: () => true,
       },
       {
-        columns: ["10:00", "13:00"],
+        columns: ["8/1", "8/2"],
         rows: [
-          { id: "2026-08-01", label: "8/1" },
-          { id: "2026-08-02", label: "8/2" },
+          { id: "10:00", label: "10:00" },
+          { id: "13:00", label: "13:00" },
         ],
-        slots: ["10:00", "13:00"],
+        slots: ["2026-08-01", "2026-08-02"],
         isSlotAvailable: (rowId, slot) =>
-          rowId === "2026-08-01" ? slot === "13:00" : slot === "10:00",
+          slot === "2026-08-01" ? rowId === "13:00" : rowId === "10:00",
       },
     ],
     getChecked: () => false,
