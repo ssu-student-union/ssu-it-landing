@@ -19,7 +19,7 @@ type StepLayoutProps = {
 };
 
 // 테스트용 자동 입력 FAB 노출 여부 (이 값을 false로 변경하면 폼 전체에서 자동 입력 버튼이 제거됩니다)
-export const SHOW_AUTOFILL = true;
+export const SHOW_AUTOFILL = false;
 
 /** 리크루팅 4개 페이지가 공유하는 페이지 골격: `<main>` + 스텝 표시 + 제목. */
 export const StepLayout = ({
