@@ -16,16 +16,20 @@ export const MainProjects = () => {
           Main
         </p>
         <div className="absolute inset-0 flex -translate-x-6 translate-y-1 items-end justify-start gap-1 pb-2 sm:-translate-x-10 sm:translate-y-3 sm:pb-4 lg:-translate-x-20 lg:translate-y-6">
-          <h2 className="flex h-10 items-center whitespace-nowrap text-2xl leading-none font-bold text-white sm:h-12 sm:text-4xl lg:h-16 lg:text-5xl">
-            메인 프로젝트
-          </h2>
-          <Link href="/projects" aria-label="진행 프로젝트 더보기">
+          <Link
+            href="/projects"
+            aria-label="진행 프로젝트 더보기"
+            className="flex items-end gap-1"
+          >
+            <h2 className="flex h-10 items-center whitespace-nowrap text-2xl leading-none font-bold text-white sm:h-12 sm:text-4xl lg:h-16 lg:text-5xl">
+              메인 프로젝트
+            </h2>
             <Image
               src={arrowCircleIcon}
               alt=""
               width={64}
               height={64}
-              className="h-10 w-10 max-w-none shrink-0 sm:h-12 sm:w-12 lg:h-16 lg:w-16 cursor-pointer"
+              className="h-10 w-10 max-w-none shrink-0 sm:h-12 sm:w-12 lg:h-16 lg:w-16"
             />
           </Link>
         </div>

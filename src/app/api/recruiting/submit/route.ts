@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { isApplicationActive } from "../../../../data/recruitingSchedule";
 import { submitRecruitingApplication } from "../../../../server/notion";
 import { validateSubmission } from "../../../recruiting/_lib/schema";
 import { MAX_FILE_SIZE } from "../../../recruiting/portfolio/constants";
@@ -16,6 +17,13 @@ function isSubmissionShape(
 }
 
 export async function POST(request: Request) {
+  if (!isApplicationActive()) {
+    return NextResponse.json(
+      { ok: false, error: "application_closed" },
+      { status: 403 },
+    );
+  }
+
   const formData = await request.formData();
 
   const payloadRaw = formData.get("payload");

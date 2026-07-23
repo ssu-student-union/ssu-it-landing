@@ -2,6 +2,7 @@ import "server-only";
 
 import type { ValidatedRecruitingSubmission } from "../../app/recruiting/_lib/schema";
 import { getNotionClient } from "./client";
+import { getNotionEnv } from "./env";
 import { mapPayloadToProperties } from "./mapPayloadToProperties";
 import { resolveDataSourceId } from "./resolveDataSource";
 import { uploadPortfolioFile } from "./uploadPortfolioFile";
@@ -14,7 +15,7 @@ export async function submitRecruitingApplication(
   const client = getNotionClient();
 
   const [dataSourceId, fileUploadId] = await Promise.all([
-    resolveDataSourceId(),
+    resolveDataSourceId(getNotionEnv().NOTION_DATABASE_ID),
     file ? uploadPortfolioFile(file) : Promise.resolve(undefined),
   ]);
 

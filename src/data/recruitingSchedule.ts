@@ -9,20 +9,23 @@ export const APPLICATION_PERIOD = {
   end: "2026-07-30",
 } as const;
 
-// 면접(INTERVIEW_DATES) 종료 직후 최종 발표일.
+// 최종 발표일
 export const ANNOUNCEMENT_DATE = "2026-08-05";
 
-// 서류 평가 결과 통보(마감)일 — 확정 시 교체 (플레이스홀더).
+// 서류 평가 마감일
 export const DOCUMENT_RESULT_DATE = "2026-07-31";
 
-// IT지원위원회 5기 첫 전체 회의(필참)일 — 확정 시 교체 (플레이스홀더).
+// 첫 전체 회의 일정
 export const GENERAL_MEETING_DATE = "2026-08-20";
 
-// 5기 활동 기간(연·월). 랜딩 "활동 기간" 표기용 — 확정 시 교체 (플레이스홀더).
+// 신입 기수 활동 기간
 export const ACTIVITY_PERIOD = {
   start: "2026-08",
   end: "2027-08",
 } as const;
+
+// 다음 기수 모집 예정일
+export const NEXT_RECRUITING_ROUND_DATE = "2027-02-28";
 
 export const INTERVIEW_DATES = [
   "2026-08-01",
@@ -54,22 +57,22 @@ export const formatInterviewDate = (dateIso: string): string => {
   return dayjs(`${dateIso}T00:00:00`).format("M월 D일 (ddd)");
 };
 
-/** "2026-07-31" → "7/31(금)" — complete 페이지의 짧은 표기용 */
+/** "2026-07-31" → "7/31(금)" */
 export const formatShortDate = (dateIso: string): string => {
   return dayjs(`${dateIso}T00:00:00`).format("M/D(ddd)");
 };
 
-/** "2026-07-30" → "2026.07.30" — 개요 지원 기간 / 유의사항 마감 표기용 */
+/** "2026-07-30" → "2026.07.30" */
 export const formatDotDate = (dateIso: string): string => {
   return dayjs(`${dateIso}T00:00:00`).format("YYYY.MM.DD");
 };
 
-/** "2026-09" → "2026.09" — 활동 기간 표기용 */
+/** "2026-09" → "2026.09" */
 export const formatYearMonth = (yearMonth: string): string => {
   return dayjs(`${yearMonth}-01T00:00:00`).format("YYYY.MM");
 };
 
-/** "2026-08-20" → "8/20" — 요일 없는 짧은 표기(유의사항 인라인용) */
+/** "2026-08-20" → "8/20" */
 export const formatSlashDate = (dateIso: string): string => {
   return dayjs(`${dateIso}T00:00:00`).format("M/D");
 };
@@ -109,6 +112,16 @@ export const isApplicationActive = (): boolean => {
     "day",
     "[]",
   );
+};
+
+export const checkApplicationActiveClient = (): boolean => {
+  if (typeof window !== "undefined") {
+    const mock = window.sessionStorage.getItem("MOCK_RECRUITING_ACTIVE");
+    if (mock !== null) {
+      return mock === "true";
+    }
+  }
+  return isApplicationActive();
 };
 
 // 9번(면접 가능한 대체 일자/시간) DateTimePicker의 min/max — 면접 기간 전체
