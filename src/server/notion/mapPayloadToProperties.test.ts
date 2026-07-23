@@ -14,11 +14,11 @@ const stepOne: StepOneFormData = {
   college: "정보과학대학",
   major: "IT융합전공",
   grade: "2학년 1학기",
-  department: "PM",
+  department: "pm",
 };
 
 const baseStepTwo: StepTwoFormData = {
-  department: "PM",
+  department: "pm",
   interviewAvailability: {},
   noAvailableTime: false,
   otherTime: [],

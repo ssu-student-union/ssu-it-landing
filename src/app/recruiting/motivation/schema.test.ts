@@ -3,7 +3,7 @@ import { buildStepTwoSchema, stepTwoInitialValues } from "./schema";
 
 const validPmData = {
   ...stepTwoInitialValues,
-  department: "PM",
+  department: "pm",
   interviewAvailability: {},
   noAvailableTime: true,
   otherTime: [{ start: "2026-02-01T19:00", end: "2026-02-01T20:00" }],
@@ -29,13 +29,13 @@ describe("buildStepTwoSchema", () => {
   });
 
   it("PM 부서의 유효한 데이터는 통과한다", () => {
-    const schema = buildStepTwoSchema("PM");
+    const schema = buildStepTwoSchema("pm");
     const result = schema.safeParse(validPmData);
     expect(result.success).toBe(true);
   });
 
   it("PM 부서에서 taskPriorities를 다 채우지 않으면 실패한다", () => {
-    const schema = buildStepTwoSchema("PM");
+    const schema = buildStepTwoSchema("pm");
     const result = schema.safeParse({
       ...validPmData,
       taskPriorities: { "student-council-site": "1" },
@@ -49,17 +49,17 @@ describe("buildStepTwoSchema", () => {
   });
 
   it("PM 부서에서 공통 문항(motivation)이 비어있으면 실패한다", () => {
-    const schema = buildStepTwoSchema("PM");
+    const schema = buildStepTwoSchema("pm");
     const result = schema.safeParse({ ...validPmData, motivation: "" });
     expect(result.success).toBe(false);
   });
 
   it("Frontend 부서는 techStack/projectExperience에 2000자 제한이 적용된다", () => {
-    const schema = buildStepTwoSchema("Frontend");
+    const schema = buildStepTwoSchema("frontend");
     const tooLong = "a".repeat(2001);
     const result = schema.safeParse({
       ...stepTwoInitialValues,
-      department: "Frontend",
+      department: "frontend",
       interviewAvailability: {},
       noAvailableTime: true,
       otherTime: [{ start: "2026-02-01T19:00", end: "2026-02-01T20:00" }],
