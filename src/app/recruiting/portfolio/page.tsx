@@ -97,8 +97,20 @@ export default function RecruitingStepThreePage() {
     submitMutation.mutate(buildFormData());
   };
 
+  const handleAutofill = () => {
+    setValues((prev) => ({
+      ...prev,
+      portfolioLink: "https://github.com/ssu-student-union/ssu-it-landing",
+      activityCommitmentAck: true,
+    }));
+  };
+
   return (
-    <StepLayout currentStep={3} title="3. 포트폴리오 제출 및 완료">
+    <StepLayout
+      currentStep={3}
+      title="3. 포트폴리오 제출 및 완료"
+      onAutofill={handleAutofill}
+    >
       <FormRenderer
         fields={stepThreeFields}
         values={values}

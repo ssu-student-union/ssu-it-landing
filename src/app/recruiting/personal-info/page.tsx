@@ -30,8 +30,25 @@ export default function RecruitingStepOnePage() {
     router.push("/recruiting/motivation");
   };
 
+  const handleAutofill = () => {
+    setValues((prev) => ({
+      ...prev,
+      agree: true,
+      name: "테스터",
+      studentId: "20241234",
+      phone: "010-1234-5678",
+      college: "IT대학",
+      major: "소프트웨어학부",
+      grade: "2학년-2학기",
+    }));
+  };
+
   return (
-    <StepLayout currentStep={1} title="1. 개인정보 동의 및 작성">
+    <StepLayout
+      currentStep={1}
+      title="1. 개인정보 동의 및 작성"
+      onAutofill={handleAutofill}
+    >
       <FormRenderer
         fields={stepOneFields}
         values={values}

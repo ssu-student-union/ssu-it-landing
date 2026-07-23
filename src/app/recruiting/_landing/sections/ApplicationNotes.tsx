@@ -1,3 +1,4 @@
+import { Callout } from "../../_components/form";
 import { SectionTitle } from "../components";
 import { notes } from "../content";
 
@@ -16,26 +17,24 @@ export const ApplicationNotes = () => (
         ))}
       </ul>
 
-      <div className="mt-8 flex flex-col gap-2 pl-4 sm:pl-6">
-        <p className="font-medium text-base text-ink sm:text-lg">
-          {notes.contactIntro}
-        </p>
-        <ul className="flex flex-col gap-1.5">
+      <Callout heading={notes.contactIntro} className="mt-8">
+        <p>{notes.contactNote}</p>
+        <ul className="mt-3 flex flex-col gap-1.5">
           {notes.contacts.map((contact) => (
-            <li key={contact.label} className="text-sm sm:text-base">
-              <span className="font-semibold text-ink">{contact.label}: </span>
+            <li key={contact.label}>
+              <span className="font-semibold">{contact.label}: </span>
               <a
                 href={contact.href}
                 target="_blank"
                 rel="noreferrer"
-                className="text-muted underline underline-offset-2 hover:text-ink"
+                className="underline underline-offset-2 hover:text-brand"
               >
                 {contact.value}
               </a>
             </li>
           ))}
         </ul>
-      </div>
+      </Callout>
     </div>
   </section>
 );

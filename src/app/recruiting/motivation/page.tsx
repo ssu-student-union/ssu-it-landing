@@ -58,10 +58,52 @@ export default function RecruitingStepTwoPage() {
     router.push("/recruiting/portfolio");
   };
 
+  const handleAutofill = () => {
+    setValues((prev) => ({
+      ...prev,
+      interviewAvailability: {
+        "2026-08-01": ["13:00", "14:00"],
+        "2026-08-02": ["13:00", "14:00"],
+        "2026-08-03": ["19:00", "20:00"],
+      },
+      noAvailableTime: false,
+      otherTime: [],
+      motivation:
+        "IT지원위원회 지원동기 테스트 문장입니다. 잘 설계된 협업 프로세스와 실제 사용자가 사용하는 환경에서 배우고 기여하고 싶습니다.",
+      fitReason:
+        "제 리소스를 파악하고 계획적으로 움직이며, 팀원들과 적극적으로 의사소통하는 태도가 IT지원위원회의 인재상과 잘 부합한다고 생각합니다.",
+      // PM
+      taskPriorities: {
+        "student-council-site": "1",
+        "club-council-site": "2",
+        ssuport: "3",
+        etc: "4",
+      },
+      priorityTaskStrategy:
+        "1순위 과제 기획 전략 테스트 문장입니다. 유저의 목소리를 듣고 데이터를 분석하여 최적의 요구사항을 도출하겠습니다.",
+      // HR
+      processStructureExperience:
+        "비효율적인 엑셀 취합 프로세스를 슬랙 봇과 자동화 스프레드시트를 이용해 해결한 경험이 있습니다.",
+      stakeholderCoordinationExperience:
+        "일정 차이가 있던 기획과 디자인 간 소통을 정기 회의를 만들어 중재한 경험이 있습니다.",
+      // Design & Backend & others
+      skillAnswer:
+        "해당 분야에 최적화된 기술 스택과 풍부한 프로젝트 관련 경험이 있습니다. 적극적으로 배우고 성장하겠습니다.",
+      tasks: [
+        "UI/UX 디자인 유지보수",
+        "IT지원위원회의 서비스 마케팅/굿즈 제작",
+      ],
+    }));
+  };
+
   const requirements = departmentRequirementsFor(values.department);
 
   return (
-    <StepLayout currentStep={2} title="2. 면접 시간 선택 및 지원동기 작성">
+    <StepLayout
+      currentStep={2}
+      title="2. 면접 시간 선택 및 지원동기 작성"
+      onAutofill={handleAutofill}
+    >
       {requirements && <Callout>{requirements}</Callout>}
       <FormRenderer
         fields={stepTwoFields}

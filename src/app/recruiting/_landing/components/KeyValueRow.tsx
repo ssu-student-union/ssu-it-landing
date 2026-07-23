@@ -30,13 +30,13 @@ export const KeyValueRow = ({
   >
     <span
       aria-hidden="true"
-      className="absolute top-2 left-2 size-[5px] rounded-full bg-ink sm:top-2.5 lg:top-3"
+      className="absolute top-2 left-2 size-1.25 rounded-full bg-ink sm:top-2.5 lg:top-3"
     />
     {connector && (
       // 점 중심(left 0.5rem+반지름, top 점상단+반지름)에서 위·아래로 0.75rem씩 띄운 선분.
       <span
         aria-hidden="true"
-        className="absolute top-[calc(1.25rem+2.5px)] left-[0.625rem] h-[calc(100%-1.5rem)] w-px bg-line sm:top-[calc(1.375rem+2.5px)] lg:top-[calc(1.5rem+2.5px)]"
+        className="absolute top-[calc(1.25rem+2.5px)] left-2.5 h-[calc(100%-1.5rem)] w-px bg-line sm:top-[calc(1.375rem+2.5px)] lg:top-[calc(1.5rem+2.5px)]"
       />
     )}
     <span className="whitespace-nowrap font-bold text-base text-ink sm:text-lg lg:text-xl">

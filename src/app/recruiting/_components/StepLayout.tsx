@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { Heading } from "../../../common/Heading";
 import { RECRUITING_STEPS } from "../_lib/constants";
+import { FormAutofillFAB } from "./FormAutofillFAB";
 import { StepIndicator } from "./StepIndicator";
 
 type StepLayoutProps = {
@@ -10,6 +11,8 @@ type StepLayoutProps = {
   title?: string;
   /** 페이지별 레이아웃 클래스. 기본 `gap-10`을 통째로 대체하므로 다른 gap이 필요하면 gap까지 포함해 넘긴다. */
   className?: string;
+  /** 테스트용 자동 입력 콜백. */
+  onAutofill?: () => void;
   children: ReactNode;
 };
 
@@ -18,6 +21,7 @@ export const StepLayout = ({
   currentStep,
   title,
   className = "gap-10",
+  onAutofill,
   children,
 }: StepLayoutProps) => (
   <main
@@ -26,5 +30,8 @@ export const StepLayout = ({
     <StepIndicator steps={RECRUITING_STEPS} currentStep={currentStep} />
     {title && <Heading as="h1">{title}</Heading>}
     {children}
+    {currentStep >= 1 && currentStep <= 3 && onAutofill && (
+      <FormAutofillFAB onAutofill={onAutofill} />
+    )}
   </main>
 );

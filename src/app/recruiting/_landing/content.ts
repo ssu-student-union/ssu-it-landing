@@ -120,7 +120,8 @@ export const notes = {
     "제출된 지원서는 채용 목적 외 사용되지 않으며, 마감 후 수정·추가 제출은 불가합니다.",
     `지원 마감: ${formatDotDate(APPLICATION_PERIOD.end)} 23:59 (마감 후 접수 불가)`,
   ],
-  contactIntro: "문의: (평일 기준 1~2일 내 답변)",
+  contactIntro: "궁금한 점은 아래 채널로 편하게 문의해주세요!",
+  contactNote: "평일 기준 1~2일 내 답변드려요",
   contacts: [
     {
       label: "Instagram",
@@ -133,7 +134,7 @@ export const notes = {
       href: "mailto:ssudeveloper2024@gmail.com",
     },
     {
-      label: "Kakao",
+      label: "kakao",
       value: "http://pf.kakao.com/_SRGqn",
       href: "http://pf.kakao.com/_SRGqn",
     },
