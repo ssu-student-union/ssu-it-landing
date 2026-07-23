@@ -23,11 +23,6 @@ export async function POST(request: Request) {
   const json = await request.json().catch(() => null);
   const parsed = bodySchema.safeParse(json);
   if (!parsed.success) {
-    await logAbuseAttempt({
-      reason: "invalid_email",
-      endpoint: "notify",
-      request,
-    });
     return NextResponse.json(
       { ok: false, error: "invalid_email" },
       { status: 400 },

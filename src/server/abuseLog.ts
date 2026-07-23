@@ -7,7 +7,6 @@ export type AbuseReason =
   | "invalid_request"
   | "validation_failed"
   | "file_too_large"
-  | "invalid_email"
   | "bot_detected";
 
 export type AbuseLogEntry = {
