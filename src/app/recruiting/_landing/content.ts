@@ -65,9 +65,9 @@ export type PartRow = {
 };
 
 export const parts = {
-  title: "모집 파트별 인원/자격/우대사항",
+  title: "모집 파트별 인원/자격/특이시항",
   cornerLabel: "파트",
-  columns: ["인원", "자격 · 우대사항"],
+  columns: ["인원", "자격 · 특이시항"],
   rows: [
     { part: "PM", count: "1~2명", note: "-" },
     { part: "Design", count: "2명", note: "-" },
