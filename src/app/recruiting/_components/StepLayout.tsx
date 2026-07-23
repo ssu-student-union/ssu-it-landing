@@ -1,5 +1,7 @@
-import type { ReactNode } from "react";
+import { useRouter } from "next/navigation";
+import { type ReactNode, useEffect } from "react";
 import { Heading } from "../../../common/Heading";
+import { isApplicationActive } from "../../../data/recruitingSchedule";
 import { RECRUITING_STEPS } from "../_lib/constants";
 import { FormAutofillFAB } from "./FormAutofillFAB";
 import { StepIndicator } from "./StepIndicator";
@@ -26,15 +28,27 @@ export const StepLayout = ({
   className = "gap-10",
   onAutofill,
   children,
-}: StepLayoutProps) => (
-  <main
-    className={`mx-auto flex w-full max-w-6xl flex-col px-8 py-16 sm:px-12 lg:px-32 xl:px-40 ${className}`}
-  >
-    <StepIndicator steps={RECRUITING_STEPS} currentStep={currentStep} />
-    {title && <Heading as="h1">{title}</Heading>}
-    {children}
-    {SHOW_AUTOFILL && currentStep >= 1 && currentStep <= 3 && onAutofill && (
-      <FormAutofillFAB onAutofill={onAutofill} />
-    )}
-  </main>
-);
+}: StepLayoutProps) => {
+  const router = useRouter();
+
+  // 지원 기간이 끝났는데 폼 페이지에 직접 진입한 경우 랜딩(마감 화면)으로
+  // 돌려보낸다. 완료 화면(currentStep > 3)은 이미 제출을 마친 뒤라 제외한다.
+  useEffect(() => {
+    if (currentStep <= 3 && !isApplicationActive()) {
+      router.replace("/recruiting");
+    }
+  }, [currentStep, router]);
+
+  return (
+    <main
+      className={`mx-auto flex w-full max-w-6xl flex-col px-8 py-16 sm:px-12 lg:px-32 xl:px-40 ${className}`}
+    >
+      <StepIndicator steps={RECRUITING_STEPS} currentStep={currentStep} />
+      {title && <Heading as="h1">{title}</Heading>}
+      {children}
+      {SHOW_AUTOFILL && currentStep >= 1 && currentStep <= 3 && onAutofill && (
+        <FormAutofillFAB onAutofill={onAutofill} />
+      )}
+    </main>
+  );
+};

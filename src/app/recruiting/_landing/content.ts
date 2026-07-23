@@ -9,6 +9,7 @@ import {
   formatYearMonth,
   GENERAL_MEETING_DATE,
   INTERVIEW_DATES,
+  NEXT_RECRUITING_ROUND_DATE,
 } from "../../../data/recruitingSchedule";
 
 /** Hero가 쓰는 카피/설정. 나머지 랜딩 섹션 카피는 아래에 이어 둔다. */
@@ -139,6 +140,14 @@ export const notes = {
       href: "http://pf.kakao.com/_SRGqn",
     },
   ] satisfies Contact[],
+} as const;
+
+/** 지원 기간이 아닐 때 Hero 자리를 대체하는 마감 안내 카피. */
+export const closedNotice = {
+  headlineLines: ["모집 기간이 되면 메일로 알려드릴게요", "감사합니다!"],
+  nextRoundLabel: `6기 모집 예정 날짜: ${formatDotDate(NEXT_RECRUITING_ROUND_DATE)}`,
+  emailPlaceholder: "ex. abc123@gmail.com",
+  submitLabel: "알림 신청하기",
 } as const;
 
 export const timeline = { title: "모집 일정" } as const;

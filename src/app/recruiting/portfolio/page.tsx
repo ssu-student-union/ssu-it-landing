@@ -24,6 +24,7 @@ async function submitApplication(formData: FormData): Promise<void> {
   } catch {
     throw new Error("네트워크 연결을 확인해주세요.");
   }
+  if (response.status === 403) throw new Error("APPLICATION_CLOSED");
   if (!response.ok) throw new Error("제출에 실패했어요.");
 }
 
@@ -124,21 +125,33 @@ export default function RecruitingStepThreePage() {
         onFileChange={handleFileChange}
       />
 
-      {submitMutation.isError && (
-        <div className="rounded-xl bg-red-50 p-5 text-red-600 text-sm leading-relaxed sm:text-base">
-          <p>
-            제출 중 문제가 발생했어요. 입력하신 내용은 그대로 남아있으니 다시
-            시도해주세요.
-          </p>
-          <button
-            type="button"
-            onClick={() => submitMutation.mutate(buildFormData())}
-            className="mt-3 font-medium underline underline-offset-2 hover:text-red-700"
-          >
-            다시 시도
-          </button>
-        </div>
-      )}
+      {submitMutation.isError &&
+        (submitMutation.error.message === "APPLICATION_CLOSED" ? (
+          <div className="rounded-xl bg-red-50 p-5 text-red-600 text-sm leading-relaxed sm:text-base">
+            <p>모집 기간이 종료되어 접수가 마감되었어요.</p>
+            <button
+              type="button"
+              onClick={() => router.push("/recruiting")}
+              className="mt-3 font-medium underline underline-offset-2 hover:text-red-700"
+            >
+              홈으로 돌아가기
+            </button>
+          </div>
+        ) : (
+          <div className="rounded-xl bg-red-50 p-5 text-red-600 text-sm leading-relaxed sm:text-base">
+            <p>
+              제출 중 문제가 발생했어요. 입력하신 내용은 그대로 남아있으니 다시
+              시도해주세요.
+            </p>
+            <button
+              type="button"
+              onClick={() => submitMutation.mutate(buildFormData())}
+              className="mt-3 font-medium underline underline-offset-2 hover:text-red-700"
+            >
+              다시 시도
+            </button>
+          </div>
+        ))}
 
       <div className="flex items-center justify-between gap-4">
         <Button
