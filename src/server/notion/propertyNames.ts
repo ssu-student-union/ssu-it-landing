@@ -30,3 +30,10 @@ export const NOTION_PROPERTIES = {
   /** Notion이 자동 관리하는 created_time 프로퍼티. 앱 코드에서는 값을 쓰지 않는다. */
   submittedAt: "제출 일시",
 } as const;
+
+/** 마감 화면 "알림 신청하기" 이메일을 저장하는 별도 Notion 데이터베이스 프로퍼티. */
+export const NOTIFY_PROPERTIES = {
+  email: "이메일",
+  /** Notion이 자동 관리하는 created_time 프로퍼티. 앱 코드에서는 값을 쓰지 않는다. */
+  submittedAt: "제출 일시",
+} as const;

@@ -13,7 +13,7 @@ import earthImage from "../../../assets/images/hero/earth-bottom-left.webp";
 import planetBottomRightImage from "../../../assets/images/hero/planet-bottom-right.webp";
 import planetTopRightImage from "../../../assets/images/hero/planet-top-right.webp";
 import { trackEvent } from "../../../common/analytics";
-import { Button } from "../../../common/Button";
+import { CtaButton } from "../../../common/CtaButton";
 import { dayjs } from "../../../lib";
 import { EASE_EXPO_OUT } from "../_lib/ui";
 import { hero } from "./content";
@@ -235,15 +235,14 @@ export const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3, ease: EASE_EXPO_OUT }}
           >
-            <Button
-              gradient
+            <CtaButton
               onClick={() => {
                 trackEvent("recruit_apply_click");
                 router.push(hero.applyHref);
               }}
             >
               지원하기
-            </Button>
+            </CtaButton>
           </motion.div>
         </div>
       </div>

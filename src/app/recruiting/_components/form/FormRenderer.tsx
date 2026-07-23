@@ -299,10 +299,7 @@ export function FormRenderer<T extends FormValues>({
 
   const consent = (field: Extract<FieldConfig, { type: "consent" }>) => (
     <Fragment key={field.key}>
-      <Callout>
-        <p className="font-semibold">{field.heading}</p>
-        <div className="mt-4 flex flex-col gap-1">{field.body}</div>
-      </Callout>
+      <Callout heading={field.heading}>{field.body}</Callout>
       <div id={`field-${field.key}`}>
         <Checkbox
           label={field.checkboxLabel}

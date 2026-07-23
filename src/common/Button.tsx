@@ -5,10 +5,6 @@ import Image from "next/image";
 import type { ReactNode } from "react";
 import arrowIcon from "../assets/icons/arrow.svg";
 
-/** Figma 원본 디자인의 그라디언트 색(Hero CTA 등). 스톱 간격은 원본처럼 비균등(0/40/75/100%). */
-const GRADIENT =
-  "linear-gradient(90deg, #6197ee 0%, #10d7e2 40%, #45b5e9 75%, #6197ee 100%)";
-
 type ButtonSize = "sm" | "md" | "lg";
 
 /** 크기별 padding/글자/아이콘 프리셋. `size`를 지정하면 이 값으로 고정된다. */
@@ -25,8 +21,6 @@ const RESPONSIVE_ICON_CLASSES = "size-6 sm:size-8 md:size-10";
 
 type ButtonProps = {
   icon?: "prev" | "next";
-  /** true면 브랜드 solid 대신 유동적으로 흐르는 그라디언트 배경을 쓴다(Hero CTA 등). */
-  gradient?: boolean;
   /** 생략하면 화면 폭에 따라 sm→md→lg로 자동 확대된다. 특정 크기로 고정하려면 지정한다. */
   size?: ButtonSize;
   children?: ReactNode;
@@ -34,7 +28,6 @@ type ButtonProps = {
 
 export const Button = ({
   icon,
-  gradient,
   size,
   className,
   children,
@@ -51,12 +44,7 @@ export const Button = ({
   return (
     <motion.button
       type={type}
-      className={`flex items-center justify-center gap-0.5 whitespace-nowrap rounded-xl transition-colors ${controlClassName} ${
-        gradient
-          ? "text-[#041621]"
-          : "bg-brand text-on-brand hover:bg-brand-hover active:bg-brand-active"
-      } ${icon ? "font-medium" : "font-semibold"} ${className ?? ""}`}
-      style={gradient ? { backgroundImage: GRADIENT } : undefined}
+      className={`flex items-center justify-center gap-0.5 whitespace-nowrap rounded-xl bg-brand text-on-brand transition-colors hover:bg-brand-hover active:bg-brand-active ${controlClassName} ${icon ? "font-medium" : "font-semibold"} ${className ?? ""}`}
       whileTap={{ scale: 0.97, transition: { duration: 0.1 } }}
       {...props}
     >
