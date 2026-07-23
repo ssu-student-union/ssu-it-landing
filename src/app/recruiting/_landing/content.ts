@@ -48,7 +48,7 @@ export const overview = {
     },
     {
       label: "활동 방식",
-      value: "전체회의 : 월 1회 TF별 회의 : TF별 상이 + 상시 협업",
+      value: "전체 회의 : 월 1회\nTF 회의 : TF별 상이 + 상시 협업",
     },
     { label: "지원 기간", value: `~${formatDotDate(APPLICATION_PERIOD.end)}` },
     { label: "활동 혜택", value: "실무 프로젝트 경험, OB 네트워크, 수료증 등" },
