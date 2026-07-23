@@ -38,7 +38,9 @@ type InterviewFieldParams = {
   dates: InterviewDateRange[];
 };
 
-/** 날짜마다 실제 가능한 시간이 달라도 표는 하나로 두고, 해당 없는 칸만 선택 불가로 표시한다. */
+/** 날짜마다 실제 가능한 시간이 달라도 표는 하나로 두고, 해당 없는 칸만 선택 불가로 표시한다.
+ * 날짜(보통 3~4개)보다 시간대가 더 많아 행에 시간대를, 열에 날짜를 두는 게(transpose)
+ * 모바일에서 가로 스크롤을 줄여 더 읽기 쉽다. */
 function buildGroup(groupDates: InterviewDateRange[]): MatrixGroup | undefined {
   if (groupDates.length === 0) return undefined;
 
@@ -55,14 +57,15 @@ function buildGroup(groupDates: InterviewDateRange[]): MatrixGroup | undefined {
   ].sort();
 
   return {
-    columns: allSlots.map(formatSlotLabel),
-    rows: groupDates.map((d) => ({
-      id: d.id,
-      label: formatInterviewDate(d.id),
+    columns: groupDates.map((d) => formatInterviewDate(d.id)),
+    rows: allSlots.map((slot) => ({
+      id: slot,
+      label: formatSlotLabel(slot),
     })),
-    slots: allSlots,
+    slots: groupDates.map((d) => d.id),
+    // 행=시간대(rowId), 열=날짜(slot)로 뒤집혔으니 조회 순서도 맞춰 뒤집는다.
     isSlotAvailable: (rowId, slot) =>
-      slotsByDate.get(rowId)?.has(slot) ?? false,
+      slotsByDate.get(slot)?.has(rowId) ?? false,
   };
 }
 
@@ -80,19 +83,21 @@ export function buildInterviewField({
     title: "면접 가능한 시간을 선택해주세요.",
     groups: group ? [group] : [],
     disabledWhen: (values) => Boolean(values.noAvailableTime),
+    // 표에서 행=시간대(rowId), 열=날짜(slot)로 뒤집혔지만 저장 형태(날짜 → 시간대 목록)는
+    // 그대로 유지한다 — 그래서 아래 세 함수만 두 인자의 역할을 뒤집어 호출한다.
     getChecked: (values, rowId, slot) =>
-      availabilityOf(values)[rowId]?.includes(slot) ?? false,
+      availabilityOf(values)[slot]?.includes(rowId) ?? false,
     onToggle: (values, rowId, slot, checked) => ({
       ...values,
       interviewAvailability: toggleSlot(
         availabilityOf(values),
-        rowId,
         slot,
+        rowId,
         checked,
       ),
       noAvailableTime: checked ? false : values.noAvailableTime,
     }),
-    cellAriaLabel: (row, slot) => `${formatInterviewDate(row.id)} ${slot}`,
+    cellAriaLabel: (row, slot) => `${formatInterviewDate(slot)} ${row.label}`,
     extraCheckbox: {
       key: "noAvailableTime",
       label: "가능한 시간이 없음",
