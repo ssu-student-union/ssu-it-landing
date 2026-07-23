@@ -145,7 +145,7 @@ export const notes = {
 /** 지원 기간이 아닐 때 Hero 자리를 대체하는 마감 안내 카피. */
 export const closedNotice = {
   headlineLines: ["모집 기간이 되면 메일로 알려드릴게요", "감사합니다!"],
-  nextRoundLabel: `6기 모집 예정 날짜: ${formatDotDate(NEXT_RECRUITING_ROUND_DATE)}`,
+  nextRoundLabel: `6기 모집 예정 날짜: ${formatYearMonth(NEXT_RECRUITING_ROUND_DATE)}`,
   emailPlaceholder: "ex. abc123@gmail.com",
   submitLabel: "알림 신청하기",
 } as const;
