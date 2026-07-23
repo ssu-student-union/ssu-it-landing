@@ -7,9 +7,9 @@ import { hrFields } from "./hr";
 import { pmFields } from "./pm";
 
 export const departmentFields: Record<DepartmentId, FieldConfig[]> = {
-  PM: pmFields,
-  Design: designFields,
-  Frontend: frontendFields,
-  Backend: backendFields,
-  HR: hrFields,
+  pm: pmFields,
+  design: designFields,
+  frontend: frontendFields,
+  backend: backendFields,
+  hr: hrFields,
 };

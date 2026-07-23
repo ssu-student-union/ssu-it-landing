@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useEffect } from "react";
 import completeImage from "../../../assets/images/complete.webp";
 import {
-  ANNOUNCEMENT_DATE,
+  DOCUMENT_RESULT_DATE,
   formatShortDate,
 } from "../../../data/recruitingSchedule";
 import { StepLayout } from "../_components/StepLayout";
@@ -37,7 +37,7 @@ export default function RecruitingCompletePage() {
       <p className="font-semibold text-ink text-xl leading-relaxed sm:text-2xl md:text-[1.875rem]">
         서류 합격 발표일은{" "}
         <span className="font-extrabold text-brand">
-          {formatShortDate(ANNOUNCEMENT_DATE)}
+          {formatShortDate(DOCUMENT_RESULT_DATE)}
         </span>{" "}
         입니다!
         <br />

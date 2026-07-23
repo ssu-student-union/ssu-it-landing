@@ -1,6 +1,6 @@
 import {
   type DepartmentId,
-  departments,
+  isDepartmentId,
 } from "../../../../data/recruitingDepartments";
 import {
   buildStepTwoSchema,
@@ -33,10 +33,6 @@ export type SubmissionValidationResult =
       success: false;
       errors: { stepOne: unknown; stepTwo: unknown; stepThree: unknown };
     };
-
-function isDepartmentId(value: string): value is DepartmentId {
-  return departments.some((department) => department.id === value);
-}
 
 function extractDepartment(stepOne: unknown): DepartmentId | "" {
   if (

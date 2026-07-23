@@ -4,7 +4,6 @@ import {
   formatSlotLabel,
   INTERVIEW_PERIOD_MAX,
   INTERVIEW_PERIOD_MIN,
-  isWeekendDate,
 } from "../../../../data/recruitingSchedule";
 import type { FieldConfig, FormValues } from "../../_lib/schema";
 
@@ -40,11 +39,7 @@ type InterviewFieldParams = {
 };
 
 /** 날짜마다 실제 가능한 시간이 달라도 표는 하나로 두고, 해당 없는 칸만 선택 불가로 표시한다. */
-function buildGroup(
-  groupDates: InterviewDateRange[],
-  cornerLabel: string,
-  className?: string,
-): MatrixGroup | undefined {
+function buildGroup(groupDates: InterviewDateRange[]): MatrixGroup | undefined {
   if (groupDates.length === 0) return undefined;
 
   const slotsByDate = new Map(
@@ -60,8 +55,6 @@ function buildGroup(
   ].sort();
 
   return {
-    cornerLabel,
-    className,
     columns: allSlots.map(formatSlotLabel),
     rows: groupDates.map((d) => ({
       id: d.id,
@@ -73,27 +66,19 @@ function buildGroup(
   };
 }
 
-/** 면접 가능 시간 문항. 부서별 날짜/시간 범위는 호출부(각 부서 파일)가 직접 넘긴다. */
+/** 면접 가능 시간 문항. 부서별 날짜/시간 범위는 호출부(각 부서 파일)가 직접 넘긴다.
+ * 평일/주말을 나누지 않고 모든 날짜를 표 하나에 담는다 — 날짜별로 실제 가능한 시간이
+ * 달라도 `isSlotAvailable`이 칸 단위로 선택 가능 여부를 가려준다. */
 export function buildInterviewField({
   dates,
 }: InterviewFieldParams): FieldConfig {
-  const weekdayGroup = buildGroup(
-    dates.filter((d) => !isWeekendDate(d.id)),
-    "평일",
-  );
-  const weekendGroup = buildGroup(
-    dates.filter((d) => isWeekendDate(d.id)),
-    "주말",
-    "mt-8",
-  );
+  const group = buildGroup(dates);
 
   return {
     type: "checkbox-matrix",
     key: "interviewAvailability",
     title: "면접 가능한 시간을 선택해주세요.",
-    groups: [weekdayGroup, weekendGroup].filter((g): g is MatrixGroup =>
-      Boolean(g),
-    ),
+    groups: group ? [group] : [],
     disabledWhen: (values) => Boolean(values.noAvailableTime),
     getChecked: (values, rowId, slot) =>
       availabilityOf(values)[rowId]?.includes(slot) ?? false,

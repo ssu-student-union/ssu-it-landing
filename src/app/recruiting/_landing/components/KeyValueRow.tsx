@@ -43,7 +43,7 @@ export const KeyValueRow = ({
       {label}
     </span>
     <span
-      className={`font-medium text-base sm:text-lg lg:text-xl ${
+      className={`whitespace-pre-line font-medium text-base sm:text-lg lg:text-xl ${
         dimmed ? "text-inactive" : "text-ink"
       }`}
     >

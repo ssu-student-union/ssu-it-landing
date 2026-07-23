@@ -50,7 +50,7 @@ function Sections({ sections }: { sections: RequirementSection[] }) {
 }
 
 const REQUIREMENTS: Record<DepartmentId, ReactNode> = {
-  PM: (
+  pm: (
     <Sections
       sections={[
         {
@@ -98,7 +98,7 @@ const REQUIREMENTS: Record<DepartmentId, ReactNode> = {
       ]}
     />
   ),
-  Design: (
+  design: (
     <Sections
       sections={[
         {
@@ -131,7 +131,7 @@ const REQUIREMENTS: Record<DepartmentId, ReactNode> = {
       ]}
     />
   ),
-  Frontend: (
+  frontend: (
     <Sections
       sections={[
         {
@@ -159,7 +159,7 @@ const REQUIREMENTS: Record<DepartmentId, ReactNode> = {
       ]}
     />
   ),
-  Backend: (
+  backend: (
     <Sections
       sections={[
         {
@@ -245,7 +245,7 @@ const REQUIREMENTS: Record<DepartmentId, ReactNode> = {
       ]}
     />
   ),
-  HR: (
+  hr: (
     <Sections
       sections={[
         {
