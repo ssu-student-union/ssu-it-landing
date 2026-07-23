@@ -1,7 +1,7 @@
 import { useRouter } from "next/navigation";
 import { type ReactNode, useEffect } from "react";
 import { Heading } from "../../../common/Heading";
-import { isApplicationActive } from "../../../data/recruitingSchedule";
+import { checkApplicationActiveClient } from "../../../data/recruitingSchedule";
 import { RECRUITING_STEPS } from "../_lib/constants";
 import { FormAutofillFAB } from "./FormAutofillFAB";
 import { StepIndicator } from "./StepIndicator";
@@ -19,7 +19,7 @@ type StepLayoutProps = {
 };
 
 // 테스트용 자동 입력 FAB 노출 여부 (이 값을 false로 변경하면 폼 전체에서 자동 입력 버튼이 제거됩니다)
-const SHOW_AUTOFILL = true;
+export const SHOW_AUTOFILL = true;
 
 /** 리크루팅 4개 페이지가 공유하는 페이지 골격: `<main>` + 스텝 표시 + 제목. */
 export const StepLayout = ({
@@ -31,10 +31,10 @@ export const StepLayout = ({
 }: StepLayoutProps) => {
   const router = useRouter();
 
-  // 지원 기간이 끝났는데 폼 페이지에 직접 진입한 경우 랜딩(마감 화면)으로
+  // 지원 기간 외에 폼 스텝(1~3) 진입 시 마감 화면으로
   // 돌려보낸다. 완료 화면(currentStep > 3)은 이미 제출을 마친 뒤라 제외한다.
   useEffect(() => {
-    if (currentStep <= 3 && !isApplicationActive()) {
+    if (currentStep <= 3 && !checkApplicationActiveClient()) {
       router.replace("/recruiting");
     }
   }, [currentStep, router]);

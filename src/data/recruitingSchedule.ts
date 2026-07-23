@@ -114,6 +114,16 @@ export const isApplicationActive = (): boolean => {
   );
 };
 
+export const checkApplicationActiveClient = (): boolean => {
+  if (typeof window !== "undefined") {
+    const mock = window.sessionStorage.getItem("MOCK_RECRUITING_ACTIVE");
+    if (mock !== null) {
+      return mock === "true";
+    }
+  }
+  return isApplicationActive();
+};
+
 // 9번(면접 가능한 대체 일자/시간) DateTimePicker의 min/max — 면접 기간 전체
 export const INTERVIEW_PERIOD_MIN = `${INTERVIEW_DATES[0]}T00:00`;
 export const INTERVIEW_PERIOD_MAX = `${INTERVIEW_DATES[INTERVIEW_DATES.length - 1]}T23:59`;
