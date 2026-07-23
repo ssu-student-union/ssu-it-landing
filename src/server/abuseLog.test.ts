@@ -46,7 +46,7 @@ describe("logAbuseAttempt", () => {
 
   it("x-forwarded-for가 없으면 IP를 unknown으로 기록한다", async () => {
     await logAbuseAttempt({
-      reason: "invalid_email",
+      reason: "bot_detected",
       endpoint: "notify",
       request: new Request("https://example.com/api/recruiting/notify", {
         method: "POST",
