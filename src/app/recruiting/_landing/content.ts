@@ -69,15 +69,15 @@ export const parts = {
   cornerLabel: "파트",
   columns: ["인원", "자격 · 우대사항"],
   rows: [
-    { part: "PM", count: "1~2명", note: "TF 무관" },
+    { part: "PM", count: "1~2명", note: "-" },
     { part: "Design", count: "2명", note: "-" },
-    { part: "Frontend", count: "0명", note: "", dimmed: true },
+    { part: "Frontend", count: "0명", note: "5기 모집 없음", dimmed: true },
     {
       part: "Backend",
       count: "6명",
       note: "TF 이외 AWS/SSO 관련 기술 보유자 필요",
     },
-    { part: "HR", count: "1~2명", note: "TF 무관" },
+    { part: "HR", count: "1~2명", note: "-" },
   ] satisfies PartRow[],
 } as const;
 

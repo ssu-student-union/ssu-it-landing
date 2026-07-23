@@ -1,13 +1,33 @@
+import { checkBotId } from "botid/server";
 import { NextResponse } from "next/server";
 import { z } from "zod";
+import { logAbuseAttempt } from "../../../../server/abuseLog";
 import { subscribeRecruitingNotify } from "../../../../server/notion";
 
 const bodySchema = z.object({ email: z.string().email() });
 
 export async function POST(request: Request) {
+  const verdict = await checkBotId();
+  if (verdict.isBot) {
+    await logAbuseAttempt({
+      reason: "bot_detected",
+      endpoint: "notify",
+      request,
+    });
+    return NextResponse.json(
+      { ok: false, error: "forbidden" },
+      { status: 403 },
+    );
+  }
+
   const json = await request.json().catch(() => null);
   const parsed = bodySchema.safeParse(json);
   if (!parsed.success) {
+    await logAbuseAttempt({
+      reason: "invalid_email",
+      endpoint: "notify",
+      request,
+    });
     return NextResponse.json(
       { ok: false, error: "invalid_email" },
       { status: 400 },
