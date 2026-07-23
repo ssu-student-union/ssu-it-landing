@@ -3,7 +3,7 @@
 import { useId, useState } from "react";
 import { useFieldFocusState } from "../../_lib/hooks";
 import { maxLengthExceededMessage, REQUIRED_MESSAGE } from "../../_lib/schema";
-import { FieldError } from "../question/FieldError";
+import { FieldError } from "../question";
 
 type TextfieldProps = {
   label?: string;
