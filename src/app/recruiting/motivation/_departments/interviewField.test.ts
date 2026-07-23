@@ -5,8 +5,7 @@ import { buildInterviewField } from "./interviewField";
 type CheckboxMatrixField = Extract<FieldConfig, { type: "checkbox-matrix" }>;
 
 function build(dates: { id: string; start: string; end: string }[]) {
-  const field = buildInterviewField({ dates }) as CheckboxMatrixField;
-  return field;
+  return buildInterviewField({ dates }) as CheckboxMatrixField;
 }
 
 describe("buildInterviewField", () => {
