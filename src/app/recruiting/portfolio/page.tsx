@@ -61,7 +61,7 @@ export default function RecruitingStepThreePage() {
       if (file) {
         try {
           const blob = await upload(`portfolio/${file.name}`, file, {
-            access: "public",
+            access: "private",
             handleUploadUrl: "/api/recruiting/upload",
           });
           fileUrl = blob.url;
@@ -187,8 +187,12 @@ export default function RecruitingStepThreePage() {
         >
           이전
         </Button>
-        <Button onClick={handleComplete} disabled={submitMutation.isPending}>
-          {submitMutation.isPending ? "제출 중..." : "완료"}
+        <Button
+          onClick={handleComplete}
+          disabled={submitMutation.isPending}
+          loading={submitMutation.isPending}
+        >
+          완료
         </Button>
       </div>
     </StepLayout>

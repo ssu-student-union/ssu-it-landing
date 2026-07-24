@@ -2,7 +2,6 @@ import { type HandleUploadBody, handleUpload } from "@vercel/blob/client";
 import { checkBotId } from "botid/server";
 import { NextResponse } from "next/server";
 import { isApplicationActive } from "../../../../data/recruitingSchedule";
-import { logAbuseAttempt } from "../../../../server/abuseLog";
 import { MAX_FILE_SIZE } from "../../../recruiting/portfolio/constants";
 
 /**
@@ -12,20 +11,10 @@ import { MAX_FILE_SIZE } from "../../../recruiting/portfolio/constants";
 export async function POST(request: Request) {
   const verdict = await checkBotId();
   if (verdict.isBot) {
-    await logAbuseAttempt({
-      reason: "bot_detected",
-      endpoint: "upload",
-      request,
-    });
     return NextResponse.json({ error: "forbidden" }, { status: 403 });
   }
 
   if (!isApplicationActive()) {
-    await logAbuseAttempt({
-      reason: "application_closed",
-      endpoint: "upload",
-      request,
-    });
     // 클라이언트는 upload()가 던진 에러 메시지에 담긴 이 문자열로 마감 여부를 감지한다.
     return NextResponse.json({ error: "application_closed" }, { status: 403 });
   }
@@ -50,12 +39,13 @@ export async function POST(request: Request) {
     });
     return NextResponse.json(jsonResponse);
   } catch (error) {
-    await logAbuseAttempt({
-      reason: "invalid_request",
-      endpoint: "upload",
-      request,
-      detail: error instanceof Error ? error.message : "업로드 토큰 발급 실패",
-    });
-    return NextResponse.json({ error: "upload_failed" }, { status: 400 });
+    console.error("Upload token generation error:", error);
+    return NextResponse.json(
+      {
+        error: "upload_failed",
+        detail: error instanceof Error ? error.message : String(error),
+      },
+      { status: 400 },
+    );
   }
 }
