@@ -2,8 +2,10 @@ import { z } from "zod";
 import { formatFileSize } from "../_lib/ui";
 import { MAX_FILE_SIZE } from "./constants";
 
+// url은 optional — 클라이언트 검증은 Blob 업로드 전에 실행되고, sessionStorage 복원
+// 메타에도 url이 없다. "파일이 있으면 url 필수"는 submit 라우트가 서버에서만 강제한다.
 const fileMeta = z
-  .object({ name: z.string(), size: z.number() })
+  .object({ name: z.string(), size: z.number(), url: z.url().optional() })
   .nullable()
   .refine(
     (f) => !f || f.size <= MAX_FILE_SIZE,
