@@ -3,7 +3,10 @@ import { NextResponse } from "next/server";
 import { departments } from "../../../../data/recruitingDepartments";
 import { isApplicationActive } from "../../../../data/recruitingSchedule";
 import { logAbuseAttempt } from "../../../../server/abuseLog";
-import { notifySubmissionToDiscord } from "../../../../server/discord";
+import {
+  notifyNotionFailureToDiscord,
+  notifySubmissionToDiscord,
+} from "../../../../server/discord";
 import { submitRecruitingApplication } from "../../../../server/notion";
 import { validateSubmission } from "../../../recruiting/_lib/schema";
 import { MAX_FILE_SIZE } from "../../../recruiting/portfolio/constants";
@@ -126,6 +129,7 @@ export async function POST(request: Request) {
     await submitRecruitingApplication(result.data, file);
   } catch (error) {
     console.error("Notion 제출 실패:", error);
+    await notifyNotionFailureToDiscord({ endpoint: "submit", error });
     return NextResponse.json(
       { ok: false, error: "notion_unavailable" },
       { status: 502 },
