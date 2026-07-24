@@ -9,5 +9,6 @@ initBotId({
   protect: [
     { path: "/api/recruiting/submit", method: "POST" },
     { path: "/api/recruiting/notify", method: "POST" },
+    { path: "/api/recruiting/upload", method: "POST" },
   ],
 });
