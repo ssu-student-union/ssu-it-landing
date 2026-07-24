@@ -1,6 +1,7 @@
 "use client";
 
 import { useMutation } from "@tanstack/react-query";
+import { upload } from "@vercel/blob/client";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { trackEvent } from "../../../common/analytics";
@@ -16,10 +17,11 @@ async function submitApplication(formData: FormData): Promise<void> {
   let response: Response;
   try {
     // Content-Type을 직접 지정하면 multipart boundary가 빠져 서버 파싱이 실패하므로 지정하지 않는다.
+    // 서버가 이 요청 안에서 Blob 다운로드 + Notion 업로드까지 수행하므로 타임아웃을 넉넉히 둔다.
     response = await fetch("/api/recruiting/submit", {
       method: "POST",
       body: formData,
-      signal: AbortSignal.timeout(10_000),
+      signal: AbortSignal.timeout(30_000),
     });
   } catch {
     throw new Error("네트워크 연결을 확인해주세요.");
@@ -53,7 +55,29 @@ export default function RecruitingStepThreePage() {
   }, []);
 
   const submitMutation = useMutation({
-    mutationFn: submitApplication,
+    // 파일은 서버리스 본문 한도(~4.5MB)를 피해 Blob에 직접 올리고, 제출에는 URL만 싣는다.
+    mutationFn: async () => {
+      let fileUrl: string | null = null;
+      if (file) {
+        try {
+          const blob = await upload(`portfolio/${file.name}`, file, {
+            access: "public",
+            handleUploadUrl: "/api/recruiting/upload",
+          });
+          fileUrl = blob.url;
+        } catch (error) {
+          // 토큰 라우트가 403 body로 내려준 사유가 에러 메시지에 담겨 온다.
+          if (
+            error instanceof Error &&
+            error.message.includes("application_closed")
+          ) {
+            throw new Error("APPLICATION_CLOSED");
+          }
+          throw new Error("파일 업로드에 실패했어요.");
+        }
+      }
+      await submitApplication(buildFormData(fileUrl));
+    },
     onSuccess: () => {
       trackEvent("form_submit_success");
       router.push("/recruiting/complete");
@@ -71,7 +95,8 @@ export default function RecruitingStepThreePage() {
   };
 
   // 1·2단계는 이미 언마운트된 상태라 sessionStorage가 유일한 데이터 소스다.
-  const buildFormData = (): FormData => {
+  // 파일 메타는 values가 아닌 file state에서 파생한다 — blob URL이 sessionStorage에 남지 않는다.
+  const buildFormData = (fileUrl: string | null): FormData => {
     const stepOneRaw = sessionStorage.getItem(RECRUITING_STORAGE_KEYS.stepOne);
     const stepTwoRaw = sessionStorage.getItem(RECRUITING_STORAGE_KEYS.stepTwo);
 
@@ -83,19 +108,20 @@ export default function RecruitingStepThreePage() {
         stepTwo: stepTwoRaw ? JSON.parse(stepTwoRaw) : {},
         stepThree: {
           portfolioLink: values.portfolioLink,
-          portfolioFile: values.portfolioFile,
+          portfolioFile: file
+            ? { name: file.name, size: file.size, url: fileUrl ?? undefined }
+            : null,
           activityCommitmentAck: values.activityCommitmentAck,
         },
       }),
     );
-    if (file) formData.set("file", file);
     return formData;
   };
 
   const handleComplete = () => {
     if (!validate().success) return;
     trackEvent("form_step_complete", { step: 3 });
-    submitMutation.mutate(buildFormData());
+    submitMutation.mutate();
   };
 
   const handleAutofill = () => {
@@ -145,7 +171,7 @@ export default function RecruitingStepThreePage() {
             </p>
             <button
               type="button"
-              onClick={() => submitMutation.mutate(buildFormData())}
+              onClick={() => submitMutation.mutate()}
               className="mt-3 font-medium underline underline-offset-2 hover:text-red-700"
             >
               다시 시도

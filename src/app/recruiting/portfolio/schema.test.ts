@@ -77,6 +77,37 @@ describe("stepThreeSchema", () => {
     expect(result.success).toBe(true);
   });
 
+  it("url이 없는 파일 메타도 통과한다(업로드 전 클라이언트 검증·sessionStorage 복원)", () => {
+    const result = stepThreeSchema.safeParse({
+      portfolioLink: "",
+      portfolioFile: { name: "portfolio.pdf", size: 1024 },
+      activityCommitmentAck: true,
+    });
+    expect(result.success).toBe(true);
+  });
+
+  it("유효한 url이 있는 파일 메타는 통과한다", () => {
+    const result = stepThreeSchema.safeParse({
+      portfolioLink: "",
+      portfolioFile: {
+        name: "portfolio.pdf",
+        size: 1024,
+        url: "https://abc123.public.blob.vercel-storage.com/portfolio/portfolio-x1y2.pdf",
+      },
+      activityCommitmentAck: true,
+    });
+    expect(result.success).toBe(true);
+  });
+
+  it("URL 형식이 아닌 url은 실패한다", () => {
+    const result = stepThreeSchema.safeParse({
+      portfolioLink: "",
+      portfolioFile: { name: "portfolio.pdf", size: 1024, url: "not-a-url" },
+      activityCommitmentAck: true,
+    });
+    expect(result.success).toBe(false);
+  });
+
   it("activityCommitmentAck를 체크하지 않으면 실패한다", () => {
     const result = stepThreeSchema.safeParse({
       portfolioLink: "https://example.com",

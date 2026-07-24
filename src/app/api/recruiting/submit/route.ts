@@ -3,10 +3,21 @@ import { NextResponse } from "next/server";
 import { departments } from "../../../../data/recruitingDepartments";
 import { isApplicationActive } from "../../../../data/recruitingSchedule";
 import { logAbuseAttempt } from "../../../../server/abuseLog";
-import { notifySubmissionToDiscord } from "../../../../server/discord";
+import {
+  BlobFetchError,
+  deletePortfolioBlob,
+  fetchPortfolioBlob,
+  isAllowedBlobUrl,
+} from "../../../../server/blob";
+import {
+  notifyNotionFailureToDiscord,
+  notifySubmissionToDiscord,
+} from "../../../../server/discord";
 import { submitRecruitingApplication } from "../../../../server/notion";
 import { validateSubmission } from "../../../recruiting/_lib/schema";
-import { MAX_FILE_SIZE } from "../../../recruiting/portfolio/constants";
+
+// Blob 다운로드(최대 20MiB) + Notion 업로드를 한 요청 안에서 처리할 시간 확보.
+export const maxDuration = 60;
 
 function isSubmissionShape(
   value: unknown,
@@ -91,23 +102,6 @@ export async function POST(request: Request) {
     );
   }
 
-  const fileEntry = formData.get("file");
-  const file =
-    fileEntry instanceof File && fileEntry.size > 0 ? fileEntry : undefined;
-
-  if (file && file.size > MAX_FILE_SIZE) {
-    await logAbuseAttempt({
-      reason: "file_too_large",
-      endpoint: "submit",
-      request,
-      detail: `파일 크기: ${file.size} bytes`,
-    });
-    return NextResponse.json(
-      { ok: false, error: "file_too_large" },
-      { status: 400 },
-    );
-  }
-
   const result = validateSubmission(payload);
   if (!result.success) {
     await logAbuseAttempt({
@@ -122,14 +116,58 @@ export async function POST(request: Request) {
     );
   }
 
+  // 파일 바이트는 클라이언트가 Blob에 직접 올렸다 — 여기서는 URL 검증 후 내려받아 Notion에 넘긴다.
+  const meta = result.data.stepThree.portfolioFile;
+  let file: File | undefined;
+  if (meta) {
+    if (!meta.url || !isAllowedBlobUrl(meta.url)) {
+      await logAbuseAttempt({
+        reason: "invalid_request",
+        endpoint: "submit",
+        request,
+        detail: "portfolioFile url 누락 또는 비허용 호스트",
+      });
+      return NextResponse.json(
+        { ok: false, error: "invalid_request" },
+        { status: 400 },
+      );
+    }
+
+    try {
+      file = await fetchPortfolioBlob({ name: meta.name, url: meta.url });
+    } catch (error) {
+      const tooLarge =
+        error instanceof BlobFetchError && error.reason === "file_too_large";
+      if (tooLarge) {
+        await logAbuseAttempt({
+          reason: "file_too_large",
+          endpoint: "submit",
+          request,
+          detail: `메타 크기: ${meta.size} bytes`,
+        });
+      } else {
+        console.error("Blob 다운로드 실패:", error);
+      }
+      await deletePortfolioBlob(meta.url);
+      return NextResponse.json(
+        { ok: false, error: tooLarge ? "file_too_large" : "blob_unavailable" },
+        { status: tooLarge ? 400 : 502 },
+      );
+    }
+  }
+
   try {
     await submitRecruitingApplication(result.data, file);
   } catch (error) {
     console.error("Notion 제출 실패:", error);
+    await notifyNotionFailureToDiscord({ endpoint: "submit", error });
     return NextResponse.json(
       { ok: false, error: "notion_unavailable" },
       { status: 502 },
     );
+  } finally {
+    // 성공·실패 무관하게 blob은 이 요청에서 수명을 끝낸다(PII). 재시도는 재업로드부터 시작된다.
+    if (meta?.url) await deletePortfolioBlob(meta.url);
   }
 
   const { name, department } = result.data.stepOne;

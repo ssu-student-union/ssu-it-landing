@@ -11,7 +11,7 @@ export type AbuseReason =
 
 export type AbuseLogEntry = {
   reason: AbuseReason;
-  endpoint: "submit" | "notify";
+  endpoint: "submit" | "notify" | "upload";
   request: Request;
   /** 실패 필드 키 목록 등 요약만 넘긴다 — 원본 페이로드는 PII가 섞일 수 있어 보내지 않는다. */
   detail?: string;

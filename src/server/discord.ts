@@ -58,6 +58,30 @@ export async function notifySubmissionToDiscord(submission: {
   }
 }
 
+/** Notion API 실패 알림. 부정 접근과 같은 에러 채널로 보낸다. 에러 메시지만 전송한다 — 스택·지원자 입력값에는 PII가 섞일 수 있다. */
+export async function notifyNotionFailureToDiscord(entry: {
+  endpoint: "submit" | "notify";
+  error: unknown;
+}): Promise<void> {
+  try {
+    const url = process.env.DISCORD_ABUSE_WEBHOOK_URL;
+    if (!url) return;
+
+    const message =
+      entry.error instanceof Error ? entry.error.message : String(entry.error);
+    await postWebhook(url, {
+      title: "🔥 Notion API 요청이 실패했어요",
+      color: 0xfaa61a,
+      fields: [
+        field("엔드포인트", entry.endpoint, true),
+        field("에러", message),
+      ],
+    });
+  } catch (error) {
+    console.error("Discord Notion 실패 알림 실패:", error);
+  }
+}
+
 /** 부정 접근 시도 알림. `logAbuseAttempt`의 IP당 레이트리밋을 통과한 건만 여기로 온다. */
 export async function notifyAbuseToDiscord(entry: {
   reason: string;
