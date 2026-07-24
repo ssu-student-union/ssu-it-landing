@@ -92,7 +92,7 @@ describe("stepThreeSchema", () => {
       portfolioFile: {
         name: "portfolio.pdf",
         size: 1024,
-        url: "https://abc123.public.blob.vercel-storage.com/portfolio/portfolio-x1y2.pdf",
+        url: "https://abc123.private.blob.vercel-storage.com/portfolio/portfolio-x1y2.pdf",
       },
       activityCommitmentAck: true,
     });

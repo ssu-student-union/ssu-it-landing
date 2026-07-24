@@ -23,12 +23,15 @@ type ButtonProps = {
   icon?: "prev" | "next";
   /** 생략하면 화면 폭에 따라 sm→md→lg로 자동 확대된다. 특정 크기로 고정하려면 지정한다. */
   size?: ButtonSize;
+  /** true면 내용 대신 스피너를 보여준다. children은 스크린 리더용으로만 남긴다. */
+  loading?: boolean;
   children?: ReactNode;
 } & Omit<HTMLMotionProps<"button">, "children">;
 
 export const Button = ({
   icon,
   size,
+  loading = false,
   className,
   children,
   type = "button",
@@ -44,20 +47,33 @@ export const Button = ({
   return (
     <motion.button
       type={type}
+      aria-busy={loading}
       className={`flex items-center justify-center gap-0.5 whitespace-nowrap rounded-xl bg-brand text-on-brand transition-colors hover:bg-brand-hover active:bg-brand-active ${controlClassName} ${icon ? "font-medium" : "font-semibold"} ${className ?? ""}`}
       whileTap={{ scale: 0.97, transition: { duration: 0.1 } }}
       {...props}
     >
-      {icon === "prev" && (
-        <Image
-          src={arrowIcon}
-          alt=""
-          className={`${iconClassName} rotate-180`}
-        />
-      )}
-      {children}
-      {icon === "next" && (
-        <Image src={arrowIcon} alt="" className={iconClassName} />
+      {loading ? (
+        <>
+          <span
+            aria-hidden
+            className={`${iconClassName} animate-spin rounded-full border-2 border-current border-t-transparent`}
+          />
+          <span className="sr-only">{children}</span>
+        </>
+      ) : (
+        <>
+          {icon === "prev" && (
+            <Image
+              src={arrowIcon}
+              alt=""
+              className={`${iconClassName} rotate-180`}
+            />
+          )}
+          {children}
+          {icon === "next" && (
+            <Image src={arrowIcon} alt="" className={iconClassName} />
+          )}
+        </>
       )}
     </motion.button>
   );
