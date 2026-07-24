@@ -1,10 +1,10 @@
 import "server-only";
 
-import { del } from "@vercel/blob";
+import { del, get } from "@vercel/blob";
 import { MAX_FILE_SIZE } from "../app/recruiting/portfolio/constants";
 
 /** Vercel Blob 공개 URL의 호스트 접미사. */
-const ALLOWED_HOST_SUFFIX = ".public.blob.vercel-storage.com";
+const ALLOWED_HOST_SUFFIX = ".private.blob.vercel-storage.com";
 
 /** 위조 URL로 서버가 임의 호스트를 fetch(SSRF)하지 않도록 Blob 호스트만 허용한다. */
 export function isAllowedBlobUrl(url: string): boolean {
@@ -25,29 +25,30 @@ export class BlobFetchError extends Error {
   }
 }
 
-/** Blob 바이트를 내려받아 File로 만든다. 업로드 토큰의 크기 제한과 별개로
+/** Blob 비공개 URL에서 바이트를 내려받아 File로 만든다. 업로드 토큰의 크기 제한과 별개로
  * content-length·실제 바이트 양쪽에서 크기를 재검증한다 — 메타는 클라이언트 입력이라 못 믿는다. */
 export async function fetchPortfolioBlob(meta: {
   name: string;
   url: string;
 }): Promise<File> {
-  const response = await fetch(meta.url);
-  if (!response.ok) {
+  const result = await get(meta.url, { access: "private" });
+  if (!result) {
     throw new BlobFetchError("fetch_failed");
   }
 
-  const contentLength = Number(response.headers.get("content-length"));
+  const contentLength = Number(result.headers.get("content-length"));
   if (Number.isFinite(contentLength) && contentLength > MAX_FILE_SIZE) {
     throw new BlobFetchError("file_too_large");
   }
 
-  const buffer = await response.arrayBuffer();
+  // GetBlobResult는 ReadableStream을 반환한다 — Response로 감싸서 arrayBuffer()를 사용한다.
+  const buffer = await new Response(result.stream).arrayBuffer();
   if (buffer.byteLength > MAX_FILE_SIZE) {
     throw new BlobFetchError("file_too_large");
   }
 
   return new File([buffer], meta.name, {
-    type: response.headers.get("content-type") ?? undefined,
+    type: result.headers.get("content-type") ?? undefined,
   });
 }
 
